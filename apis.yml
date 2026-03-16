@@ -1,0 +1,48 @@
+aid: sap-integration-suite
+name: SAP Integration Suite
+description: >-
+  SAP Integration Suite is an enterprise integration platform as a service
+  (iPaaS) that connects applications, processes, and people across cloud and
+  on-premises environments. It includes capabilities for Cloud Integration,
+  API Management, Integration Advisor, Open Connectors, and Trading Partner
+  Management as part of SAP Business Technology Platform.
+type: Index
+image: https://kinlane-productions.s3.amazonaws.com/apis-json/apis-json-logo.jpg
+tags:
+  - Enterprise Integration
+  - iPaaS
+  - SAP
+  - API Management
+  - Cloud Integration
+url: >-
+  https://raw.githubusercontent.com/api-evangelist/sap-integration-suite/refs/heads/main/apis.yml
+created: '2026-03-16'
+modified: '2026-03-16'
+specificationVersion: '0.19'
+apis:
+  - aid: sap-integration-suite:sap-integration-suite
+    name: SAP Integration Suite API
+    description: >-
+      The SAP Integration Suite API provides programmatic access to manage
+      integration flows, APIs, artifacts, and runtime operations on the
+      SAP Integration Suite platform hosted on SAP Business Technology Platform.
+    humanURL: https://help.sap.com/docs/integration-suite/sap-integration-suite/api-documentation
+    tags:
+      - Integration
+      - SAP BTP
+      - Cloud Integration
+    properties:
+      - type: Documentation
+        url: https://help.sap.com/docs/integration-suite/sap-integration-suite/api-documentation
+      - type: Reference
+        url: https://help.sap.com/docs/integration-suite/sap-integration-suite/api-management-capability
+common:
+  - type: Portal
+    url: https://api.sap.com/
+  - type: Documentation
+    url: https://help.sap.com/docs/integration-suite
+  - type: Website
+    url: https://www.sap.com/products/technology-platform/integration-suite.html
+maintainers:
+  - FN: Kin Lane
+    email: kin@apievangelist.com
