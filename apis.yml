@@ -9,11 +9,11 @@ description: >-
 type: Index
 image: https://kinlane-productions.s3.amazonaws.com/apis-json/apis-json-logo.jpg
 tags:
+  - API Management
+  - Cloud Integration
   - Enterprise Integration
   - iPaaS
   - SAP
-  - API Management
-  - Cloud Integration
 url: >-
   https://raw.githubusercontent.com/api-evangelist/sap-integration-suite/refs/heads/main/apis.yml
 created: '2026-03-16'
@@ -28,9 +28,9 @@ apis:
       SAP Integration Suite platform hosted on SAP Business Technology Platform.
     humanURL: https://help.sap.com/docs/integration-suite/sap-integration-suite/api-documentation
     tags:
+      - Cloud Integration
       - Integration
       - SAP BTP
-      - Cloud Integration
     properties:
       - type: Documentation
         url: https://help.sap.com/docs/integration-suite/sap-integration-suite/api-documentation
@@ -69,10 +69,10 @@ apis:
     humanURL: https://help.sap.com/docs/integration-suite/sap-integration-suite/api-management-capability
     baseURL: https://api.sap.com/api/APIMgmt
     tags:
-      - API Management
       - API Gateway
-      - Developer Portal
+      - API Management
       - API Proxy
+      - Developer Portal
     properties:
       - type: Documentation
         url: https://help.sap.com/docs/integration-suite/sap-integration-suite/api-management-capability
@@ -90,8 +90,8 @@ apis:
       integration content in the Integration Advisor capability.
     humanURL: https://help.sap.com/docs/integration-suite/sap-integration-suite/integration-advisor-capability
     tags:
-      - Integration Advisor
       - B2B Integration
+      - Integration Advisor
       - Message Mapping
       - MIG
     properties:
@@ -110,10 +110,10 @@ apis:
     humanURL: https://help.sap.com/docs/integration-suite/sap-integration-suite/open-connectors-capability
     baseURL: https://api.openconnectors.ext.hana.ondemand.com
     tags:
+      - Cloud Connectors
       - Open Connectors
       - Third-Party Integration
       - Unified API
-      - Cloud Connectors
     properties:
       - type: Documentation
         url: https://help.sap.com/docs/integration-suite/sap-integration-suite/open-connectors-capability
@@ -129,10 +129,10 @@ apis:
       and maintenance of EDI and AS2 communication profiles.
     humanURL: https://help.sap.com/docs/integration-suite/sap-integration-suite/trading-partner-management-capability
     tags:
-      - Trading Partner Management
+      - AS2
       - B2B
       - EDI
-      - AS2
+      - Trading Partner Management
     properties:
       - type: Documentation
         url: https://help.sap.com/docs/integration-suite/sap-integration-suite/trading-partner-management-capability
@@ -149,10 +149,10 @@ apis:
     humanURL: https://help.sap.com/docs/event-mesh
     baseURL: https://enterprise-messaging.cfapps.sap.hana.ondemand.com
     tags:
+      - Asynchronous
       - Event Mesh
       - Messaging
       - Pub/Sub
-      - Asynchronous
     properties:
       - type: Documentation
         url: https://help.sap.com/docs/event-mesh
