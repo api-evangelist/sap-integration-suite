@@ -1,0 +1,70 @@
+{
+  "title": "SAP Integration Package Structure",
+  "description": "JSON structure documentation for SAP Cloud Integration packages and their artifacts",
+  "type": "object",
+  "structure": {
+    "IntegrationPackage": {
+      "description": "Top-level integration package containing related integration artifacts",
+      "fields": {
+        "Id": "string — Unique package identifier (URL-safe)",
+        "Name": "string — Human-readable display name",
+        "Description": "string — Long-form package description",
+        "ShortText": "string — Brief summary (max 140 chars)",
+        "Version": "string — Semantic version (major.minor.patch)",
+        "Vendor": "string — Package author or vendor",
+        "Mode": "enum[EDIT_ALLOWED, READONLY] — Edit permissions",
+        "SupportedPlatform": "string — Target SAP platform",
+        "CreationDate": "date-time — Package creation timestamp",
+        "ModifiedDate": "date-time — Last modification timestamp"
+      },
+      "children": {
+        "IntegrationDesigntimeArtifacts": {
+          "description": "Collection of design-time artifacts within a package",
+          "type": "array",
+          "items": {
+            "description": "Single design-time integration artifact",
+            "fields": {
+              "Id": "string — Artifact identifier",
+              "Version": "string — Artifact version",
+              "PackageId": "string — Parent package reference",
+              "Name": "string — Artifact display name",
+              "Description": "string — Artifact description",
+              "Type": "enum[IFlow, ValueMapping, ODataApi, RestApi, SoapApi]",
+              "ModifiedBy": "string — Last modifying user",
+              "ModifiedAt": "date-time — Last modification time"
+            }
+          }
+        }
+      }
+    },
+    "RuntimeArtifact": {
+      "description": "Deployed runtime artifact with status information",
+      "fields": {
+        "Id": "string — Runtime artifact identifier",
+        "Version": "string — Deployed version",
+        "Name": "string — Artifact name",
+        "Type": "string — Artifact type",
+        "Status": "enum[STARTED, STARTING, STOPPING, STOPPED, ERROR] — Deployment status",
+        "DeployedBy": "string — Deploying user",
+        "DeployedOn": "date-time — Deployment timestamp",
+        "ErrorInformation": "string — Error details when Status is ERROR"
+      }
+    },
+    "MessageProcessingLog": {
+      "description": "Audit log entry for a single message processed by an integration flow",
+      "fields": {
+        "MessageGuid": "string — Unique message identifier",
+        "CorrelationId": "string — Cross-message correlation identifier",
+        "ApplicationMessageId": "string — App-level message ID",
+        "ApplicationMessageType": "string — App message type",
+        "LogStart": "date-time — Processing start time",
+        "LogEnd": "date-time — Processing end time",
+        "Sender": "string — Source system/channel",
+        "Receiver": "string — Target system/channel",
+        "IntegrationFlowName": "string — Processing integration flow",
+        "Status": "enum[COMPLETED, FAILED, PROCESSING, RETRY, ESCALATED, DISCARDED, ABANDONED]",
+        "LogLevel": "enum[INFO, DEBUG, TRACE, ERROR]"
+      }
+    }
+  }
+}

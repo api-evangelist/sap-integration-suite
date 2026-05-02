@@ -1,0 +1,58 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://api-evangelist.github.io/sap-integration-suite/json-schema/sap-integration-suite-message-processing-log-schema.json",
+  "title": "SAP Message Processing Log",
+  "description": "Schema for a message processing log entry in SAP Cloud Integration",
+  "type": "object",
+  "properties": {
+    "MessageGuid": {
+      "type": "string",
+      "description": "Unique GUID identifier for the message processing log entry"
+    },
+    "CorrelationId": {
+      "type": "string",
+      "description": "Correlation ID linking related messages across a process"
+    },
+    "ApplicationMessageId": {
+      "type": "string",
+      "description": "Application-level message identifier"
+    },
+    "ApplicationMessageType": {
+      "type": "string",
+      "description": "Type classification of the application message"
+    },
+    "LogStart": {
+      "type": "string",
+      "description": "ISO 8601 timestamp when message processing started",
+      "format": "date-time"
+    },
+    "LogEnd": {
+      "type": "string",
+      "description": "ISO 8601 timestamp when message processing ended",
+      "format": "date-time"
+    },
+    "Sender": {
+      "type": "string",
+      "description": "Sending system, adapter, or channel identifier"
+    },
+    "Receiver": {
+      "type": "string",
+      "description": "Receiving system, adapter, or channel identifier"
+    },
+    "IntegrationFlowName": {
+      "type": "string",
+      "description": "Name of the integration flow that processed the message"
+    },
+    "Status": {
+      "type": "string",
+      "description": "Current processing status of the message",
+      "enum": ["COMPLETED", "FAILED", "PROCESSING", "RETRY", "ESCALATED", "DISCARDED", "ABANDONED"]
+    },
+    "LogLevel": {
+      "type": "string",
+      "description": "Verbosity level of the log entry",
+      "enum": ["INFO", "DEBUG", "TRACE", "ERROR"]
+    }
+  },
+  "required": ["MessageGuid", "Status"]
+}

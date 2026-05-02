@@ -1,0 +1,402 @@
+naftiko: "1.0.0-alpha1"
+
+info:
+  label: "SAP Cloud Integration API"
+  description: >-
+    SAP Cloud Integration API providing OData V2 endpoints for managing
+    integration flows, artifacts, packages, message processing logs,
+    service endpoints, and runtime operations on SAP Integration Suite.
+  tags:
+    - SAP Integration Suite
+    - Cloud Integration
+    - Integration Flows
+    - OData
+  created: "2026-05-02"
+  modified: "2026-05-02"
+
+binds:
+  - namespace: env
+    keys:
+      SAP_CLOUD_INTEGRATION_OAUTH_TOKEN: SAP_CLOUD_INTEGRATION_OAUTH_TOKEN
+      SAP_CLOUD_INTEGRATION_HOST: SAP_CLOUD_INTEGRATION_HOST
+
+capability:
+  consumes:
+    - type: http
+      namespace: cloud-integration
+      baseUri: "https://{{env.SAP_CLOUD_INTEGRATION_HOST}}/api/v1"
+      description: "SAP Cloud Integration OData API for integration flow lifecycle management"
+      authentication:
+        type: bearer
+        token: "{{env.SAP_CLOUD_INTEGRATION_OAUTH_TOKEN}}"
+      resources:
+        - name: integration-packages
+          path: /IntegrationPackages
+          description: Manage integration packages
+          operations:
+            - name: list-integration-packages
+              method: GET
+              description: Retrieve all integration packages in the tenant
+              inputParameters:
+                - name: $top
+                  in: query
+                  type: integer
+                  required: false
+                  description: Maximum number of records
+                - name: $skip
+                  in: query
+                  type: integer
+                  required: false
+                  description: Number of records to skip
+                - name: $filter
+                  in: query
+                  type: string
+                  required: false
+                  description: OData filter expression
+              outputRawFormat: json
+              outputParameters:
+                - name: result
+                  type: object
+                  value: "$."
+
+            - name: get-integration-package
+              method: GET
+              description: Retrieve a specific integration package
+              inputParameters:
+                - name: Id
+                  in: path
+                  type: string
+                  required: true
+                  description: Package identifier
+              outputRawFormat: json
+              outputParameters:
+                - name: result
+                  type: object
+                  value: "$."
+
+        - name: integration-flows
+          path: /IntegrationDesigntimeArtifacts
+          description: Manage integration flow design-time artifacts
+          operations:
+            - name: get-integration-flow
+              method: GET
+              description: Retrieve a specific design-time integration flow artifact
+              inputParameters:
+                - name: Id
+                  in: path
+                  type: string
+                  required: true
+                  description: Artifact identifier
+                - name: Version
+                  in: path
+                  type: string
+                  required: true
+                  description: Artifact version
+              outputRawFormat: json
+              outputParameters:
+                - name: result
+                  type: object
+                  value: "$."
+
+        - name: deploy-integration-flow
+          path: /DeployIntegrationDesigntimeArtifact
+          description: Deploy integration flows to runtime
+          operations:
+            - name: deploy-integration-flow
+              method: POST
+              description: Deploy an integration flow artifact to the runtime
+              inputParameters:
+                - name: Id
+                  in: query
+                  type: string
+                  required: true
+                  description: Artifact ID to deploy
+                - name: Version
+                  in: query
+                  type: string
+                  required: true
+                  description: Artifact version to deploy
+              outputRawFormat: json
+              outputParameters:
+                - name: result
+                  type: object
+                  value: "$."
+
+        - name: runtime-artifacts
+          path: /IntegrationRuntimeArtifacts
+          description: Monitor deployed runtime artifacts
+          operations:
+            - name: list-runtime-artifacts
+              method: GET
+              description: List all deployed runtime artifacts and their status
+              inputParameters:
+                - name: $filter
+                  in: query
+                  type: string
+                  required: false
+                  description: OData filter expression
+                - name: $top
+                  in: query
+                  type: integer
+                  required: false
+                  description: Maximum records
+              outputRawFormat: json
+              outputParameters:
+                - name: result
+                  type: object
+                  value: "$."
+
+            - name: get-runtime-artifact
+              method: GET
+              description: Get a specific runtime artifact and its deployment status
+              inputParameters:
+                - name: Id
+                  in: path
+                  type: string
+                  required: true
+                  description: Runtime artifact identifier
+              outputRawFormat: json
+              outputParameters:
+                - name: result
+                  type: object
+                  value: "$."
+
+            - name: undeploy-runtime-artifact
+              method: DELETE
+              description: Remove a deployed artifact from the runtime
+              inputParameters:
+                - name: Id
+                  in: path
+                  type: string
+                  required: true
+                  description: Runtime artifact identifier
+              outputRawFormat: json
+              outputParameters:
+                - name: result
+                  type: object
+                  value: "$."
+
+        - name: message-processing-logs
+          path: /MessageProcessingLogs
+          description: Retrieve and analyze message processing logs
+          operations:
+            - name: list-message-processing-logs
+              method: GET
+              description: Retrieve message processing logs with optional filtering
+              inputParameters:
+                - name: $filter
+                  in: query
+                  type: string
+                  required: false
+                  description: OData filter (e.g., Status eq 'FAILED')
+                - name: $top
+                  in: query
+                  type: integer
+                  required: false
+                  description: Max log entries
+                - name: $skip
+                  in: query
+                  type: integer
+                  required: false
+                  description: Skip for pagination
+                - name: $orderby
+                  in: query
+                  type: string
+                  required: false
+                  description: OData orderby expression
+              outputRawFormat: json
+              outputParameters:
+                - name: result
+                  type: object
+                  value: "$."
+
+            - name: get-message-processing-log
+              method: GET
+              description: Retrieve a specific message processing log by GUID
+              inputParameters:
+                - name: MessageGuid
+                  in: path
+                  type: string
+                  required: true
+                  description: Message GUID
+              outputRawFormat: json
+              outputParameters:
+                - name: result
+                  type: object
+                  value: "$."
+
+        - name: service-endpoints
+          path: /ServiceEndpoints
+          description: Discover and list service endpoints
+          operations:
+            - name: list-service-endpoints
+              method: GET
+              description: Retrieve all service endpoints registered in the tenant
+              inputParameters:
+                - name: $top
+                  in: query
+                  type: integer
+                  required: false
+                  description: Maximum records
+                - name: $skip
+                  in: query
+                  type: integer
+                  required: false
+                  description: Skip for pagination
+              outputRawFormat: json
+              outputParameters:
+                - name: result
+                  type: object
+                  value: "$."
+
+  exposes:
+    - type: rest
+      port: 8100
+      namespace: cloud-integration-rest
+      resources:
+        - path: /v1/integration-packages
+          name: integration-packages
+          description: Integration package management
+          operations:
+            - method: GET
+              name: list-integration-packages
+              description: List all integration packages
+              call: "cloud-integration.list-integration-packages"
+              outputParameters:
+                - type: object
+                  mapping: "$."
+        - path: /v1/integration-packages/{id}
+          name: integration-package
+          description: Single integration package
+          operations:
+            - method: GET
+              name: get-integration-package
+              description: Get a specific integration package
+              call: "cloud-integration.get-integration-package"
+              with:
+                Id: "rest.id"
+              outputParameters:
+                - type: object
+                  mapping: "$."
+        - path: /v1/runtime-artifacts
+          name: runtime-artifacts
+          description: Deployed runtime artifacts
+          operations:
+            - method: GET
+              name: list-runtime-artifacts
+              description: List deployed runtime artifacts
+              call: "cloud-integration.list-runtime-artifacts"
+              outputParameters:
+                - type: object
+                  mapping: "$."
+        - path: /v1/message-processing-logs
+          name: message-processing-logs
+          description: Message processing logs
+          operations:
+            - method: GET
+              name: list-message-processing-logs
+              description: List message processing logs
+              call: "cloud-integration.list-message-processing-logs"
+              outputParameters:
+                - type: object
+                  mapping: "$."
+
+    - type: mcp
+      port: 9100
+      namespace: cloud-integration-mcp
+      transport: http
+      tools:
+        - name: list-integration-packages
+          description: List all integration packages in the SAP Cloud Integration tenant
+          hints:
+            readOnly: true
+            openWorld: true
+          call: "cloud-integration.list-integration-packages"
+          outputParameters:
+            - type: object
+              mapping: "$."
+        - name: get-integration-package
+          description: Get a specific integration package by ID
+          hints:
+            readOnly: true
+            openWorld: false
+          call: "cloud-integration.get-integration-package"
+          with:
+            Id: "tools.Id"
+          outputParameters:
+            - type: object
+              mapping: "$."
+        - name: list-runtime-artifacts
+          description: List deployed runtime integration artifacts and their status
+          hints:
+            readOnly: true
+            openWorld: true
+          call: "cloud-integration.list-runtime-artifacts"
+          outputParameters:
+            - type: object
+              mapping: "$."
+        - name: get-runtime-artifact
+          description: Get a specific runtime artifact deployment status
+          hints:
+            readOnly: true
+            openWorld: false
+          call: "cloud-integration.get-runtime-artifact"
+          with:
+            Id: "tools.Id"
+          outputParameters:
+            - type: object
+              mapping: "$."
+        - name: list-message-processing-logs
+          description: List message processing logs with optional status filtering
+          hints:
+            readOnly: true
+            openWorld: true
+          call: "cloud-integration.list-message-processing-logs"
+          outputParameters:
+            - type: object
+              mapping: "$."
+        - name: get-message-processing-log
+          description: Get a specific message processing log entry by GUID
+          hints:
+            readOnly: true
+            openWorld: false
+          call: "cloud-integration.get-message-processing-log"
+          with:
+            MessageGuid: "tools.MessageGuid"
+          outputParameters:
+            - type: object
+              mapping: "$."
+        - name: list-service-endpoints
+          description: List all service endpoints registered in the Integration Suite tenant
+          hints:
+            readOnly: true
+            openWorld: true
+          call: "cloud-integration.list-service-endpoints"
+          outputParameters:
+            - type: object
+              mapping: "$."
+        - name: deploy-integration-flow
+          description: Deploy an integration flow artifact to the runtime
+          hints:
+            readOnly: false
+            destructive: false
+            idempotent: false
+          call: "cloud-integration.deploy-integration-flow"
+          with:
+            Id: "tools.Id"
+            Version: "tools.Version"
+          outputParameters:
+            - type: object
+              mapping: "$."
+        - name: undeploy-runtime-artifact
+          description: Remove a deployed artifact from the runtime
+          hints:
+            readOnly: false
+            destructive: true
+            idempotent: true
+          call: "cloud-integration.undeploy-runtime-artifact"
+          with:
+            Id: "tools.Id"
+          outputParameters:
+            - type: object
+              mapping: "$."

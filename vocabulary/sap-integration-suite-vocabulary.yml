@@ -1,0 +1,181 @@
+vocabulary:
+  name: SAP Integration Suite Vocabulary
+  description: >-
+    Domain vocabulary for SAP Integration Suite covering integration patterns,
+    artifact types, runtime concepts, API management terms, and operational
+    terminology used across Cloud Integration, API Management, Integration
+    Advisor, Open Connectors, and Event Mesh capabilities.
+  version: 1.0.0
+  created: '2026-05-02'
+  modified: '2026-05-02'
+
+terms:
+  # Core Integration Concepts
+  - term: Integration Flow
+    abbreviation: iFlow
+    definition: >-
+      A BPMN-based executable artifact in SAP Cloud Integration that defines
+      the processing logic for messages between source and target systems.
+      Contains adapters, message transformations, routing, and error handling steps.
+    category: Integration Artifact
+    related:
+      - Integration Package
+      - Runtime Artifact
+      - Adapter
+
+  - term: Integration Package
+    definition: >-
+      A container for related integration artifacts including integration flows,
+      value mappings, OData APIs, and documentation. Packages can be imported
+      from the SAP Business Accelerator Hub.
+    category: Integration Artifact
+    related:
+      - Integration Flow
+      - Value Mapping
+
+  - term: Value Mapping
+    definition: >-
+      An artifact that maps values between different coding systems or
+      standards, such as mapping SAP material numbers to customer part numbers
+      or standard codes between trading partners.
+    category: Integration Artifact
+
+  - term: Message Processing Log
+    abbreviation: MPL
+    definition: >-
+      An audit log record generated for each message processed by an integration
+      flow, containing processing status, timing, sender/receiver information,
+      and any error details for troubleshooting.
+    category: Runtime Monitoring
+    related:
+      - Correlation ID
+      - Trace
+
+  - term: Correlation ID
+    definition: >-
+      A unique identifier assigned to a business process or transaction that
+      links multiple related message processing log entries across different
+      integration flows.
+    category: Runtime Monitoring
+
+  - term: Runtime Artifact
+    definition: >-
+      A deployed instance of a design-time integration artifact that is actively
+      running on the SAP Integration Suite runtime engine.
+    category: Runtime Operations
+    statuses:
+      - STARTED
+      - STARTING
+      - STOPPING
+      - STOPPED
+      - ERROR
+
+  - term: Adapter
+    definition: >-
+      A connector component within an integration flow that handles communication
+      with external systems using specific protocols such as HTTPS, SFTP, SOAP,
+      OData, AS2, JDBC, or messaging systems.
+    category: Connectivity
+
+  - term: Service Endpoint
+    definition: >-
+      An HTTP endpoint exposed by an integration flow within SAP Cloud
+      Integration that external systems can invoke to trigger message processing.
+    category: Connectivity
+
+  # API Management Terms
+  - term: API Proxy
+    definition: >-
+      A managed API endpoint in SAP API Management that acts as a facade for a
+      backend service. The proxy applies policies for security, traffic
+      management, mediation, and monitoring.
+    category: API Management
+    related:
+      - API Product
+      - Policy
+
+  - term: API Product
+    definition: >-
+      A bundle of one or more API proxies published to the developer portal.
+      Products can include quota and rate limit configurations and are what
+      developers subscribe to through Applications.
+    category: API Management
+    related:
+      - API Proxy
+      - Application
+
+  - term: Application
+    definition: >-
+      A developer-registered entity in SAP API Management that represents a
+      client consuming API products. Applications are issued credentials (API keys
+      or OAuth clients) for accessing subscribed API products.
+    category: API Management
+
+  - term: Policy
+    definition: >-
+      A configurable processing step applied to API request or response flows
+      in SAP API Management. Includes quota enforcement, spike arrest, OAuth
+      validation, mediation transforms, and logging policies.
+    category: API Management
+
+  - term: Key Value Map
+    abbreviation: KVM
+    definition: >-
+      A named collection of key-value pairs used to store configuration data
+      accessible to API proxies at runtime. Can be scoped to an API proxy,
+      environment, or organization and optionally encrypted.
+    category: API Management
+
+  # Integration Advisor Terms
+  - term: Message Implementation Guideline
+    abbreviation: MIG
+    definition: >-
+      A document in SAP Integration Advisor that describes how a message type
+      from a specific standard (EDI, IDoc, etc.) is used in a particular B2B
+      or A2A scenario. Serves as the basis for creating mapping guidelines.
+    category: B2B Integration
+
+  - term: Mapping Guideline
+    abbreviation: MAG
+    definition: >-
+      A document in SAP Integration Advisor that defines field-level mapping
+      between source and target message implementation guidelines. Used to
+      automatically generate integration content.
+    category: B2B Integration
+
+  # Event Mesh Terms
+  - term: Event Mesh
+    definition: >-
+      SAP's event brokering service on BTP that enables asynchronous,
+      event-driven communication between applications and services using
+      standard protocols including AMQP, MQTT, and HTTP with CloudEvents format.
+    category: Event-Driven Integration
+
+  - term: Topic Subscription
+    definition: >-
+      A named subscription to an event topic in the SAP Event Mesh, allowing
+      services to receive event notifications asynchronously when matching
+      events are published.
+    category: Event-Driven Integration
+
+  # Process Terms
+  - term: iPaaS
+    definition: >-
+      Integration Platform as a Service — the cloud-based delivery model for
+      integration capabilities such as SAP Integration Suite, enabling
+      connection of cloud, on-premise, and hybrid systems without managing
+      middleware infrastructure.
+    category: Platform Concepts
+
+  - term: B2B Integration
+    definition: >-
+      Business-to-Business integration connecting external trading partner
+      systems using standard electronic document formats such as EDI, AS2,
+      AS4, and OFTP.
+    category: Integration Patterns
+
+  - term: A2A Integration
+    definition: >-
+      Application-to-Application integration connecting internal SAP and
+      non-SAP systems within an organization's landscape.
+    category: Integration Patterns

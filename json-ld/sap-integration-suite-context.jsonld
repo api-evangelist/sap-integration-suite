@@ -1,0 +1,55 @@
+{
+  "@context": {
+    "@version": 1.1,
+    "xsd": "http://www.w3.org/2001/XMLSchema#",
+    "schema": "https://schema.org/",
+    "sap": "https://api.sap.com/vocabulary/",
+    "iflow": "https://help.sap.com/docs/integration-suite/terms/",
+
+    "IntegrationPackage": {
+      "@id": "sap:IntegrationPackage",
+      "@type": "@id"
+    },
+    "IntegrationFlow": {
+      "@id": "sap:IntegrationFlow",
+      "@type": "@id"
+    },
+    "RuntimeArtifact": {
+      "@id": "sap:RuntimeArtifact",
+      "@type": "@id"
+    },
+    "MessageProcessingLog": {
+      "@id": "sap:MessageProcessingLog",
+      "@type": "@id"
+    },
+    "APIProxy": {
+      "@id": "sap:APIProxy",
+      "@type": "@id"
+    },
+    "APIProduct": {
+      "@id": "sap:APIProduct",
+      "@type": "@id"
+    },
+
+    "id": "@id",
+    "name": "schema:name",
+    "description": "schema:description",
+    "version": "schema:version",
+    "vendor": "schema:provider",
+    "status": "sap:status",
+    "creationDate": "schema:dateCreated",
+    "modifiedDate": "schema:dateModified",
+    "deployedBy": "sap:deployedBy",
+    "deployedOn": "sap:deployedOn",
+    "sender": "sap:sender",
+    "receiver": "sap:receiver",
+    "integrationFlowName": "sap:integrationFlowName",
+    "correlationId": "sap:correlationId",
+    "basePath": "sap:basePath",
+    "targetEndpoint": "sap:targetEndpoint",
+    "isDeployed": "sap:isDeployed",
+    "quota": "sap:quota",
+    "quotaInterval": "sap:quotaInterval",
+    "quotaTimeUnit": "sap:quotaTimeUnit"
+  }
+}

@@ -1,131 +1,173 @@
-# SAP Integration Suite (sap-integration-suite)
-SAP Integration Suite is an enterprise integration platform as a service (iPaaS) that connects applications, processes, and people across cloud and on-premises environments. It includes capabilities for Cloud Integration, API Management, Integration Advisor, Open Connectors, and Trading Partner Management as part of SAP Business Technology Platform.
+# SAP Integration Suite
+
+SAP Integration Suite is an enterprise integration platform as a service (iPaaS) that connects applications, processes, and people across cloud and on-premises environments. It includes capabilities for Cloud Integration, API Management, Integration Advisor, Open Connectors, Trading Partner Management, and Event Mesh as part of SAP Business Technology Platform (BTP).
 
 **URL:** [Visit APIs.json URL](https://raw.githubusercontent.com/api-evangelist/sap-integration-suite/refs/heads/main/apis.yml)
 
+- **Website:** https://www.sap.com/products/technology-platform/integration-suite.html
+- **Documentation:** https://help.sap.com/docs/integration-suite
+- **API Portal:** https://api.sap.com/
+- **Community:** https://community.sap.com/topics/integration-suite
+
 ## Scope
 
-- **Type:** Index 
-- **Position:** Consuming 
-- **Access:** 3rd-Party 
+- **Type:** Index
+- **Position:** Consuming
+- **Access:** 3rd-Party
 
-## Tags:
+## Tags
 
- - Enterprise Integration, iPaaS, SAP, API Management, Cloud Integration
+Enterprise Integration, iPaaS, SAP, API Management, Cloud Integration, Event Mesh, SAP BTP
 
 ## Timestamps
 
-- **Created:** 2026-03-16 
-- **Modified:** 2026-03-18 
+- **Created:** 2026-03-16
+- **Modified:** 2026-05-02
 
 ## APIs
 
-### SAP Integration Suite API
-The SAP Integration Suite API provides programmatic access to manage integration flows, APIs, artifacts, and runtime operations on the SAP Integration Suite platform hosted on SAP Business Technology Platform.
-
-**Human URL:** [https://help.sap.com/docs/integration-suite/sap-integration-suite/api-documentation](https://help.sap.com/docs/integration-suite/sap-integration-suite/api-documentation)
-
-
-#### Tags:
-
- - Integration, SAP BTP, Cloud Integration
-
-#### Properties
-
-- [Documentation](https://help.sap.com/docs/integration-suite/sap-integration-suite/api-documentation)
-- [Reference](https://help.sap.com/docs/integration-suite/sap-integration-suite/api-management-capability)
-
 ### SAP Cloud Integration API
-The SAP Cloud Integration API (also known as the Process Integration Runtime API) allows developers to deploy, monitor, and manage integration flows and artifacts on SAP Integration Suite. It provides OData and REST endpoints for runtime monitoring, message processing logs, and artifact lifecycle management.
 
-**Human URL:** [https://help.sap.com/docs/integration-suite/sap-integration-suite/cloud-integration](https://help.sap.com/docs/integration-suite/sap-integration-suite/cloud-integration)
+The SAP Cloud Integration API (Process Integration Runtime API) provides OData V2 endpoints for deploying, monitoring, and managing integration flows, artifacts, packages, message processing logs, and service endpoints.
 
+**Human URL:** https://help.sap.com/docs/integration-suite/sap-integration-suite/cloud-integration
 
-#### Tags:
+**Tags:** Cloud Integration, Integration Flows, OData, Runtime Monitoring
 
- - Cloud Integration, Integration Flows, OData, Runtime Monitoring
-
-#### Properties
+**Properties**
 
 - [Documentation](https://help.sap.com/docs/integration-suite/sap-integration-suite/cloud-integration)
 - [Reference](https://api.sap.com/api/CloudIntegrationAPI/overview)
+- [OpenAPI](openapi/sap-integration-suite-cloud-integration-openapi.yml)
+- [JSONSchema](json-schema/sap-integration-suite-integration-package-schema.json)
+- [JSONSchema](json-schema/sap-integration-suite-message-processing-log-schema.json)
+- [JSONLD](json-ld/sap-integration-suite-context.jsonld)
 - [Authentication](https://help.sap.com/docs/integration-suite/sap-integration-suite/setting-up-oauth-inbound-authentication)
 
 ### SAP API Management API
-The SAP API Management API enables programmatic management of APIs, products, applications, and developer portals within SAP Integration Suite. It supports creating and publishing API proxies, managing rate plans, and administering the full API lifecycle.
 
-**Human URL:** [https://help.sap.com/docs/integration-suite/sap-integration-suite/api-management-capability](https://help.sap.com/docs/integration-suite/sap-integration-suite/api-management-capability)
+The SAP API Management API enables programmatic management of APIs, products, applications, and developer portals within SAP Integration Suite. Supports creating and publishing API proxies, managing rate plans, and administering the full API lifecycle.
 
+**Human URL:** https://help.sap.com/docs/integration-suite/sap-integration-suite/api-management-capability
 
-#### Tags:
+**Tags:** API Management, API Gateway, Developer Portal, API Proxy, OData
 
- - API Management, API Gateway, Developer Portal, API Proxy
-
-#### Properties
+**Properties**
 
 - [Documentation](https://help.sap.com/docs/integration-suite/sap-integration-suite/api-management-capability)
 - [Reference](https://api.sap.com/api/APIMgmt/overview)
-- [Getting Started](https://help.sap.com/docs/integration-suite/sap-integration-suite/getting-started-with-api-management)
+- [OpenAPI](openapi/sap-integration-suite-api-management-openapi.yml)
+- [JSONLD](json-ld/sap-integration-suite-context.jsonld)
+- [Authentication](https://help.sap.com/docs/integration-suite/sap-integration-suite/setting-up-oauth-inbound-authentication)
 
 ### SAP Integration Advisor API
-The SAP Integration Advisor API provides access to the library of message implementation guidelines (MIGs) and mapping guidelines (MAGs) used to simplify B2B and A2A integration scenarios. It supports querying and managing integration content in the Integration Advisor capability.
 
-**Human URL:** [https://help.sap.com/docs/integration-suite/sap-integration-suite/integration-advisor-capability](https://help.sap.com/docs/integration-suite/sap-integration-suite/integration-advisor-capability)
+The SAP Integration Advisor API provides access to the library of message implementation guidelines (MIGs) and mapping guidelines (MAGs) for B2B and A2A integration scenarios.
 
+**Human URL:** https://help.sap.com/docs/integration-suite/sap-integration-suite/integration-advisor-capability
 
-#### Tags:
+**Tags:** Integration Advisor, B2B Integration, EDI, Mapping Guidelines, Message Implementation Guidelines
 
- - Integration Advisor, B2B Integration, Message Mapping, MIG
-
-#### Properties
+**Properties**
 
 - [Documentation](https://help.sap.com/docs/integration-suite/sap-integration-suite/integration-advisor-capability)
 - [Reference](https://api.sap.com/api/IntegrationAdvisor/overview)
 
 ### SAP Open Connectors API
-The SAP Open Connectors API (formerly Cloud Elements) provides a unified REST interface to connect to over 160 third-party cloud applications using pre-built connectors. It normalizes disparate API endpoints into consistent resource models for faster integration development.
 
-**Human URL:** [https://help.sap.com/docs/integration-suite/sap-integration-suite/open-connectors-capability](https://help.sap.com/docs/integration-suite/sap-integration-suite/open-connectors-capability)
+The SAP Open Connectors API provides a unified REST interface to connect to over 160 third-party cloud applications using pre-built connectors.
 
+**Human URL:** https://help.sap.com/docs/integration-suite/sap-integration-suite/open-connectors-capability
 
-#### Tags:
+**Tags:** Open Connectors, Third-Party Integration, Unified API, Cloud Connectors, Normalization
 
- - Open Connectors, Third-Party Integration, Unified API, Cloud Connectors
-
-#### Properties
+**Properties**
 
 - [Documentation](https://help.sap.com/docs/integration-suite/sap-integration-suite/open-connectors-capability)
 - [Reference](https://api.sap.com/api/OpenConnectors/overview)
 
 ### SAP Trading Partner Management API
-The SAP Trading Partner Management API supports the setup and management of B2B trading partner relationships, agreements, and communication channels within SAP Integration Suite. It enables automation of partner onboarding and maintenance of EDI and AS2 communication profiles.
 
-**Human URL:** [https://help.sap.com/docs/integration-suite/sap-integration-suite/trading-partner-management-capability](https://help.sap.com/docs/integration-suite/sap-integration-suite/trading-partner-management-capability)
+The SAP Trading Partner Management API supports setup and management of B2B trading partner relationships, agreements, EDI and AS2 communication channels.
 
+**Human URL:** https://help.sap.com/docs/integration-suite/sap-integration-suite/trading-partner-management-capability
 
-#### Tags:
+**Tags:** Trading Partner Management, B2B, EDI, AS2
 
- - Trading Partner Management, B2B, EDI, AS2
-
-#### Properties
+**Properties**
 
 - [Documentation](https://help.sap.com/docs/integration-suite/sap-integration-suite/trading-partner-management-capability)
 - [Reference](https://api.sap.com/api/TradingPartnerManagement/overview)
 
 ### SAP Event Mesh API
-The SAP Event Mesh API provides access to the event brokering service within SAP Business Technology Platform that enables applications to communicate through asynchronous events. It supports publishing and subscribing to events across SAP and third-party applications using industry-standard messaging protocols.
 
-**Human URL:** [https://help.sap.com/docs/event-mesh](https://help.sap.com/docs/event-mesh)
+The SAP Event Mesh API provides access to the event brokering service on BTP for asynchronous event-driven communication using CloudEvents, AMQP, and MQTT.
 
+**Human URL:** https://help.sap.com/docs/event-mesh
 
-#### Tags:
+**Tags:** Event Mesh, Messaging, Pub/Sub, Asynchronous, CloudEvents
 
- - Event Mesh, Messaging, Pub/Sub, Asynchronous
-
-#### Properties
+**Properties**
 
 - [Documentation](https://help.sap.com/docs/event-mesh)
 - [Reference](https://api.sap.com/api/SAPEventMesh/overview)
+
+### SAP Integration Suite Advanced Event Mesh API
+
+The SAP Integration Suite Advanced Event Mesh REST API provides management capabilities for event brokers, message queues, and topic subscriptions.
+
+**Human URL:** https://help.pubsub.em.services.cloud.sap/Cloud/cloud-rest-api-lp.htm
+
+**Tags:** Advanced Event Mesh, Broker Management, Event Streaming, Messaging
+
+**Properties**
+
+- [Documentation](https://help.pubsub.em.services.cloud.sap/Cloud/cloud-rest-api-lp.htm)
+- [Reference](https://api.sap.com/package/SAPIIntegrationSuiteAdvancedEventMesh/rest)
+
+## OpenAPI Specifications
+
+- [openapi/sap-integration-suite-cloud-integration-openapi.yml](openapi/sap-integration-suite-cloud-integration-openapi.yml) — SAP Cloud Integration OData V2 API
+- [openapi/sap-integration-suite-api-management-openapi.yml](openapi/sap-integration-suite-api-management-openapi.yml) — SAP API Management REST API
+
+## Capabilities
+
+### Shared Definitions
+
+- [capabilities/shared/cloud-integration.yaml](capabilities/shared/cloud-integration.yaml) — Cloud Integration consumed definition with 9 operations
+- [capabilities/shared/api-management.yaml](capabilities/shared/api-management.yaml) — API Management consumed definition with 8 operations
+
+### Workflow Capabilities
+
+| Capability | Description | APIs | Tools |
+|-----------|-------------|------|-------|
+| [integration-lifecycle.yaml](capabilities/integration-lifecycle.yaml) | Complete integration lifecycle management: artifact deployment, monitoring, API proxy governance, developer portal | Cloud Integration + API Management | 16 |
+
+## Rules
+
+- [rules/sap-integration-suite-rules.yml](rules/sap-integration-suite-rules.yml) — Spectral ruleset enforcing SAP OData naming conventions and documentation standards
+
+## JSON Schema
+
+- [json-schema/sap-integration-suite-integration-package-schema.json](json-schema/sap-integration-suite-integration-package-schema.json)
+- [json-schema/sap-integration-suite-message-processing-log-schema.json](json-schema/sap-integration-suite-message-processing-log-schema.json)
+
+## JSON Structure
+
+- [json-structure/sap-integration-suite-integration-package-structure.json](json-structure/sap-integration-suite-integration-package-structure.json)
+
+## JSON-LD
+
+- [json-ld/sap-integration-suite-context.jsonld](json-ld/sap-integration-suite-context.jsonld)
+
+## Examples
+
+- [examples/sap-integration-suite-list-integration-packages-example.json](examples/sap-integration-suite-list-integration-packages-example.json)
+- [examples/sap-integration-suite-list-message-processing-logs-example.json](examples/sap-integration-suite-list-message-processing-logs-example.json)
+
+## Vocabulary
+
+- [vocabulary/sap-integration-suite-vocabulary.yml](vocabulary/sap-integration-suite-vocabulary.yml)
 
 ## Common Properties
 
@@ -142,9 +184,9 @@ The SAP Event Mesh API provides access to the event brokering service within SAP
 - [Terms of Service](https://www.sap.com/about/agreements/policies/cloud-platform.html)
 - [Privacy Policy](https://www.sap.com/about/legal/privacy.html)
 - [YouTube](https://www.youtube.com/@SAPTechnology)
+- [Pricing](https://www.sap.com/products/technology-platform/integration-suite/pricing.html)
 
 ## Maintainers
 
-**FN:** Kin Lane
-
+**FN:** Kin Lane  
 **Email:** kin@apievangelist.com

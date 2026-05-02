@@ -1,0 +1,136 @@
+extends: spectral:oas
+rules:
+  # SAP OData entity naming conventions
+  sap-odata-entity-pascal-case:
+    description: SAP OData entity set names must use PascalCase
+    message: Entity set path segment '{{value}}' should use PascalCase (e.g., IntegrationPackages not integration-packages)
+    severity: warn
+    given: "$.paths[*]~"
+    then:
+      function: pattern
+      functionOptions:
+        match: "^(/[A-Z][a-zA-Z]*|/\\{[a-z][a-zA-Z]*\\})+$"
+
+  # OData key notation in paths
+  sap-odata-key-notation:
+    description: OData key predicates must use parenthetical notation
+    message: OData key segments should use parenthetical notation (e.g., /Entities('{Id}'))
+    severity: warn
+    given: "$.paths[*]~"
+    then:
+      function: pattern
+      functionOptions:
+        match: "^.*$"
+
+  # SAP operation IDs must be camelCase
+  sap-operation-id-camel-case:
+    description: Operation IDs must use camelCase
+    message: OperationId '{{value}}' should use camelCase
+    severity: warn
+    given: "$.paths[*][*].operationId"
+    then:
+      function: pattern
+      functionOptions:
+        match: "^[a-z][a-zA-Z0-9]*$"
+
+  # All operations must have summaries
+  sap-operation-summary-required:
+    description: All operations must have a summary
+    message: Operation is missing a summary
+    severity: error
+    given: "$.paths[*][get,post,put,patch,delete]"
+    then:
+      field: summary
+      function: truthy
+
+  # OData filter parameter should use $filter naming
+  sap-odata-filter-parameter:
+    description: OData filter parameters must be named $filter
+    message: Filter parameters in OData APIs should be named '$filter'
+    severity: warn
+    given: "$.paths[*][get].parameters[*]"
+    then:
+      function: schema
+      functionOptions:
+        schema:
+          if:
+            properties:
+              name:
+                pattern: "filter"
+          then:
+            properties:
+              name:
+                enum:
+                  - "$filter"
+
+  # OData pagination parameters
+  sap-odata-pagination-parameters:
+    description: OData pagination parameters must use $top and $skip
+    message: Pagination parameter should be named '$top' or '$skip'
+    severity: warn
+    given: "$.paths[*][get].parameters[*]"
+    then:
+      function: schema
+      functionOptions:
+        schema:
+          if:
+            properties:
+              name:
+                pattern: "^(top|skip)$"
+          then:
+            properties:
+              name:
+                enum:
+                  - "$top"
+                  - "$skip"
+
+  # All schemas should have descriptions
+  sap-schema-description:
+    description: Schema properties should have descriptions
+    message: Property '{{path}}' is missing a description
+    severity: warn
+    given: "$.components.schemas[*].properties[*]"
+    then:
+      field: description
+      function: truthy
+
+  # OAuth2 security must be defined
+  sap-oauth2-security-defined:
+    description: SAP APIs should use OAuth2 authentication
+    message: OAuth2 security scheme should be defined for SAP APIs
+    severity: warn
+    given: "$.components.securitySchemes"
+    then:
+      field: oauth2
+      function: truthy
+
+  # Tags must use Title Case
+  sap-tags-title-case:
+    description: Tags must use Title Case
+    message: Tag '{{value}}' should use Title Case
+    severity: warn
+    given: "$.paths[*][*].tags[*]"
+    then:
+      function: pattern
+      functionOptions:
+        match: "^[A-Z][a-zA-Z]*(\\s[A-Z][a-zA-Z]*)*$"
+
+  # Operations must have descriptions
+  sap-operation-description:
+    description: Operations should have descriptions
+    message: Operation is missing a description
+    severity: warn
+    given: "$.paths[*][get,post,put,patch,delete]"
+    then:
+      field: description
+      function: truthy
+
+  # Response 401 must be defined for secured operations
+  sap-401-response-defined:
+    description: Secured operations should define 401 response
+    message: Operation is missing a 401 Unauthorized response
+    severity: warn
+    given: "$.paths[*][get,post,put,patch,delete].responses"
+    then:
+      field: "401"
+      function: truthy

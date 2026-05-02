@@ -1,0 +1,48 @@
+{
+  "request": {
+    "method": "GET",
+    "url": "https://my-tenant.integrationsuite.cfapps.sap.hana.ondemand.com/api/v1/MessageProcessingLogs?$filter=Status%20eq%20'FAILED'&$top=5&$orderby=LogStart%20desc",
+    "headers": {
+      "Authorization": "Bearer {oauth_token}",
+      "Accept": "application/json"
+    }
+  },
+  "response": {
+    "status": 200,
+    "headers": {
+      "Content-Type": "application/json"
+    },
+    "body": {
+      "d": {
+        "results": [
+          {
+            "MessageGuid": "ABCd1234-ef56-7890-abcd-ef1234567890",
+            "CorrelationId": "CORR-2026-05-02-001",
+            "ApplicationMessageId": "ORDER-98765",
+            "ApplicationMessageType": "SalesOrder",
+            "LogStart": "/Date(1746172800000)/",
+            "LogEnd": "/Date(1746172810000)/",
+            "Sender": "S4HANA_PRD",
+            "Receiver": "CRM_CLOUD",
+            "IntegrationFlowName": "SalesOrderReplication",
+            "Status": "FAILED",
+            "LogLevel": "ERROR"
+          },
+          {
+            "MessageGuid": "DEFg5678-ab12-3456-cdef-ab7890123456",
+            "CorrelationId": "CORR-2026-05-02-002",
+            "ApplicationMessageId": "INV-45678",
+            "ApplicationMessageType": "Invoice",
+            "LogStart": "/Date(1746169200000)/",
+            "LogEnd": "/Date(1746169215000)/",
+            "Sender": "ERP_BACKEND",
+            "Receiver": "FINANCE_CLOUD",
+            "IntegrationFlowName": "InvoiceReplication",
+            "Status": "FAILED",
+            "LogLevel": "ERROR"
+          }
+        ]
+      }
+    }
+  }
+}

@@ -1,0 +1,56 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://api-evangelist.github.io/sap-integration-suite/json-schema/sap-integration-suite-integration-package-schema.json",
+  "title": "SAP Integration Package",
+  "description": "Schema for an SAP Cloud Integration package containing integration artifacts",
+  "type": "object",
+  "properties": {
+    "Id": {
+      "type": "string",
+      "description": "Unique identifier of the integration package"
+    },
+    "Name": {
+      "type": "string",
+      "description": "Display name of the integration package"
+    },
+    "Description": {
+      "type": "string",
+      "description": "Detailed description of the package"
+    },
+    "ShortText": {
+      "type": "string",
+      "description": "Short description of the package",
+      "maxLength": 140
+    },
+    "Version": {
+      "type": "string",
+      "description": "Package version in semantic versioning format",
+      "pattern": "^\\d+\\.\\d+\\.\\d+$"
+    },
+    "Vendor": {
+      "type": "string",
+      "description": "Vendor or publisher of the package"
+    },
+    "Mode": {
+      "type": "string",
+      "description": "Edit mode for the package",
+      "enum": ["EDIT_ALLOWED", "READONLY"]
+    },
+    "SupportedPlatform": {
+      "type": "string",
+      "description": "Supported runtime platform",
+      "enum": ["SAP Cloud Integration", "SAP Integration Suite"]
+    },
+    "CreationDate": {
+      "type": "string",
+      "description": "ISO 8601 creation timestamp",
+      "format": "date-time"
+    },
+    "ModifiedDate": {
+      "type": "string",
+      "description": "ISO 8601 last modification timestamp",
+      "format": "date-time"
+    }
+  },
+  "required": ["Id", "Name", "Version"]
+}

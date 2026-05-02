@@ -1,0 +1,397 @@
+naftiko: "1.0.0-alpha1"
+
+info:
+  label: "SAP Integration Suite - Integration Lifecycle"
+  description: >-
+    Unified capability for managing the complete integration lifecycle on
+    SAP Integration Suite. Combines Cloud Integration artifact management
+    with API Management proxy lifecycle for integration developers and
+    platform administrators. Covers design, deployment, monitoring, and
+    API governance workflows.
+  tags:
+    - SAP Integration Suite
+    - Cloud Integration
+    - API Management
+    - Integration Flows
+    - DevOps
+  created: "2026-05-02"
+  modified: "2026-05-02"
+
+binds:
+  - namespace: env
+    keys:
+      SAP_CLOUD_INTEGRATION_OAUTH_TOKEN: SAP_CLOUD_INTEGRATION_OAUTH_TOKEN
+      SAP_CLOUD_INTEGRATION_HOST: SAP_CLOUD_INTEGRATION_HOST
+      SAP_APIM_OAUTH_TOKEN: SAP_APIM_OAUTH_TOKEN
+      SAP_APIM_HOST: SAP_APIM_HOST
+
+capability:
+  consumes:
+    - import: cloud-integration
+      location: ./shared/cloud-integration.yaml
+    - import: api-management
+      location: ./shared/api-management.yaml
+
+  exposes:
+    - type: rest
+      port: 8080
+      namespace: integration-lifecycle-api
+      description: "Unified REST API for SAP Integration Suite lifecycle management."
+      resources:
+        - path: /v1/integration-packages
+          name: integration-packages
+          description: List and retrieve integration packages
+          operations:
+            - method: GET
+              name: list-integration-packages
+              description: List all integration packages
+              call: "cloud-integration.list-integration-packages"
+              outputParameters:
+                - type: object
+                  mapping: "$."
+        - path: /v1/integration-packages/{id}
+          name: integration-package
+          description: Single integration package details
+          operations:
+            - method: GET
+              name: get-integration-package
+              description: Get a specific integration package
+              call: "cloud-integration.get-integration-package"
+              with:
+                Id: "rest.id"
+              outputParameters:
+                - type: object
+                  mapping: "$."
+        - path: /v1/runtime-artifacts
+          name: runtime-artifacts
+          description: Deployed integration flow runtime artifacts
+          operations:
+            - method: GET
+              name: list-runtime-artifacts
+              description: List all deployed runtime artifacts
+              call: "cloud-integration.list-runtime-artifacts"
+              outputParameters:
+                - type: object
+                  mapping: "$."
+        - path: /v1/runtime-artifacts/{id}
+          name: runtime-artifact
+          description: Single runtime artifact status
+          operations:
+            - method: GET
+              name: get-runtime-artifact
+              description: Get runtime artifact status
+              call: "cloud-integration.get-runtime-artifact"
+              with:
+                Id: "rest.id"
+              outputParameters:
+                - type: object
+                  mapping: "$."
+            - method: DELETE
+              name: undeploy-runtime-artifact
+              description: Undeploy a runtime artifact
+              call: "cloud-integration.undeploy-runtime-artifact"
+              with:
+                Id: "rest.id"
+              outputParameters:
+                - type: object
+                  mapping: "$."
+        - path: /v1/deploy
+          name: deploy
+          description: Trigger integration flow deployment
+          operations:
+            - method: POST
+              name: deploy-integration-flow
+              description: Deploy an integration flow to runtime
+              call: "cloud-integration.deploy-integration-flow"
+              with:
+                Id: "rest.id"
+                Version: "rest.version"
+              outputParameters:
+                - type: object
+                  mapping: "$."
+        - path: /v1/message-processing-logs
+          name: message-processing-logs
+          description: Message processing audit logs
+          operations:
+            - method: GET
+              name: list-message-processing-logs
+              description: List message processing logs
+              call: "cloud-integration.list-message-processing-logs"
+              outputParameters:
+                - type: object
+                  mapping: "$."
+        - path: /v1/message-processing-logs/{messageGuid}
+          name: message-processing-log
+          description: Single message processing log
+          operations:
+            - method: GET
+              name: get-message-processing-log
+              description: Get a specific message log
+              call: "cloud-integration.get-message-processing-log"
+              with:
+                MessageGuid: "rest.messageGuid"
+              outputParameters:
+                - type: object
+                  mapping: "$."
+        - path: /v1/service-endpoints
+          name: service-endpoints
+          description: Integration service endpoints
+          operations:
+            - method: GET
+              name: list-service-endpoints
+              description: List all service endpoints
+              call: "cloud-integration.list-service-endpoints"
+              outputParameters:
+                - type: object
+                  mapping: "$."
+        - path: /v1/api-proxies
+          name: api-proxies
+          description: API Management proxy configurations
+          operations:
+            - method: GET
+              name: list-api-proxies
+              description: List all API proxies
+              call: "api-management.list-api-proxies"
+              outputParameters:
+                - type: object
+                  mapping: "$."
+        - path: /v1/api-proxies/{name}
+          name: api-proxy
+          description: Single API proxy configuration
+          operations:
+            - method: GET
+              name: get-api-proxy
+              description: Get API proxy details
+              call: "api-management.get-api-proxy"
+              with:
+                name: "rest.name"
+              outputParameters:
+                - type: object
+                  mapping: "$."
+            - method: DELETE
+              name: delete-api-proxy
+              description: Delete an API proxy
+              call: "api-management.delete-api-proxy"
+              with:
+                name: "rest.name"
+              outputParameters:
+                - type: object
+                  mapping: "$."
+        - path: /v1/api-products
+          name: api-products
+          description: API products bundling API proxies
+          operations:
+            - method: GET
+              name: list-api-products
+              description: List all API products
+              call: "api-management.list-api-products"
+              outputParameters:
+                - type: object
+                  mapping: "$."
+        - path: /v1/applications
+          name: applications
+          description: Developer applications and subscriptions
+          operations:
+            - method: GET
+              name: list-applications
+              description: List all developer applications
+              call: "api-management.list-applications"
+              outputParameters:
+                - type: object
+                  mapping: "$."
+        - path: /v1/developers
+          name: developers
+          description: Developer accounts in API portal
+          operations:
+            - method: GET
+              name: list-developers
+              description: List all developers
+              call: "api-management.list-developers"
+              outputParameters:
+                - type: object
+                  mapping: "$."
+
+    - type: mcp
+      port: 9090
+      namespace: integration-lifecycle-mcp
+      transport: http
+      description: "MCP server for AI-assisted SAP Integration Suite lifecycle management."
+      tools:
+        - name: list-integration-packages
+          description: List all integration packages in the SAP Cloud Integration tenant
+          hints:
+            readOnly: true
+            openWorld: true
+          call: "cloud-integration.list-integration-packages"
+          outputParameters:
+            - type: object
+              mapping: "$."
+        - name: get-integration-package
+          description: Get a specific SAP integration package by ID
+          hints:
+            readOnly: true
+            openWorld: false
+          call: "cloud-integration.get-integration-package"
+          with:
+            Id: "tools.Id"
+          outputParameters:
+            - type: object
+              mapping: "$."
+        - name: list-runtime-artifacts
+          description: List all deployed runtime integration artifacts and their status
+          hints:
+            readOnly: true
+            openWorld: true
+          call: "cloud-integration.list-runtime-artifacts"
+          outputParameters:
+            - type: object
+              mapping: "$."
+        - name: get-runtime-artifact
+          description: Get the deployment status of a specific integration flow
+          hints:
+            readOnly: true
+            openWorld: false
+          call: "cloud-integration.get-runtime-artifact"
+          with:
+            Id: "tools.Id"
+          outputParameters:
+            - type: object
+              mapping: "$."
+        - name: deploy-integration-flow
+          description: Deploy an integration flow artifact to the SAP Integration Suite runtime
+          hints:
+            readOnly: false
+            destructive: false
+            idempotent: false
+          call: "cloud-integration.deploy-integration-flow"
+          with:
+            Id: "tools.Id"
+            Version: "tools.Version"
+          outputParameters:
+            - type: object
+              mapping: "$."
+        - name: undeploy-runtime-artifact
+          description: Remove a deployed integration flow from the runtime
+          hints:
+            readOnly: false
+            destructive: true
+            idempotent: true
+          call: "cloud-integration.undeploy-runtime-artifact"
+          with:
+            Id: "tools.Id"
+          outputParameters:
+            - type: object
+              mapping: "$."
+        - name: list-message-processing-logs
+          description: List message processing logs, optionally filtered by status or flow name
+          hints:
+            readOnly: true
+            openWorld: true
+          call: "cloud-integration.list-message-processing-logs"
+          outputParameters:
+            - type: object
+              mapping: "$."
+        - name: get-message-processing-log
+          description: Get a specific message processing log entry by GUID
+          hints:
+            readOnly: true
+            openWorld: false
+          call: "cloud-integration.get-message-processing-log"
+          with:
+            MessageGuid: "tools.MessageGuid"
+          outputParameters:
+            - type: object
+              mapping: "$."
+        - name: list-service-endpoints
+          description: List all service endpoints registered in SAP Integration Suite
+          hints:
+            readOnly: true
+            openWorld: true
+          call: "cloud-integration.list-service-endpoints"
+          outputParameters:
+            - type: object
+              mapping: "$."
+        - name: list-api-proxies
+          description: List all API proxies in the SAP API Management tenant
+          hints:
+            readOnly: true
+            openWorld: true
+          call: "api-management.list-api-proxies"
+          outputParameters:
+            - type: object
+              mapping: "$."
+        - name: get-api-proxy
+          description: Get a specific API proxy configuration by name
+          hints:
+            readOnly: true
+            openWorld: false
+          call: "api-management.get-api-proxy"
+          with:
+            name: "tools.name"
+          outputParameters:
+            - type: object
+              mapping: "$."
+        - name: create-api-proxy
+          description: Create a new API proxy in SAP API Management
+          hints:
+            readOnly: false
+            destructive: false
+            idempotent: false
+          call: "api-management.create-api-proxy"
+          with:
+            name: "tools.name"
+            title: "tools.title"
+            targetEndpoint: "tools.targetEndpoint"
+          outputParameters:
+            - type: object
+              mapping: "$."
+        - name: delete-api-proxy
+          description: Delete an API proxy from SAP API Management
+          hints:
+            readOnly: false
+            destructive: true
+            idempotent: true
+          call: "api-management.delete-api-proxy"
+          with:
+            name: "tools.name"
+          outputParameters:
+            - type: object
+              mapping: "$."
+        - name: list-api-products
+          description: List all API products in the SAP API Management developer portal
+          hints:
+            readOnly: true
+            openWorld: true
+          call: "api-management.list-api-products"
+          outputParameters:
+            - type: object
+              mapping: "$."
+        - name: get-api-product
+          description: Get a specific API product by name
+          hints:
+            readOnly: true
+            openWorld: false
+          call: "api-management.get-api-product"
+          with:
+            name: "tools.name"
+          outputParameters:
+            - type: object
+              mapping: "$."
+        - name: list-applications
+          description: List all developer applications registered in the API portal
+          hints:
+            readOnly: true
+            openWorld: true
+          call: "api-management.list-applications"
+          outputParameters:
+            - type: object
+              mapping: "$."
+        - name: list-developers
+          description: List all developers registered in the SAP API Management portal
+          hints:
+            readOnly: true
+            openWorld: true
+          call: "api-management.list-developers"
+          outputParameters:
+            - type: object
+              mapping: "$."

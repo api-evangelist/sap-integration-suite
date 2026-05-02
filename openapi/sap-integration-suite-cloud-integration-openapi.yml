@@ -1,0 +1,697 @@
+openapi: 3.1.0
+info:
+  title: SAP Cloud Integration API
+  description: >-
+    The SAP Cloud Integration API (Process Integration Runtime API) provides
+    OData V2 and REST endpoints for deploying, monitoring, and managing
+    integration flows, artifacts, packages, and runtime operations on
+    SAP Integration Suite hosted on SAP Business Technology Platform.
+    It supports message processing log retrieval, integration package
+    lifecycle management, artifact deployment, and service endpoint discovery.
+  version: 1.0.0
+  contact:
+    name: SAP Support
+    url: https://support.sap.com
+  license:
+    name: SAP Developer License
+    url: https://www.sap.com/about/agreements/product-use-and-support-terms.html
+  x-logo:
+    url: https://www.sap.com/dam/application/shared/logos/sap-logo.svg
+servers:
+  - url: https://{tenant-host}/api/v1
+    description: SAP Integration Suite Tenant
+    variables:
+      tenant-host:
+        default: my-tenant.integrationsuite.cfapps.sap.hana.ondemand.com
+        description: SAP Integration Suite tenant host
+security:
+  - oauth2: []
+tags:
+  - name: Integration Packages
+    description: Manage integration packages and their content
+  - name: Integration Flows
+    description: Deploy and manage integration flow artifacts
+  - name: Message Processing Logs
+    description: Retrieve message processing logs and audit information
+  - name: Runtime Artifacts
+    description: Manage deployed runtime artifacts
+  - name: Service Endpoints
+    description: Discover and manage service endpoints
+  - name: Value Mappings
+    description: Manage value mapping artifacts
+  - name: Variables
+    description: Manage global and local variables
+
+paths:
+  /IntegrationPackages:
+    get:
+      operationId: listIntegrationPackages
+      summary: List Integration Packages
+      description: Retrieve all integration packages available in the tenant.
+      tags:
+        - Integration Packages
+      parameters:
+        - name: $top
+          in: query
+          description: Maximum number of records to return
+          schema:
+            type: integer
+        - name: $skip
+          in: query
+          description: Number of records to skip for pagination
+          schema:
+            type: integer
+        - name: $filter
+          in: query
+          description: OData filter expression
+          schema:
+            type: string
+        - name: $orderby
+          in: query
+          description: OData orderby expression
+          schema:
+            type: string
+      responses:
+        '200':
+          description: List of integration packages
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  d:
+                    type: object
+                    properties:
+                      results:
+                        type: array
+                        items:
+                          $ref: '#/components/schemas/IntegrationPackage'
+        '401':
+          description: Unauthorized
+        '403':
+          description: Forbidden
+
+  /IntegrationPackages('{Id}'):
+    get:
+      operationId: getIntegrationPackage
+      summary: Get Integration Package
+      description: Retrieve a specific integration package by its ID.
+      tags:
+        - Integration Packages
+      parameters:
+        - name: Id
+          in: path
+          required: true
+          description: Integration package identifier
+          schema:
+            type: string
+      responses:
+        '200':
+          description: Integration package details
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  d:
+                    $ref: '#/components/schemas/IntegrationPackage'
+        '401':
+          description: Unauthorized
+        '404':
+          description: Package not found
+
+  /IntegrationPackages('{Id}')/IntegrationDesigntimeArtifacts:
+    get:
+      operationId: listIntegrationDesigntimeArtifacts
+      summary: List Design-Time Artifacts in Package
+      description: Retrieve all design-time integration artifacts within a package.
+      tags:
+        - Integration Flows
+      parameters:
+        - name: Id
+          in: path
+          required: true
+          description: Integration package identifier
+          schema:
+            type: string
+      responses:
+        '200':
+          description: List of design-time artifacts
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  d:
+                    type: object
+                    properties:
+                      results:
+                        type: array
+                        items:
+                          $ref: '#/components/schemas/IntegrationArtifact'
+        '401':
+          description: Unauthorized
+
+  /IntegrationDesigntimeArtifacts(Id='{Id}',Version='{Version}'):
+    get:
+      operationId: getIntegrationDesigntimeArtifact
+      summary: Get Design-Time Artifact
+      description: Retrieve a specific design-time integration artifact.
+      tags:
+        - Integration Flows
+      parameters:
+        - name: Id
+          in: path
+          required: true
+          description: Artifact identifier
+          schema:
+            type: string
+        - name: Version
+          in: path
+          required: true
+          description: Artifact version (use 'active' for latest)
+          schema:
+            type: string
+      responses:
+        '200':
+          description: Design-time artifact details
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  d:
+                    $ref: '#/components/schemas/IntegrationArtifact'
+        '401':
+          description: Unauthorized
+        '404':
+          description: Artifact not found
+
+  /DeployIntegrationDesigntimeArtifact:
+    post:
+      operationId: deployIntegrationDesigntimeArtifact
+      summary: Deploy Integration Flow
+      description: >-
+        Deploy a design-time integration artifact to the runtime. Triggers
+        compilation and deployment of the integration flow.
+      tags:
+        - Integration Flows
+      parameters:
+        - name: Id
+          in: query
+          required: true
+          description: Artifact identifier to deploy
+          schema:
+            type: string
+        - name: Version
+          in: query
+          required: true
+          description: Artifact version to deploy
+          schema:
+            type: string
+      responses:
+        '202':
+          description: Deployment accepted
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  d:
+                    type: object
+                    properties:
+                      TaskId:
+                        type: string
+        '401':
+          description: Unauthorized
+        '400':
+          description: Bad request
+
+  /IntegrationRuntimeArtifacts:
+    get:
+      operationId: listRuntimeArtifacts
+      summary: List Runtime Artifacts
+      description: Retrieve all currently deployed integration artifacts in the runtime.
+      tags:
+        - Runtime Artifacts
+      parameters:
+        - name: $filter
+          in: query
+          description: OData filter expression
+          schema:
+            type: string
+        - name: $top
+          in: query
+          schema:
+            type: integer
+        - name: $skip
+          in: query
+          schema:
+            type: integer
+      responses:
+        '200':
+          description: List of runtime artifacts
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  d:
+                    type: object
+                    properties:
+                      results:
+                        type: array
+                        items:
+                          $ref: '#/components/schemas/RuntimeArtifact'
+        '401':
+          description: Unauthorized
+
+  /IntegrationRuntimeArtifacts('{Id}'):
+    get:
+      operationId: getRuntimeArtifact
+      summary: Get Runtime Artifact
+      description: Retrieve a specific deployed runtime artifact and its status.
+      tags:
+        - Runtime Artifacts
+      parameters:
+        - name: Id
+          in: path
+          required: true
+          description: Runtime artifact identifier
+          schema:
+            type: string
+      responses:
+        '200':
+          description: Runtime artifact details
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  d:
+                    $ref: '#/components/schemas/RuntimeArtifact'
+        '404':
+          description: Artifact not found
+    delete:
+      operationId: undeployRuntimeArtifact
+      summary: Undeploy Runtime Artifact
+      description: Remove a deployed integration artifact from the runtime.
+      tags:
+        - Runtime Artifacts
+      parameters:
+        - name: Id
+          in: path
+          required: true
+          description: Runtime artifact identifier
+          schema:
+            type: string
+      responses:
+        '202':
+          description: Undeploy accepted
+        '401':
+          description: Unauthorized
+        '404':
+          description: Artifact not found
+
+  /MessageProcessingLogs:
+    get:
+      operationId: listMessageProcessingLogs
+      summary: List Message Processing Logs
+      description: >-
+        Retrieve message processing logs for all integration flows.
+        Supports filtering by time range, status, and integration flow ID.
+      tags:
+        - Message Processing Logs
+      parameters:
+        - name: $filter
+          in: query
+          description: OData filter expression (e.g., Status eq 'FAILED')
+          schema:
+            type: string
+        - name: $top
+          in: query
+          schema:
+            type: integer
+          description: Maximum number of log entries to return
+        - name: $skip
+          in: query
+          schema:
+            type: integer
+        - name: $orderby
+          in: query
+          schema:
+            type: string
+      responses:
+        '200':
+          description: List of message processing logs
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  d:
+                    type: object
+                    properties:
+                      results:
+                        type: array
+                        items:
+                          $ref: '#/components/schemas/MessageProcessingLog'
+        '401':
+          description: Unauthorized
+
+  /MessageProcessingLogs('{MessageGuid}'):
+    get:
+      operationId: getMessageProcessingLog
+      summary: Get Message Processing Log
+      description: Retrieve a specific message processing log entry by its GUID.
+      tags:
+        - Message Processing Logs
+      parameters:
+        - name: MessageGuid
+          in: path
+          required: true
+          description: Message processing log GUID
+          schema:
+            type: string
+      responses:
+        '200':
+          description: Message processing log details
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  d:
+                    $ref: '#/components/schemas/MessageProcessingLog'
+        '401':
+          description: Unauthorized
+        '404':
+          description: Log entry not found
+
+  /MessageProcessingLogs('{MessageGuid}')/AdapterAttributes:
+    get:
+      operationId: getMessageProcessingLogAdapterAttributes
+      summary: Get Message Log Adapter Attributes
+      description: Retrieve adapter-specific attributes for a message processing log entry.
+      tags:
+        - Message Processing Logs
+      parameters:
+        - name: MessageGuid
+          in: path
+          required: true
+          description: Message processing log GUID
+          schema:
+            type: string
+      responses:
+        '200':
+          description: Adapter attributes for the message log
+          content:
+            application/json:
+              schema:
+                type: object
+        '401':
+          description: Unauthorized
+
+  /ServiceEndpoints:
+    get:
+      operationId: listServiceEndpoints
+      summary: List Service Endpoints
+      description: >-
+        Retrieve all service endpoints registered in the Integration Suite tenant.
+        Supports pagination with $top and $skip parameters.
+      tags:
+        - Service Endpoints
+      parameters:
+        - name: $top
+          in: query
+          schema:
+            type: integer
+        - name: $skip
+          in: query
+          schema:
+            type: integer
+        - name: $count
+          in: query
+          schema:
+            type: boolean
+      responses:
+        '200':
+          description: List of service endpoints
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  d:
+                    type: object
+                    properties:
+                      results:
+                        type: array
+                        items:
+                          $ref: '#/components/schemas/ServiceEndpoint'
+        '401':
+          description: Unauthorized
+
+  /Variables:
+    get:
+      operationId: listVariables
+      summary: List Variables
+      description: Retrieve all integration variables defined in the tenant.
+      tags:
+        - Variables
+      parameters:
+        - name: $filter
+          in: query
+          schema:
+            type: string
+        - name: $top
+          in: query
+          schema:
+            type: integer
+        - name: $skip
+          in: query
+          schema:
+            type: integer
+      responses:
+        '200':
+          description: List of variables
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  d:
+                    type: object
+                    properties:
+                      results:
+                        type: array
+                        items:
+                          $ref: '#/components/schemas/Variable'
+        '401':
+          description: Unauthorized
+
+components:
+  securitySchemes:
+    oauth2:
+      type: oauth2
+      flows:
+        clientCredentials:
+          tokenUrl: https://{tenant}.authentication.sap.hana.ondemand.com/oauth/token
+          scopes: {}
+
+  schemas:
+    IntegrationPackage:
+      type: object
+      properties:
+        Id:
+          type: string
+          description: Unique identifier of the integration package
+        Name:
+          type: string
+          description: Display name of the package
+        Description:
+          type: string
+          description: Package description
+        ShortText:
+          type: string
+          description: Short description
+        Version:
+          type: string
+          description: Package version
+        Vendor:
+          type: string
+          description: Package vendor
+        Mode:
+          type: string
+          description: Package mode (EDIT_ALLOWED or READONLY)
+          enum:
+            - EDIT_ALLOWED
+            - READONLY
+        SupportedPlatform:
+          type: string
+          description: Supported runtime platform
+        CreationDate:
+          type: string
+          description: Package creation date
+        ModifiedDate:
+          type: string
+          description: Package last modified date
+
+    IntegrationArtifact:
+      type: object
+      properties:
+        Id:
+          type: string
+          description: Artifact identifier
+        Version:
+          type: string
+          description: Artifact version
+        PackageId:
+          type: string
+          description: Parent package identifier
+        Name:
+          type: string
+          description: Artifact display name
+        Description:
+          type: string
+          description: Artifact description
+        Type:
+          type: string
+          description: Artifact type (e.g., IFlow, ValueMapping)
+          enum:
+            - IFlow
+            - ValueMapping
+            - ODataApi
+            - RestApi
+            - SoapApi
+        ModifiedBy:
+          type: string
+          description: User who last modified the artifact
+        ModifiedAt:
+          type: string
+          description: Timestamp of last modification
+
+    RuntimeArtifact:
+      type: object
+      properties:
+        Id:
+          type: string
+          description: Runtime artifact identifier
+        Version:
+          type: string
+          description: Deployed version
+        Name:
+          type: string
+          description: Artifact name
+        Type:
+          type: string
+          description: Artifact type
+        Status:
+          type: string
+          description: Deployment status
+          enum:
+            - STARTED
+            - STARTING
+            - STOPPING
+            - STOPPED
+            - ERROR
+        DeployedBy:
+          type: string
+          description: User who deployed the artifact
+        DeployedOn:
+          type: string
+          description: Deployment timestamp
+        ErrorInformation:
+          type: string
+          description: Error details if status is ERROR
+
+    MessageProcessingLog:
+      type: object
+      properties:
+        MessageGuid:
+          type: string
+          description: Unique identifier for the message
+        CorrelationId:
+          type: string
+          description: Correlation ID linking related messages
+        ApplicationMessageId:
+          type: string
+          description: Application-level message ID
+        ApplicationMessageType:
+          type: string
+          description: Application message type
+        LogStart:
+          type: string
+          description: Message processing start time
+        LogEnd:
+          type: string
+          description: Message processing end time
+        Sender:
+          type: string
+          description: Sending system or adapter
+        Receiver:
+          type: string
+          description: Receiving system or adapter
+        IntegrationFlowName:
+          type: string
+          description: Name of the integration flow that processed the message
+        Status:
+          type: string
+          description: Processing status
+          enum:
+            - COMPLETED
+            - FAILED
+            - PROCESSING
+            - RETRY
+            - ESCALATED
+            - DISCARDED
+            - ABANDONED
+        LogLevel:
+          type: string
+          description: Log verbosity level
+          enum:
+            - INFO
+            - DEBUG
+            - TRACE
+            - ERROR
+
+    ServiceEndpoint:
+      type: object
+      properties:
+        Name:
+          type: string
+          description: Service endpoint name
+        Id:
+          type: string
+          description: Service endpoint identifier
+        Title:
+          type: string
+          description: Endpoint title
+        Protocol:
+          type: string
+          description: Communication protocol (e.g., HTTPS, AS2)
+        Url:
+          type: string
+          description: Endpoint URL
+
+    Variable:
+      type: object
+      properties:
+        VariableName:
+          type: string
+          description: Name of the variable
+        IntegrationFlow:
+          type: string
+          description: Associated integration flow name (empty for global variables)
+        Visibility:
+          type: string
+          description: Variable scope
+          enum:
+            - Global
+            - Local
+        UpdatedAt:
+          type: string
+          description: Last updated timestamp
+        RetainUntil:
+          type: string
+          description: Retention expiry timestamp
