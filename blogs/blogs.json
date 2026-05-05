@@ -1,0 +1,13 @@
+{
+  "repo": "sap-integration-suite",
+  "feeds": [
+    {
+      "source": "https://blogs.sap.com/tags/73554900100700002542/",
+      "feed_url": "https://community.sap.com/khhcw49343/rss/Community?interaction.style=forum",
+      "saved": 10,
+      "title": "New board topics in SAP Community"
+    }
+  ],
+  "post_count": 10,
+  "fetched": "2026-05-03T23:35:31Z"
+}
