@@ -4,118 +4,38 @@ schema: https://raw.githubusercontent.com/api-evangelist/interface-research/main
 provider: SAP Integration Suite
 providerId: sap-integration-suite
 created: '2026-05-04'
-modified: '2026-05-04'
+modified: '2026-05-05'
+reconciled: false
 tags:
-  - API Management
-  - Cloud Integration
-  - Enterprise Integration
-  - Event Mesh
-  - iPaaS
-  - SAP
-  - SAP BTP
-  - Rate Limiting
-  - Quotas
-  - Throttling
-description: Machine-readable rate limit definitions for the SAP Integration Suite API surface. Captures
-  per-tier quotas, burst behavior, response signaling, and recovery semantics. Defaults are scaffold values
-  to be replaced with published provider limits.
-headers:
-  limit: X-RateLimit-Limit
-  remaining: X-RateLimit-Remaining
-  reset: X-RateLimit-Reset
-  retryAfter: Retry-After
-  policy: RateLimit-Policy
+- iPaaS
+- API Management
+- SAP
+- Rate Limiting
+description: SAP Integration Suite does not publish public API rate limits reachable in this reconciliation
+  pass; limits are governed by the customer's commercial / partner agreement. Consumers should honor 429
+  / 503 responses where they appear and follow standard exponential-backoff guidance.
+notes: SAP Integration Suite is sold as part of SAP Business Technology Platform (BTP) and priced via
+  SAP commercial agreements. The public pricing page returns HTTP 403 to anonymous fetches; Discovery
+  Center requires authenticated SAP session. List pricing is not publicly disclosed.
+sources:
+- https://www.sap.com/products/technology-platform/integration-suite.html
+- https://discovery-center.cloud.sap/serviceCatalog/integration-suite
 responseCodes:
   throttled: 429
-  quotaExceeded: 429
   serviceUnavailable: 503
 limits:
-  - tier: free
-    name: Free Tier Default
-    scope: api-key
-    metric: requests_per_minute
-    limit: 10
-    burst: 20
-    timeFrame: minute
-    applies:
-      - SAP Cloud Integration API
-      - SAP API Management API
-      - SAP Integration Advisor API
-      - SAP Open Connectors API
-      - SAP Trading Partner Management API
-      - SAP Event Mesh API
-      - SAP Integration Suite Advanced Event Mesh API
-  - tier: free
-    name: Free Tier Monthly Quota
-    scope: api-key
-    metric: requests_per_month
-    limit: 1000
-    timeFrame: month
-    applies:
-      - SAP Cloud Integration API
-      - SAP API Management API
-      - SAP Integration Advisor API
-      - SAP Open Connectors API
-      - SAP Trading Partner Management API
-      - SAP Event Mesh API
-      - SAP Integration Suite Advanced Event Mesh API
-  - tier: professional
-    name: Professional Tier Default
-    scope: api-key
-    metric: requests_per_minute
-    limit: 100
-    burst: 200
-    timeFrame: minute
-    applies:
-      - SAP Cloud Integration API
-      - SAP API Management API
-      - SAP Integration Advisor API
-      - SAP Open Connectors API
-      - SAP Trading Partner Management API
-      - SAP Event Mesh API
-      - SAP Integration Suite Advanced Event Mesh API
-  - tier: professional
-    name: Professional Tier Monthly Quota
-    scope: api-key
-    metric: requests_per_month
-    limit: 100000
-    timeFrame: month
-    applies:
-      - SAP Cloud Integration API
-      - SAP API Management API
-      - SAP Integration Advisor API
-      - SAP Open Connectors API
-      - SAP Trading Partner Management API
-      - SAP Event Mesh API
-      - SAP Integration Suite Advanced Event Mesh API
-  - tier: enterprise
-    name: Enterprise Negotiated Limit
-    scope: contract
-    metric: requests_per_minute
-    limit: 1000
-    burst: 5000
-    timeFrame: minute
-    applies:
-      - SAP Cloud Integration API
-      - SAP API Management API
-      - SAP Integration Advisor API
-      - SAP Open Connectors API
-      - SAP Trading Partner Management API
-      - SAP Event Mesh API
-      - SAP Integration Suite Advanced Event Mesh API
+- name: Contracted limits
+  scope: account
+  metric: varies
+  limit: negotiated under commercial / partner agreement; not publicly published
 policies:
-  - name: Backoff Strategy
-    description: Clients should implement exponential backoff with jitter, honoring the Retry-After header
-      when present.
-  - name: Burst Handling
-    description: Short bursts above the steady-state limit are tolerated up to the documented burst ceiling
-      before throttling engages.
-  - name: Quota Reset
-    description: Monthly quotas reset at the start of each calendar month in UTC. Per-minute and per-second
-      windows reset on a sliding-window basis.
-  - name: Fair Use
-    description: Even on uncapped enterprise tiers, sustained usage that materially impacts shared infrastructure
-      may be subject to fair-use throttling.
+- name: Backoff on 429
+  description: Clients should implement exponential backoff with jitter on HTTP 429 responses, honoring
+    the Retry-After header when present.
+- name: Quota raise via account team
+  description: Quota and rate-limit changes are coordinated through the SAP Integration Suite account
+    team or partner manager rather than self-service.
 maintainers:
-  - FN: Kin Lane
-    email: kin@apievangelist.com
+- FN: Kin Lane
+  email: kin@apievangelist.com
+  url: https://apievangelist.com
