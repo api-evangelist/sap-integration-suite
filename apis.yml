@@ -208,7 +208,7 @@ common:
     url: https://help.sap.com/docs/integration-suite
   - type: Website
     url: https://www.sap.com/products/technology-platform/integration-suite.html
-  - type: Getting Started
+  - type: GettingStarted
     url: https://help.sap.com/docs/integration-suite/sap-integration-suite/what-is-sap-integration-suite
   - type: Authentication
     url: https://help.sap.com/docs/integration-suite/sap-integration-suite/setting-up-oauth-inbound-authentication
@@ -218,13 +218,13 @@ common:
     url: https://community.sap.com/topics/integration-suite
   - type: Support
     url: https://support.sap.com/en/product/support-by-product/73554900100700002542.html
-  - type: Status
+  - type: StatusPage
     url: https://www.sap.com/about/trust-center/cloud-service-status.html
-  - type: GitHub Organization
+  - type: GitHubOrganization
     url: https://github.com/SAP-samples
-  - type: Terms of Service
+  - type: TermsOfService
     url: https://www.sap.com/about/agreements/policies/cloud-platform.html
-  - type: Privacy Policy
+  - type: PrivacyPolicy
     url: https://www.sap.com/about/legal/privacy.html
   - type: YouTube
     url: https://www.youtube.com/@SAPTechnology
