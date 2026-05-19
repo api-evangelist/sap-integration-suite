@@ -1,0 +1,130 @@
+naftiko: 1.0.0-alpha2
+info:
+  label: SAP API Management API — Applications
+  description: 'SAP API Management API — Applications. 2 operations. Lead operation: List Applications. Self-contained Naftiko
+    capability covering one Sap Integration Suite business surface.'
+  tags:
+  - Sap Integration Suite
+  - Applications
+  created: '2026-05-19'
+  modified: '2026-05-19'
+binds:
+- namespace: env
+  keys:
+    SAP_INTEGRATION_SUITE_API_KEY: SAP_INTEGRATION_SUITE_API_KEY
+capability:
+  consumes:
+  - type: http
+    namespace: api-management-applications
+    baseUri: https://{api-portal-host}/apiportal/api/1.0
+    description: SAP API Management API — Applications business capability. Self-contained, no shared references.
+    resources:
+    - name: Management-Applications
+      path: /Management/Applications
+      operations:
+      - name: listapplications
+        method: GET
+        description: List Applications
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: $top
+          in: query
+          type: integer
+        - name: $skip
+          in: query
+          type: integer
+        - name: $filter
+          in: query
+          type: string
+    - name: Management-Applications('{id}')
+      path: /Management/Applications('{id}')
+      operations:
+      - name: getapplication
+        method: GET
+        description: Get Application
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: id
+          in: path
+          type: string
+          description: Application identifier
+          required: true
+    authentication:
+      type: bearer
+      token: '{{env.SAP_INTEGRATION_SUITE_API_KEY}}'
+  exposes:
+  - type: rest
+    namespace: api-management-applications-rest
+    port: 8080
+    description: REST adapter for SAP API Management API — Applications. One Spectral-compliant resource per consumed operation,
+      prefixed with /v1.
+    resources:
+    - path: /v1/management/applications
+      name: management-applications
+      description: REST surface for Management-Applications.
+      operations:
+      - method: GET
+        name: listapplications
+        description: List Applications
+        call: api-management-applications.listapplications
+        with:
+          $top: rest.$top
+          $skip: rest.$skip
+          $filter: rest.$filter
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/management/applications-id
+      name: management-applications-id
+      description: REST surface for Management-Applications('{id}').
+      operations:
+      - method: GET
+        name: getapplication
+        description: Get Application
+        call: api-management-applications.getapplication
+        with:
+          id: rest.id
+        outputParameters:
+        - type: object
+          mapping: $.
+  - type: mcp
+    namespace: api-management-applications-mcp
+    port: 9090
+    transport: http
+    description: MCP adapter for SAP API Management API — Applications. One tool per consumed operation, routed inline through
+      this capability's consumes block.
+    tools:
+    - name: list-applications
+      description: List Applications
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: api-management-applications.listapplications
+      with:
+        $top: tools.$top
+        $skip: tools.$skip
+        $filter: tools.$filter
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: get-application
+      description: Get Application
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: api-management-applications.getapplication
+      with:
+        id: tools.id
+      outputParameters:
+      - type: object
+        mapping: $.

@@ -1,0 +1,88 @@
+naftiko: 1.0.0-alpha2
+info:
+  label: SAP Cloud Integration API — Service Endpoints
+  description: 'SAP Cloud Integration API — Service Endpoints. 1 operations. Lead operation: List Service Endpoints. Self-contained
+    Naftiko capability covering one Sap Integration Suite business surface.'
+  tags:
+  - Sap Integration Suite
+  - Service Endpoints
+  created: '2026-05-19'
+  modified: '2026-05-19'
+binds:
+- namespace: env
+  keys:
+    SAP_INTEGRATION_SUITE_API_KEY: SAP_INTEGRATION_SUITE_API_KEY
+capability:
+  consumes:
+  - type: http
+    namespace: cloud-integration-service-endpoints
+    baseUri: https://{tenant-host}/api/v1
+    description: SAP Cloud Integration API — Service Endpoints business capability. Self-contained, no shared references.
+    resources:
+    - name: ServiceEndpoints
+      path: /ServiceEndpoints
+      operations:
+      - name: listserviceendpoints
+        method: GET
+        description: List Service Endpoints
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: $top
+          in: query
+          type: integer
+        - name: $skip
+          in: query
+          type: integer
+        - name: $count
+          in: query
+          type: boolean
+    authentication:
+      type: bearer
+      token: '{{env.SAP_INTEGRATION_SUITE_API_KEY}}'
+  exposes:
+  - type: rest
+    namespace: cloud-integration-service-endpoints-rest
+    port: 8080
+    description: REST adapter for SAP Cloud Integration API — Service Endpoints. One Spectral-compliant resource per consumed
+      operation, prefixed with /v1.
+    resources:
+    - path: /v1/serviceendpoints
+      name: serviceendpoints
+      description: REST surface for ServiceEndpoints.
+      operations:
+      - method: GET
+        name: listserviceendpoints
+        description: List Service Endpoints
+        call: cloud-integration-service-endpoints.listserviceendpoints
+        with:
+          $top: rest.$top
+          $skip: rest.$skip
+          $count: rest.$count
+        outputParameters:
+        - type: object
+          mapping: $.
+  - type: mcp
+    namespace: cloud-integration-service-endpoints-mcp
+    port: 9090
+    transport: http
+    description: MCP adapter for SAP Cloud Integration API — Service Endpoints. One tool per consumed operation, routed inline
+      through this capability's consumes block.
+    tools:
+    - name: list-service-endpoints
+      description: List Service Endpoints
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: cloud-integration-service-endpoints.listserviceendpoints
+      with:
+        $top: tools.$top
+        $skip: tools.$skip
+        $count: tools.$count
+      outputParameters:
+      - type: object
+        mapping: $.

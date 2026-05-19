@@ -1,0 +1,179 @@
+naftiko: 1.0.0-alpha2
+info:
+  label: SAP Cloud Integration API — Message Processing Logs
+  description: 'SAP Cloud Integration API — Message Processing Logs. 3 operations. Lead operation: List Message Processing
+    Logs. Self-contained Naftiko capability covering one Sap Integration Suite business surface.'
+  tags:
+  - Sap Integration Suite
+  - Message Processing Logs
+  created: '2026-05-19'
+  modified: '2026-05-19'
+binds:
+- namespace: env
+  keys:
+    SAP_INTEGRATION_SUITE_API_KEY: SAP_INTEGRATION_SUITE_API_KEY
+capability:
+  consumes:
+  - type: http
+    namespace: cloud-integration-message-processing-logs
+    baseUri: https://{tenant-host}/api/v1
+    description: SAP Cloud Integration API — Message Processing Logs business capability. Self-contained, no shared references.
+    resources:
+    - name: MessageProcessingLogs
+      path: /MessageProcessingLogs
+      operations:
+      - name: listmessageprocessinglogs
+        method: GET
+        description: List Message Processing Logs
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: $filter
+          in: query
+          type: string
+          description: OData filter expression (e.g., Status eq 'FAILED')
+        - name: $top
+          in: query
+          type: integer
+          description: Maximum number of log entries to return
+        - name: $skip
+          in: query
+          type: integer
+        - name: $orderby
+          in: query
+          type: string
+    - name: MessageProcessingLogs('{MessageGuid}')
+      path: /MessageProcessingLogs('{MessageGuid}')
+      operations:
+      - name: getmessageprocessinglog
+        method: GET
+        description: Get Message Processing Log
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: MessageGuid
+          in: path
+          type: string
+          description: Message processing log GUID
+          required: true
+    - name: MessageProcessingLogs('{MessageGuid}')-AdapterAttributes
+      path: /MessageProcessingLogs('{MessageGuid}')/AdapterAttributes
+      operations:
+      - name: getmessageprocessinglogadapterattributes
+        method: GET
+        description: Get Message Log Adapter Attributes
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: MessageGuid
+          in: path
+          type: string
+          description: Message processing log GUID
+          required: true
+    authentication:
+      type: bearer
+      token: '{{env.SAP_INTEGRATION_SUITE_API_KEY}}'
+  exposes:
+  - type: rest
+    namespace: cloud-integration-message-processing-logs-rest
+    port: 8080
+    description: REST adapter for SAP Cloud Integration API — Message Processing Logs. One Spectral-compliant resource per
+      consumed operation, prefixed with /v1.
+    resources:
+    - path: /v1/messageprocessinglogs
+      name: messageprocessinglogs
+      description: REST surface for MessageProcessingLogs.
+      operations:
+      - method: GET
+        name: listmessageprocessinglogs
+        description: List Message Processing Logs
+        call: cloud-integration-message-processing-logs.listmessageprocessinglogs
+        with:
+          $filter: rest.$filter
+          $top: rest.$top
+          $skip: rest.$skip
+          $orderby: rest.$orderby
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/messageprocessinglogs-messageguid
+      name: messageprocessinglogs-messageguid
+      description: REST surface for MessageProcessingLogs('{MessageGuid}').
+      operations:
+      - method: GET
+        name: getmessageprocessinglog
+        description: Get Message Processing Log
+        call: cloud-integration-message-processing-logs.getmessageprocessinglog
+        with:
+          MessageGuid: rest.MessageGuid
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/messageprocessinglogs-messageguid/adapterattributes
+      name: messageprocessinglogs-messageguid-adapterattributes
+      description: REST surface for MessageProcessingLogs('{MessageGuid}')-AdapterAttributes.
+      operations:
+      - method: GET
+        name: getmessageprocessinglogadapterattributes
+        description: Get Message Log Adapter Attributes
+        call: cloud-integration-message-processing-logs.getmessageprocessinglogadapterattributes
+        with:
+          MessageGuid: rest.MessageGuid
+        outputParameters:
+        - type: object
+          mapping: $.
+  - type: mcp
+    namespace: cloud-integration-message-processing-logs-mcp
+    port: 9090
+    transport: http
+    description: MCP adapter for SAP Cloud Integration API — Message Processing Logs. One tool per consumed operation, routed
+      inline through this capability's consumes block.
+    tools:
+    - name: list-message-processing-logs
+      description: List Message Processing Logs
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: cloud-integration-message-processing-logs.listmessageprocessinglogs
+      with:
+        $filter: tools.$filter
+        $top: tools.$top
+        $skip: tools.$skip
+        $orderby: tools.$orderby
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: get-message-processing-log
+      description: Get Message Processing Log
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: cloud-integration-message-processing-logs.getmessageprocessinglog
+      with:
+        MessageGuid: tools.MessageGuid
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: get-message-log-adapter-attributes
+      description: Get Message Log Adapter Attributes
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: cloud-integration-message-processing-logs.getmessageprocessinglogadapterattributes
+      with:
+        MessageGuid: tools.MessageGuid
+      outputParameters:
+      - type: object
+        mapping: $.

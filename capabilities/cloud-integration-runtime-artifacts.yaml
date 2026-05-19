@@ -1,0 +1,166 @@
+naftiko: 1.0.0-alpha2
+info:
+  label: SAP Cloud Integration API — Runtime Artifacts
+  description: 'SAP Cloud Integration API — Runtime Artifacts. 3 operations. Lead operation: List Runtime Artifacts. Self-contained
+    Naftiko capability covering one Sap Integration Suite business surface.'
+  tags:
+  - Sap Integration Suite
+  - Runtime Artifacts
+  created: '2026-05-19'
+  modified: '2026-05-19'
+binds:
+- namespace: env
+  keys:
+    SAP_INTEGRATION_SUITE_API_KEY: SAP_INTEGRATION_SUITE_API_KEY
+capability:
+  consumes:
+  - type: http
+    namespace: cloud-integration-runtime-artifacts
+    baseUri: https://{tenant-host}/api/v1
+    description: SAP Cloud Integration API — Runtime Artifacts business capability. Self-contained, no shared references.
+    resources:
+    - name: IntegrationRuntimeArtifacts
+      path: /IntegrationRuntimeArtifacts
+      operations:
+      - name: listruntimeartifacts
+        method: GET
+        description: List Runtime Artifacts
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: $filter
+          in: query
+          type: string
+          description: OData filter expression
+        - name: $top
+          in: query
+          type: integer
+        - name: $skip
+          in: query
+          type: integer
+    - name: IntegrationRuntimeArtifacts('{Id}')
+      path: /IntegrationRuntimeArtifacts('{Id}')
+      operations:
+      - name: getruntimeartifact
+        method: GET
+        description: Get Runtime Artifact
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: Id
+          in: path
+          type: string
+          description: Runtime artifact identifier
+          required: true
+      - name: undeployruntimeartifact
+        method: DELETE
+        description: Undeploy Runtime Artifact
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: Id
+          in: path
+          type: string
+          description: Runtime artifact identifier
+          required: true
+    authentication:
+      type: bearer
+      token: '{{env.SAP_INTEGRATION_SUITE_API_KEY}}'
+  exposes:
+  - type: rest
+    namespace: cloud-integration-runtime-artifacts-rest
+    port: 8080
+    description: REST adapter for SAP Cloud Integration API — Runtime Artifacts. One Spectral-compliant resource per consumed
+      operation, prefixed with /v1.
+    resources:
+    - path: /v1/integrationruntimeartifacts
+      name: integrationruntimeartifacts
+      description: REST surface for IntegrationRuntimeArtifacts.
+      operations:
+      - method: GET
+        name: listruntimeartifacts
+        description: List Runtime Artifacts
+        call: cloud-integration-runtime-artifacts.listruntimeartifacts
+        with:
+          $filter: rest.$filter
+          $top: rest.$top
+          $skip: rest.$skip
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/integrationruntimeartifacts-id
+      name: integrationruntimeartifacts-id
+      description: REST surface for IntegrationRuntimeArtifacts('{Id}').
+      operations:
+      - method: GET
+        name: getruntimeartifact
+        description: Get Runtime Artifact
+        call: cloud-integration-runtime-artifacts.getruntimeartifact
+        with:
+          Id: rest.Id
+        outputParameters:
+        - type: object
+          mapping: $.
+      - method: DELETE
+        name: undeployruntimeartifact
+        description: Undeploy Runtime Artifact
+        call: cloud-integration-runtime-artifacts.undeployruntimeartifact
+        with:
+          Id: rest.Id
+        outputParameters:
+        - type: object
+          mapping: $.
+  - type: mcp
+    namespace: cloud-integration-runtime-artifacts-mcp
+    port: 9090
+    transport: http
+    description: MCP adapter for SAP Cloud Integration API — Runtime Artifacts. One tool per consumed operation, routed inline
+      through this capability's consumes block.
+    tools:
+    - name: list-runtime-artifacts
+      description: List Runtime Artifacts
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: cloud-integration-runtime-artifacts.listruntimeartifacts
+      with:
+        $filter: tools.$filter
+        $top: tools.$top
+        $skip: tools.$skip
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: get-runtime-artifact
+      description: Get Runtime Artifact
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: cloud-integration-runtime-artifacts.getruntimeartifact
+      with:
+        Id: tools.Id
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: undeploy-runtime-artifact
+      description: Undeploy Runtime Artifact
+      hints:
+        readOnly: false
+        destructive: true
+        idempotent: true
+      call: cloud-integration-runtime-artifacts.undeployruntimeartifact
+      with:
+        Id: tools.Id
+      outputParameters:
+      - type: object
+        mapping: $.

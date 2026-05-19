@@ -1,0 +1,88 @@
+naftiko: 1.0.0-alpha2
+info:
+  label: SAP Cloud Integration API — Variables
+  description: 'SAP Cloud Integration API — Variables. 1 operations. Lead operation: List Variables. Self-contained Naftiko
+    capability covering one Sap Integration Suite business surface.'
+  tags:
+  - Sap Integration Suite
+  - Variables
+  created: '2026-05-19'
+  modified: '2026-05-19'
+binds:
+- namespace: env
+  keys:
+    SAP_INTEGRATION_SUITE_API_KEY: SAP_INTEGRATION_SUITE_API_KEY
+capability:
+  consumes:
+  - type: http
+    namespace: cloud-integration-variables
+    baseUri: https://{tenant-host}/api/v1
+    description: SAP Cloud Integration API — Variables business capability. Self-contained, no shared references.
+    resources:
+    - name: Variables
+      path: /Variables
+      operations:
+      - name: listvariables
+        method: GET
+        description: List Variables
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: $filter
+          in: query
+          type: string
+        - name: $top
+          in: query
+          type: integer
+        - name: $skip
+          in: query
+          type: integer
+    authentication:
+      type: bearer
+      token: '{{env.SAP_INTEGRATION_SUITE_API_KEY}}'
+  exposes:
+  - type: rest
+    namespace: cloud-integration-variables-rest
+    port: 8080
+    description: REST adapter for SAP Cloud Integration API — Variables. One Spectral-compliant resource per consumed operation,
+      prefixed with /v1.
+    resources:
+    - path: /v1/variables
+      name: variables
+      description: REST surface for Variables.
+      operations:
+      - method: GET
+        name: listvariables
+        description: List Variables
+        call: cloud-integration-variables.listvariables
+        with:
+          $filter: rest.$filter
+          $top: rest.$top
+          $skip: rest.$skip
+        outputParameters:
+        - type: object
+          mapping: $.
+  - type: mcp
+    namespace: cloud-integration-variables-mcp
+    port: 9090
+    transport: http
+    description: MCP adapter for SAP Cloud Integration API — Variables. One tool per consumed operation, routed inline through
+      this capability's consumes block.
+    tools:
+    - name: list-variables
+      description: List Variables
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: cloud-integration-variables.listvariables
+      with:
+        $filter: tools.$filter
+        $top: tools.$top
+        $skip: tools.$skip
+      outputParameters:
+      - type: object
+        mapping: $.

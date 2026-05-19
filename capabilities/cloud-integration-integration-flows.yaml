@@ -1,0 +1,178 @@
+naftiko: 1.0.0-alpha2
+info:
+  label: SAP Cloud Integration API — Integration Flows
+  description: 'SAP Cloud Integration API — Integration Flows. 3 operations. Lead operation: Deploy Integration Flow. Self-contained
+    Naftiko capability covering one Sap Integration Suite business surface.'
+  tags:
+  - Sap Integration Suite
+  - Integration Flows
+  created: '2026-05-19'
+  modified: '2026-05-19'
+binds:
+- namespace: env
+  keys:
+    SAP_INTEGRATION_SUITE_API_KEY: SAP_INTEGRATION_SUITE_API_KEY
+capability:
+  consumes:
+  - type: http
+    namespace: cloud-integration-integration-flows
+    baseUri: https://{tenant-host}/api/v1
+    description: SAP Cloud Integration API — Integration Flows business capability. Self-contained, no shared references.
+    resources:
+    - name: DeployIntegrationDesigntimeArtifact
+      path: /DeployIntegrationDesigntimeArtifact
+      operations:
+      - name: deployintegrationdesigntimeartifact
+        method: POST
+        description: Deploy Integration Flow
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: Id
+          in: query
+          type: string
+          description: Artifact identifier to deploy
+          required: true
+        - name: Version
+          in: query
+          type: string
+          description: Artifact version to deploy
+          required: true
+    - name: IntegrationDesigntimeArtifacts(Id='{Id}',Version='{Version}')
+      path: /IntegrationDesigntimeArtifacts(Id='{Id}',Version='{Version}')
+      operations:
+      - name: getintegrationdesigntimeartifact
+        method: GET
+        description: Get Design-Time Artifact
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: Id
+          in: path
+          type: string
+          description: Artifact identifier
+          required: true
+        - name: Version
+          in: path
+          type: string
+          description: Artifact version (use 'active' for latest)
+          required: true
+    - name: IntegrationPackages('{Id}')-IntegrationDesigntimeArtifacts
+      path: /IntegrationPackages('{Id}')/IntegrationDesigntimeArtifacts
+      operations:
+      - name: listintegrationdesigntimeartifacts
+        method: GET
+        description: List Design-Time Artifacts in Package
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: Id
+          in: path
+          type: string
+          description: Integration package identifier
+          required: true
+    authentication:
+      type: bearer
+      token: '{{env.SAP_INTEGRATION_SUITE_API_KEY}}'
+  exposes:
+  - type: rest
+    namespace: cloud-integration-integration-flows-rest
+    port: 8080
+    description: REST adapter for SAP Cloud Integration API — Integration Flows. One Spectral-compliant resource per consumed
+      operation, prefixed with /v1.
+    resources:
+    - path: /v1/deployintegrationdesigntimeartifact
+      name: deployintegrationdesigntimeartifact
+      description: REST surface for DeployIntegrationDesigntimeArtifact.
+      operations:
+      - method: POST
+        name: deployintegrationdesigntimeartifact
+        description: Deploy Integration Flow
+        call: cloud-integration-integration-flows.deployintegrationdesigntimeartifact
+        with:
+          Id: rest.Id
+          Version: rest.Version
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/integrationdesigntimeartifacts-id-id-version-version
+      name: integrationdesigntimeartifacts-id-id-version-version
+      description: REST surface for IntegrationDesigntimeArtifacts(Id='{Id}',Version='{Version}').
+      operations:
+      - method: GET
+        name: getintegrationdesigntimeartifact
+        description: Get Design-Time Artifact
+        call: cloud-integration-integration-flows.getintegrationdesigntimeartifact
+        with:
+          Id: rest.Id
+          Version: rest.Version
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/integrationpackages-id/integrationdesigntimeartifacts
+      name: integrationpackages-id-integrationdesigntimeartifacts
+      description: REST surface for IntegrationPackages('{Id}')-IntegrationDesigntimeArtifacts.
+      operations:
+      - method: GET
+        name: listintegrationdesigntimeartifacts
+        description: List Design-Time Artifacts in Package
+        call: cloud-integration-integration-flows.listintegrationdesigntimeartifacts
+        with:
+          Id: rest.Id
+        outputParameters:
+        - type: object
+          mapping: $.
+  - type: mcp
+    namespace: cloud-integration-integration-flows-mcp
+    port: 9090
+    transport: http
+    description: MCP adapter for SAP Cloud Integration API — Integration Flows. One tool per consumed operation, routed inline
+      through this capability's consumes block.
+    tools:
+    - name: deploy-integration-flow
+      description: Deploy Integration Flow
+      hints:
+        readOnly: false
+        destructive: false
+        idempotent: false
+      call: cloud-integration-integration-flows.deployintegrationdesigntimeartifact
+      with:
+        Id: tools.Id
+        Version: tools.Version
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: get-design-time-artifact
+      description: Get Design-Time Artifact
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: cloud-integration-integration-flows.getintegrationdesigntimeartifact
+      with:
+        Id: tools.Id
+        Version: tools.Version
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: list-design-time-artifacts-package
+      description: List Design-Time Artifacts in Package
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: cloud-integration-integration-flows.listintegrationdesigntimeartifacts
+      with:
+        Id: tools.Id
+      outputParameters:
+      - type: object
+        mapping: $.

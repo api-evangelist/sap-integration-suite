@@ -1,0 +1,250 @@
+naftiko: 1.0.0-alpha2
+info:
+  label: SAP API Management API — API Proxies
+  description: 'SAP API Management API — API Proxies. 5 operations. Lead operation: List API Proxies. Self-contained Naftiko
+    capability covering one Sap Integration Suite business surface.'
+  tags:
+  - Sap Integration Suite
+  - API Proxies
+  created: '2026-05-19'
+  modified: '2026-05-19'
+binds:
+- namespace: env
+  keys:
+    SAP_INTEGRATION_SUITE_API_KEY: SAP_INTEGRATION_SUITE_API_KEY
+capability:
+  consumes:
+  - type: http
+    namespace: api-management-api-proxies
+    baseUri: https://{api-portal-host}/apiportal/api/1.0
+    description: SAP API Management API — API Proxies business capability. Self-contained, no shared references.
+    resources:
+    - name: Management-APIProxies
+      path: /Management/APIProxies
+      operations:
+      - name: listapiproxies
+        method: GET
+        description: List API Proxies
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: $top
+          in: query
+          type: integer
+          description: Maximum number of results to return
+        - name: $skip
+          in: query
+          type: integer
+          description: Number of results to skip for pagination
+        - name: $filter
+          in: query
+          type: string
+          description: OData filter expression
+        - name: $orderby
+          in: query
+          type: string
+      - name: createapiproxy
+        method: POST
+        description: Create API Proxy
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: body
+          in: body
+          type: object
+          description: Request body (JSON).
+          required: true
+    - name: Management-APIProxies('{name}')
+      path: /Management/APIProxies('{name}')
+      operations:
+      - name: getapiproxy
+        method: GET
+        description: Get API Proxy
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: name
+          in: path
+          type: string
+          description: API proxy name
+          required: true
+      - name: updateapiproxy
+        method: PUT
+        description: Update API Proxy
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: name
+          in: path
+          type: string
+          description: API proxy name
+          required: true
+        - name: body
+          in: body
+          type: object
+          description: Request body (JSON).
+          required: true
+      - name: deleteapiproxy
+        method: DELETE
+        description: Delete API Proxy
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: name
+          in: path
+          type: string
+          description: API proxy name
+          required: true
+    authentication:
+      type: bearer
+      token: '{{env.SAP_INTEGRATION_SUITE_API_KEY}}'
+  exposes:
+  - type: rest
+    namespace: api-management-api-proxies-rest
+    port: 8080
+    description: REST adapter for SAP API Management API — API Proxies. One Spectral-compliant resource per consumed operation,
+      prefixed with /v1.
+    resources:
+    - path: /v1/management/apiproxies
+      name: management-apiproxies
+      description: REST surface for Management-APIProxies.
+      operations:
+      - method: GET
+        name: listapiproxies
+        description: List API Proxies
+        call: api-management-api-proxies.listapiproxies
+        with:
+          $top: rest.$top
+          $skip: rest.$skip
+          $filter: rest.$filter
+          $orderby: rest.$orderby
+        outputParameters:
+        - type: object
+          mapping: $.
+      - method: POST
+        name: createapiproxy
+        description: Create API Proxy
+        call: api-management-api-proxies.createapiproxy
+        with:
+          body: rest.body
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/management/apiproxies-name
+      name: management-apiproxies-name
+      description: REST surface for Management-APIProxies('{name}').
+      operations:
+      - method: GET
+        name: getapiproxy
+        description: Get API Proxy
+        call: api-management-api-proxies.getapiproxy
+        with:
+          name: rest.name
+        outputParameters:
+        - type: object
+          mapping: $.
+      - method: PUT
+        name: updateapiproxy
+        description: Update API Proxy
+        call: api-management-api-proxies.updateapiproxy
+        with:
+          name: rest.name
+          body: rest.body
+        outputParameters:
+        - type: object
+          mapping: $.
+      - method: DELETE
+        name: deleteapiproxy
+        description: Delete API Proxy
+        call: api-management-api-proxies.deleteapiproxy
+        with:
+          name: rest.name
+        outputParameters:
+        - type: object
+          mapping: $.
+  - type: mcp
+    namespace: api-management-api-proxies-mcp
+    port: 9090
+    transport: http
+    description: MCP adapter for SAP API Management API — API Proxies. One tool per consumed operation, routed inline through
+      this capability's consumes block.
+    tools:
+    - name: list-api-proxies
+      description: List API Proxies
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: api-management-api-proxies.listapiproxies
+      with:
+        $top: tools.$top
+        $skip: tools.$skip
+        $filter: tools.$filter
+        $orderby: tools.$orderby
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: create-api-proxy
+      description: Create API Proxy
+      hints:
+        readOnly: false
+        destructive: false
+        idempotent: false
+      call: api-management-api-proxies.createapiproxy
+      with:
+        body: tools.body
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: get-api-proxy
+      description: Get API Proxy
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: api-management-api-proxies.getapiproxy
+      with:
+        name: tools.name
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: update-api-proxy
+      description: Update API Proxy
+      hints:
+        readOnly: false
+        destructive: false
+        idempotent: true
+      call: api-management-api-proxies.updateapiproxy
+      with:
+        name: tools.name
+        body: tools.body
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: delete-api-proxy
+      description: Delete API Proxy
+      hints:
+        readOnly: false
+        destructive: true
+        idempotent: true
+      call: api-management-api-proxies.deleteapiproxy
+      with:
+        name: tools.name
+      outputParameters:
+      - type: object
+        mapping: $.
