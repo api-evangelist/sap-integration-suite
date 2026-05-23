@@ -1,0 +1,48 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "#/components/schemas/Application",
+  "title": "Application",
+  "type": "object",
+  "properties": {
+    "id": {
+      "type": "string",
+      "description": "Application identifier"
+    },
+    "name": {
+      "type": "string",
+      "description": "Application name"
+    },
+    "title": {
+      "type": "string",
+      "description": "Display title"
+    },
+    "description": {
+      "type": "string",
+      "description": "Application description"
+    },
+    "status": {
+      "type": "string",
+      "description": "Application status",
+      "enum": [
+        "APPROVED",
+        "PENDING",
+        "REJECTED"
+      ]
+    },
+    "developerEmail": {
+      "type": "string",
+      "description": "Developer email associated with the application"
+    },
+    "apiProducts": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      },
+      "description": "API products the application is subscribed to"
+    },
+    "createdAt": {
+      "type": "string",
+      "format": "date-time"
+    }
+  }
+}

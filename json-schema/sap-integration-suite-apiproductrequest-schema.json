@@ -1,0 +1,29 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "#/components/schemas/APIProductRequest",
+  "title": "APIProductRequest",
+  "type": "object",
+  "required": [
+    "name"
+  ],
+  "properties": {
+    "name": {
+      "type": "string",
+      "description": "Product name"
+    },
+    "title": {
+      "type": "string",
+      "description": "Display title"
+    },
+    "description": {
+      "type": "string",
+      "description": "Description"
+    },
+    "apiProxies": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      }
+    }
+  }
+}

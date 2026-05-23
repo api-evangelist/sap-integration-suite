@@ -1,0 +1,54 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "#/components/schemas/APIProduct",
+  "title": "APIProduct",
+  "type": "object",
+  "properties": {
+    "name": {
+      "type": "string",
+      "description": "Product name"
+    },
+    "title": {
+      "type": "string",
+      "description": "Display title"
+    },
+    "description": {
+      "type": "string",
+      "description": "Product description"
+    },
+    "status": {
+      "type": "string",
+      "description": "Product status",
+      "enum": [
+        "PUBLISHED",
+        "DEPRECATED",
+        "UNPUBLISHED"
+      ]
+    },
+    "quota": {
+      "type": "integer",
+      "description": "Request quota per interval"
+    },
+    "quotaInterval": {
+      "type": "integer",
+      "description": "Quota interval value"
+    },
+    "quotaTimeUnit": {
+      "type": "string",
+      "description": "Quota time unit",
+      "enum": [
+        "minute",
+        "hour",
+        "day",
+        "month"
+      ]
+    },
+    "apiProxies": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      },
+      "description": "Names of API proxies included in this product"
+    }
+  }
+}

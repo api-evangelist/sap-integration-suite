@@ -1,0 +1,50 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "#/components/schemas/APIProxy",
+  "title": "APIProxy",
+  "type": "object",
+  "properties": {
+    "name": {
+      "type": "string",
+      "description": "API proxy name (unique identifier)"
+    },
+    "title": {
+      "type": "string",
+      "description": "Display title"
+    },
+    "description": {
+      "type": "string",
+      "description": "API proxy description"
+    },
+    "version": {
+      "type": "string",
+      "description": "API version"
+    },
+    "basePath": {
+      "type": "string",
+      "description": "Base path for the API proxy"
+    },
+    "virtualHost": {
+      "type": "string",
+      "description": "Virtual host assigned to the proxy"
+    },
+    "targetEndpoint": {
+      "type": "string",
+      "description": "Backend target endpoint URL"
+    },
+    "isDeployed": {
+      "type": "boolean",
+      "description": "Whether the proxy is currently deployed"
+    },
+    "createdAt": {
+      "type": "string",
+      "format": "date-time",
+      "description": "Creation timestamp"
+    },
+    "updatedAt": {
+      "type": "string",
+      "format": "date-time",
+      "description": "Last update timestamp"
+    }
+  }
+}

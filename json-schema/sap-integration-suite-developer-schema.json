@@ -1,0 +1,36 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "#/components/schemas/Developer",
+  "title": "Developer",
+  "type": "object",
+  "properties": {
+    "email": {
+      "type": "string",
+      "description": "Developer email address (unique identifier)"
+    },
+    "firstName": {
+      "type": "string",
+      "description": "First name"
+    },
+    "lastName": {
+      "type": "string",
+      "description": "Last name"
+    },
+    "status": {
+      "type": "string",
+      "description": "Developer status",
+      "enum": [
+        "ACTIVE",
+        "INACTIVE"
+      ]
+    },
+    "createdAt": {
+      "type": "string",
+      "format": "date-time"
+    },
+    "updatedAt": {
+      "type": "string",
+      "format": "date-time"
+    }
+  }
+}

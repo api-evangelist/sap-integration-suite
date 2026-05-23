@@ -1,0 +1,165 @@
+{
+  "provider": "SAP Integration Suite",
+  "providerId": "sap-integration-suite",
+  "kind": "json-structure",
+  "description": "Structural overview of the SAP Integration Suite API surface; extracted from openapi/.",
+  "schemaCount": 6,
+  "operationCount": 13,
+  "schemas": [
+    {
+      "name": "IntegrationPackage",
+      "type": "object",
+      "propertyCount": 10,
+      "required": []
+    },
+    {
+      "name": "IntegrationArtifact",
+      "type": "object",
+      "propertyCount": 8,
+      "required": []
+    },
+    {
+      "name": "RuntimeArtifact",
+      "type": "object",
+      "propertyCount": 8,
+      "required": []
+    },
+    {
+      "name": "MessageProcessingLog",
+      "type": "object",
+      "propertyCount": 11,
+      "required": []
+    },
+    {
+      "name": "ServiceEndpoint",
+      "type": "object",
+      "propertyCount": 5,
+      "required": []
+    },
+    {
+      "name": "Variable",
+      "type": "object",
+      "propertyCount": 5,
+      "required": []
+    }
+  ],
+  "operations": [
+    {
+      "method": "GET",
+      "path": "/IntegrationPackages",
+      "operationId": "listIntegrationPackages",
+      "summary": "List Integration Packages",
+      "tags": [
+        "Integration Packages"
+      ]
+    },
+    {
+      "method": "GET",
+      "path": "/IntegrationPackages('{Id}')",
+      "operationId": "getIntegrationPackage",
+      "summary": "Get Integration Package",
+      "tags": [
+        "Integration Packages"
+      ]
+    },
+    {
+      "method": "GET",
+      "path": "/IntegrationPackages('{Id}')/IntegrationDesigntimeArtifacts",
+      "operationId": "listIntegrationDesigntimeArtifacts",
+      "summary": "List Design-Time Artifacts in Package",
+      "tags": [
+        "Integration Flows"
+      ]
+    },
+    {
+      "method": "GET",
+      "path": "/IntegrationDesigntimeArtifacts(Id='{Id}',Version='{Version}')",
+      "operationId": "getIntegrationDesigntimeArtifact",
+      "summary": "Get Design-Time Artifact",
+      "tags": [
+        "Integration Flows"
+      ]
+    },
+    {
+      "method": "POST",
+      "path": "/DeployIntegrationDesigntimeArtifact",
+      "operationId": "deployIntegrationDesigntimeArtifact",
+      "summary": "Deploy Integration Flow",
+      "tags": [
+        "Integration Flows"
+      ]
+    },
+    {
+      "method": "GET",
+      "path": "/IntegrationRuntimeArtifacts",
+      "operationId": "listRuntimeArtifacts",
+      "summary": "List Runtime Artifacts",
+      "tags": [
+        "Runtime Artifacts"
+      ]
+    },
+    {
+      "method": "GET",
+      "path": "/IntegrationRuntimeArtifacts('{Id}')",
+      "operationId": "getRuntimeArtifact",
+      "summary": "Get Runtime Artifact",
+      "tags": [
+        "Runtime Artifacts"
+      ]
+    },
+    {
+      "method": "DELETE",
+      "path": "/IntegrationRuntimeArtifacts('{Id}')",
+      "operationId": "undeployRuntimeArtifact",
+      "summary": "Undeploy Runtime Artifact",
+      "tags": [
+        "Runtime Artifacts"
+      ]
+    },
+    {
+      "method": "GET",
+      "path": "/MessageProcessingLogs",
+      "operationId": "listMessageProcessingLogs",
+      "summary": "List Message Processing Logs",
+      "tags": [
+        "Message Processing Logs"
+      ]
+    },
+    {
+      "method": "GET",
+      "path": "/MessageProcessingLogs('{MessageGuid}')",
+      "operationId": "getMessageProcessingLog",
+      "summary": "Get Message Processing Log",
+      "tags": [
+        "Message Processing Logs"
+      ]
+    },
+    {
+      "method": "GET",
+      "path": "/MessageProcessingLogs('{MessageGuid}')/AdapterAttributes",
+      "operationId": "getMessageProcessingLogAdapterAttributes",
+      "summary": "Get Message Log Adapter Attributes",
+      "tags": [
+        "Message Processing Logs"
+      ]
+    },
+    {
+      "method": "GET",
+      "path": "/ServiceEndpoints",
+      "operationId": "listServiceEndpoints",
+      "summary": "List Service Endpoints",
+      "tags": [
+        "Service Endpoints"
+      ]
+    },
+    {
+      "method": "GET",
+      "path": "/Variables",
+      "operationId": "listVariables",
+      "summary": "List Variables",
+      "tags": [
+        "Variables"
+      ]
+    }
+  ]
+}

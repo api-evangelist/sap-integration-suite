@@ -1,0 +1,41 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "#/components/schemas/KeyValueMap",
+  "title": "KeyValueMap",
+  "type": "object",
+  "properties": {
+    "name": {
+      "type": "string",
+      "description": "Key-value map name"
+    },
+    "encrypted": {
+      "type": "boolean",
+      "description": "Whether values are stored encrypted"
+    },
+    "scope": {
+      "type": "string",
+      "description": "Scope of the key-value map",
+      "enum": [
+        "apiproxy",
+        "environment",
+        "organization"
+      ]
+    },
+    "keyValuePairs": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "properties": {
+          "key": {
+            "type": "string",
+            "description": "Key name"
+          },
+          "value": {
+            "type": "string",
+            "description": "Value (masked if encrypted)"
+          }
+        }
+      }
+    }
+  }
+}

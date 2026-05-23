@@ -1,0 +1,32 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "#/components/schemas/Variable",
+  "title": "Variable",
+  "type": "object",
+  "properties": {
+    "VariableName": {
+      "type": "string",
+      "description": "Name of the variable"
+    },
+    "IntegrationFlow": {
+      "type": "string",
+      "description": "Associated integration flow name (empty for global variables)"
+    },
+    "Visibility": {
+      "type": "string",
+      "description": "Variable scope",
+      "enum": [
+        "Global",
+        "Local"
+      ]
+    },
+    "UpdatedAt": {
+      "type": "string",
+      "description": "Last updated timestamp"
+    },
+    "RetainUntil": {
+      "type": "string",
+      "description": "Retention expiry timestamp"
+    }
+  }
+}

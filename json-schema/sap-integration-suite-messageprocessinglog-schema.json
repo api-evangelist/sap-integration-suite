@@ -1,0 +1,67 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "#/components/schemas/MessageProcessingLog",
+  "title": "MessageProcessingLog",
+  "type": "object",
+  "properties": {
+    "MessageGuid": {
+      "type": "string",
+      "description": "Unique identifier for the message"
+    },
+    "CorrelationId": {
+      "type": "string",
+      "description": "Correlation ID linking related messages"
+    },
+    "ApplicationMessageId": {
+      "type": "string",
+      "description": "Application-level message ID"
+    },
+    "ApplicationMessageType": {
+      "type": "string",
+      "description": "Application message type"
+    },
+    "LogStart": {
+      "type": "string",
+      "description": "Message processing start time"
+    },
+    "LogEnd": {
+      "type": "string",
+      "description": "Message processing end time"
+    },
+    "Sender": {
+      "type": "string",
+      "description": "Sending system or adapter"
+    },
+    "Receiver": {
+      "type": "string",
+      "description": "Receiving system or adapter"
+    },
+    "IntegrationFlowName": {
+      "type": "string",
+      "description": "Name of the integration flow that processed the message"
+    },
+    "Status": {
+      "type": "string",
+      "description": "Processing status",
+      "enum": [
+        "COMPLETED",
+        "FAILED",
+        "PROCESSING",
+        "RETRY",
+        "ESCALATED",
+        "DISCARDED",
+        "ABANDONED"
+      ]
+    },
+    "LogLevel": {
+      "type": "string",
+      "description": "Log verbosity level",
+      "enum": [
+        "INFO",
+        "DEBUG",
+        "TRACE",
+        "ERROR"
+      ]
+    }
+  }
+}

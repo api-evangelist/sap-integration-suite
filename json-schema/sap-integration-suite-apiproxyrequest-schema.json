@@ -1,0 +1,36 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "#/components/schemas/APIProxyRequest",
+  "title": "APIProxyRequest",
+  "type": "object",
+  "required": [
+    "name",
+    "targetEndpoint"
+  ],
+  "properties": {
+    "name": {
+      "type": "string",
+      "description": "API proxy name"
+    },
+    "title": {
+      "type": "string",
+      "description": "Display title"
+    },
+    "description": {
+      "type": "string",
+      "description": "Description"
+    },
+    "basePath": {
+      "type": "string",
+      "description": "Base path"
+    },
+    "targetEndpoint": {
+      "type": "string",
+      "description": "Target endpoint URL"
+    },
+    "version": {
+      "type": "string",
+      "description": "API version"
+    }
+  }
+}

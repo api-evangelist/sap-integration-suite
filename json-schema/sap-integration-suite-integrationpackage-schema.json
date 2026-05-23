@@ -1,0 +1,52 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "#/components/schemas/IntegrationPackage",
+  "title": "IntegrationPackage",
+  "type": "object",
+  "properties": {
+    "Id": {
+      "type": "string",
+      "description": "Unique identifier of the integration package"
+    },
+    "Name": {
+      "type": "string",
+      "description": "Display name of the package"
+    },
+    "Description": {
+      "type": "string",
+      "description": "Package description"
+    },
+    "ShortText": {
+      "type": "string",
+      "description": "Short description"
+    },
+    "Version": {
+      "type": "string",
+      "description": "Package version"
+    },
+    "Vendor": {
+      "type": "string",
+      "description": "Package vendor"
+    },
+    "Mode": {
+      "type": "string",
+      "description": "Package mode (EDIT_ALLOWED or READONLY)",
+      "enum": [
+        "EDIT_ALLOWED",
+        "READONLY"
+      ]
+    },
+    "SupportedPlatform": {
+      "type": "string",
+      "description": "Supported runtime platform"
+    },
+    "CreationDate": {
+      "type": "string",
+      "description": "Package creation date"
+    },
+    "ModifiedDate": {
+      "type": "string",
+      "description": "Package last modified date"
+    }
+  }
+}

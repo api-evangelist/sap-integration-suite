@@ -1,0 +1,47 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "#/components/schemas/RuntimeArtifact",
+  "title": "RuntimeArtifact",
+  "type": "object",
+  "properties": {
+    "Id": {
+      "type": "string",
+      "description": "Runtime artifact identifier"
+    },
+    "Version": {
+      "type": "string",
+      "description": "Deployed version"
+    },
+    "Name": {
+      "type": "string",
+      "description": "Artifact name"
+    },
+    "Type": {
+      "type": "string",
+      "description": "Artifact type"
+    },
+    "Status": {
+      "type": "string",
+      "description": "Deployment status",
+      "enum": [
+        "STARTED",
+        "STARTING",
+        "STOPPING",
+        "STOPPED",
+        "ERROR"
+      ]
+    },
+    "DeployedBy": {
+      "type": "string",
+      "description": "User who deployed the artifact"
+    },
+    "DeployedOn": {
+      "type": "string",
+      "description": "Deployment timestamp"
+    },
+    "ErrorInformation": {
+      "type": "string",
+      "description": "Error details if status is ERROR"
+    }
+  }
+}

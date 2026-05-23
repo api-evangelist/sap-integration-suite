@@ -1,0 +1,47 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "#/components/schemas/IntegrationArtifact",
+  "title": "IntegrationArtifact",
+  "type": "object",
+  "properties": {
+    "Id": {
+      "type": "string",
+      "description": "Artifact identifier"
+    },
+    "Version": {
+      "type": "string",
+      "description": "Artifact version"
+    },
+    "PackageId": {
+      "type": "string",
+      "description": "Parent package identifier"
+    },
+    "Name": {
+      "type": "string",
+      "description": "Artifact display name"
+    },
+    "Description": {
+      "type": "string",
+      "description": "Artifact description"
+    },
+    "Type": {
+      "type": "string",
+      "description": "Artifact type (e.g., IFlow, ValueMapping)",
+      "enum": [
+        "IFlow",
+        "ValueMapping",
+        "ODataApi",
+        "RestApi",
+        "SoapApi"
+      ]
+    },
+    "ModifiedBy": {
+      "type": "string",
+      "description": "User who last modified the artifact"
+    },
+    "ModifiedAt": {
+      "type": "string",
+      "description": "Timestamp of last modification"
+    }
+  }
+}

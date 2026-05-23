@@ -1,0 +1,28 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "#/components/schemas/ServiceEndpoint",
+  "title": "ServiceEndpoint",
+  "type": "object",
+  "properties": {
+    "Name": {
+      "type": "string",
+      "description": "Service endpoint name"
+    },
+    "Id": {
+      "type": "string",
+      "description": "Service endpoint identifier"
+    },
+    "Title": {
+      "type": "string",
+      "description": "Endpoint title"
+    },
+    "Protocol": {
+      "type": "string",
+      "description": "Communication protocol (e.g., HTTPS, AS2)"
+    },
+    "Url": {
+      "type": "string",
+      "description": "Endpoint URL"
+    }
+  }
+}
