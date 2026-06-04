@@ -1,0 +1,127 @@
+arazzo: 1.0.1
+info:
+  title: SAP Integration Suite Upsert API Proxy
+  summary: Look up an API proxy by name and update it if it exists, otherwise create it.
+  description: >-
+    A common API Management idempotency pattern. The workflow looks up an API
+    proxy by name and then branches: when the proxy is found it updates the
+    existing proxy with the supplied target endpoint and metadata, and when it
+    is not found (a 404) it creates a new proxy instead. Finally it reads the
+    proxy back to confirm the resulting state. Every step spells out its request
+    inline so the flow can be read and executed without opening the underlying
+    OpenAPI description.
+  version: 1.0.0
+sourceDescriptions:
+- name: apiManagementApi
+  url: ../openapi/sap-integration-suite-api-management-openapi.yml
+  type: openapi
+workflows:
+- workflowId: upsert-api-proxy
+  summary: Update an API proxy if it exists, otherwise create it, by proxy name.
+  description: >-
+    Looks up an API proxy by name and either updates the existing proxy or
+    creates a new one, then confirms the final state.
+  inputs:
+    type: object
+    required:
+    - proxyName
+    - targetEndpoint
+    properties:
+      proxyName:
+        type: string
+        description: Name of the API proxy to upsert.
+      proxyTitle:
+        type: string
+        description: Display title for the proxy.
+      description:
+        type: string
+        description: Description of the proxy.
+      basePath:
+        type: string
+        description: Base path the proxy is served on.
+      targetEndpoint:
+        type: string
+        description: Backend target endpoint URL the proxy routes to.
+      version:
+        type: string
+        description: API version label for the proxy.
+  steps:
+  - stepId: findProxy
+    description: >-
+      Look up the API proxy by name. A 200 routes to update; a 404 routes to
+      create.
+    operationId: getAPIProxy
+    parameters:
+    - name: name
+      in: path
+      value: $inputs.proxyName
+    successCriteria:
+    - condition: $statusCode == 200 || $statusCode == 404
+    outputs:
+      lookupStatus: $statusCode
+    onSuccess:
+    - name: proxyExists
+      type: goto
+      stepId: updateExisting
+      criteria:
+      - condition: $statusCode == 200
+    - name: proxyMissing
+      type: goto
+      stepId: createNew
+      criteria:
+      - condition: $statusCode == 404
+  - stepId: updateExisting
+    description: Update the existing proxy with the supplied endpoint and metadata.
+    operationId: updateAPIProxy
+    parameters:
+    - name: name
+      in: path
+      value: $inputs.proxyName
+    requestBody:
+      contentType: application/json
+      payload:
+        name: $inputs.proxyName
+        title: $inputs.proxyTitle
+        description: $inputs.description
+        basePath: $inputs.basePath
+        targetEndpoint: $inputs.targetEndpoint
+        version: $inputs.version
+    successCriteria:
+    - condition: $statusCode == 200
+    outputs:
+      updateStatus: $statusCode
+    onSuccess:
+    - name: updated
+      type: goto
+      stepId: confirmProxy
+  - stepId: createNew
+    description: Create a new proxy when no proxy with the supplied name exists.
+    operationId: createAPIProxy
+    requestBody:
+      contentType: application/json
+      payload:
+        name: $inputs.proxyName
+        title: $inputs.proxyTitle
+        description: $inputs.description
+        basePath: $inputs.basePath
+        targetEndpoint: $inputs.targetEndpoint
+        version: $inputs.version
+    successCriteria:
+    - condition: $statusCode == 201
+    outputs:
+      createdProxyName: $response.body#/d/name
+  - stepId: confirmProxy
+    description: Read the proxy back to confirm its final state after the upsert.
+    operationId: getAPIProxy
+    parameters:
+    - name: name
+      in: path
+      value: $inputs.proxyName
+    successCriteria:
+    - condition: $statusCode == 200
+    outputs:
+      finalTargetEndpoint: $response.body#/d/targetEndpoint
+      isDeployed: $response.body#/d/isDeployed
+  outputs:
+    lookupStatus: $steps.findProxy.outputs.lookupStatus
+    finalTargetEndpoint: $steps.confirmProxy.outputs.finalTargetEndpoint

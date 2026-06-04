@@ -1,0 +1,84 @@
+arazzo: 1.0.1
+info:
+  title: SAP Integration Suite Retire API Proxy
+  summary: Confirm an API proxy exists, list products to check for dependents, then delete the proxy.
+  description: >-
+    A safe retirement loop for API proxies. The workflow confirms the proxy
+    exists, lists the API products in the tenant so an operator can verify no
+    product still bundles the proxy, deletes the proxy, and then re-reads it to
+    confirm a 404. Every step spells out its request inline so the flow can be
+    read and executed without opening the underlying OpenAPI description.
+  version: 1.0.0
+sourceDescriptions:
+- name: apiManagementApi
+  url: ../openapi/sap-integration-suite-api-management-openapi.yml
+  type: openapi
+workflows:
+- workflowId: retire-api-proxy
+  summary: Verify, check product dependents, delete, and confirm removal of an API proxy.
+  description: >-
+    Confirms an API proxy exists, lists API products to surface dependents,
+    deletes the proxy, and confirms the proxy is gone.
+  inputs:
+    type: object
+    required:
+    - proxyName
+    properties:
+      proxyName:
+        type: string
+        description: Name of the API proxy to retire.
+      maxProducts:
+        type: integer
+        description: Maximum number of API products to list when checking for dependents.
+        default: 100
+  steps:
+  - stepId: confirmProxy
+    description: Confirm the proxy exists before attempting to retire it.
+    operationId: getAPIProxy
+    parameters:
+    - name: name
+      in: path
+      value: $inputs.proxyName
+    successCriteria:
+    - condition: $statusCode == 200
+    outputs:
+      proxyTitle: $response.body#/d/title
+  - stepId: listProducts
+    description: >-
+      List API products so an operator can confirm none still bundle the proxy
+      before deletion.
+    operationId: listAPIProducts
+    parameters:
+    - name: $top
+      in: query
+      value: $inputs.maxProducts
+    successCriteria:
+    - condition: $statusCode == 200
+    outputs:
+      products: $response.body#/d/results
+  - stepId: deleteProxy
+    description: Delete the API proxy from the tenant.
+    operationId: deleteAPIProxy
+    parameters:
+    - name: name
+      in: path
+      value: $inputs.proxyName
+    successCriteria:
+    - condition: $statusCode == 204
+    outputs:
+      deleteStatus: $statusCode
+  - stepId: confirmRemoved
+    description: Re-read the proxy to confirm it has been deleted (a 404 is expected).
+    operationId: getAPIProxy
+    parameters:
+    - name: name
+      in: path
+      value: $inputs.proxyName
+    successCriteria:
+    - condition: $statusCode == 404
+    outputs:
+      removalStatus: $statusCode
+  outputs:
+    products: $steps.listProducts.outputs.products
+    deleteStatus: $steps.deleteProxy.outputs.deleteStatus
+    removalStatus: $steps.confirmRemoved.outputs.removalStatus

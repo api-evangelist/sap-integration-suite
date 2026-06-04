@@ -1,0 +1,77 @@
+arazzo: 1.0.1
+info:
+  title: SAP Integration Suite Trace Message By GUID
+  summary: Read a single message processing log by GUID, pull its adapter attributes, and find correlated messages.
+  description: >-
+    A single-message tracing workflow for Cloud Integration. The workflow reads
+    a message processing log by its GUID to capture its status and correlation
+    id, retrieves the adapter-specific attributes for that message, and then
+    lists other message processing logs sharing the same correlation id so a
+    full message exchange can be reconstructed. Every step spells out its
+    request inline so the flow can be read and executed without opening the
+    underlying OpenAPI description.
+  version: 1.0.0
+sourceDescriptions:
+- name: cloudIntegrationApi
+  url: ../openapi/sap-integration-suite-cloud-integration-openapi.yml
+  type: openapi
+workflows:
+- workflowId: trace-message-by-guid
+  summary: Read a message log, fetch adapter attributes, and list correlated messages.
+  description: >-
+    Reads a message processing log by GUID, retrieves its adapter attributes,
+    and lists messages sharing its correlation id to reconstruct the exchange.
+  inputs:
+    type: object
+    required:
+    - messageGuid
+    properties:
+      messageGuid:
+        type: string
+        description: GUID of the message processing log to trace.
+  steps:
+  - stepId: getLog
+    description: Read the message processing log by GUID to capture status and correlation id.
+    operationId: getMessageProcessingLog
+    parameters:
+    - name: MessageGuid
+      in: path
+      value: $inputs.messageGuid
+    successCriteria:
+    - condition: $statusCode == 200
+    outputs:
+      status: $response.body#/d/Status
+      correlationId: $response.body#/d/CorrelationId
+      integrationFlowName: $response.body#/d/IntegrationFlowName
+  - stepId: getAdapterAttributes
+    description: Retrieve adapter-specific attributes for the traced message.
+    operationId: getMessageProcessingLogAdapterAttributes
+    parameters:
+    - name: MessageGuid
+      in: path
+      value: $inputs.messageGuid
+    successCriteria:
+    - condition: $statusCode == 200
+    outputs:
+      adapterAttributes: $response.body#/d
+  - stepId: listCorrelated
+    description: >-
+      List other message processing logs sharing the same correlation id to
+      reconstruct the full exchange.
+    operationId: listMessageProcessingLogs
+    parameters:
+    - name: $filter
+      in: query
+      value: "CorrelationId eq '$steps.getLog.outputs.correlationId'"
+    - name: $orderby
+      in: query
+      value: "LogStart asc"
+    successCriteria:
+    - condition: $statusCode == 200
+    outputs:
+      correlatedLogs: $response.body#/d/results
+  outputs:
+    status: $steps.getLog.outputs.status
+    correlationId: $steps.getLog.outputs.correlationId
+    adapterAttributes: $steps.getAdapterAttributes.outputs.adapterAttributes
+    correlatedLogs: $steps.listCorrelated.outputs.correlatedLogs

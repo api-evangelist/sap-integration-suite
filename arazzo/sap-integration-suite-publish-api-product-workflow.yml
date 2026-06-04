@@ -1,0 +1,105 @@
+arazzo: 1.0.1
+info:
+  title: SAP Integration Suite Publish API Product
+  summary: Create an API proxy, confirm it, then bundle it into a published API product with a quota.
+  description: >-
+    The API Management publishing loop. The workflow creates a new API proxy
+    pointing at a backend target endpoint, reads the proxy back to confirm it
+    landed, and then creates an API product that bundles the proxy so it can be
+    discovered and subscribed to in the developer portal. The product is read
+    back to confirm its details. Every step spells out its request inline so the
+    flow can be read and executed without opening the underlying OpenAPI
+    description.
+  version: 1.0.0
+sourceDescriptions:
+- name: apiManagementApi
+  url: ../openapi/sap-integration-suite-api-management-openapi.yml
+  type: openapi
+workflows:
+- workflowId: publish-api-product
+  summary: Create an API proxy and bundle it into a published API product.
+  description: >-
+    Creates an API proxy against a backend endpoint, verifies it, then creates
+    and verifies an API product that bundles the new proxy.
+  inputs:
+    type: object
+    required:
+    - proxyName
+    - targetEndpoint
+    - productName
+    properties:
+      proxyName:
+        type: string
+        description: Unique name for the new API proxy.
+      proxyTitle:
+        type: string
+        description: Display title for the API proxy.
+      basePath:
+        type: string
+        description: Base path the proxy is served on (e.g. /v1/orders).
+      targetEndpoint:
+        type: string
+        description: Backend target endpoint URL the proxy routes to.
+      productName:
+        type: string
+        description: Unique name for the API product that bundles the proxy.
+      productTitle:
+        type: string
+        description: Display title for the API product.
+  steps:
+  - stepId: createProxy
+    description: Create a new API proxy that routes to the supplied backend target endpoint.
+    operationId: createAPIProxy
+    requestBody:
+      contentType: application/json
+      payload:
+        name: $inputs.proxyName
+        title: $inputs.proxyTitle
+        basePath: $inputs.basePath
+        targetEndpoint: $inputs.targetEndpoint
+    successCriteria:
+    - condition: $statusCode == 201
+    outputs:
+      createdProxyName: $response.body#/d/name
+  - stepId: confirmProxy
+    description: Read the new proxy back to confirm it was created and capture its deploy state.
+    operationId: getAPIProxy
+    parameters:
+    - name: name
+      in: path
+      value: $inputs.proxyName
+    successCriteria:
+    - condition: $statusCode == 200
+    outputs:
+      isDeployed: $response.body#/d/isDeployed
+      basePath: $response.body#/d/basePath
+  - stepId: createProduct
+    description: Create an API product that bundles the newly created proxy for portal discovery.
+    operationId: createAPIProduct
+    requestBody:
+      contentType: application/json
+      payload:
+        name: $inputs.productName
+        title: $inputs.productTitle
+        apiProxies:
+        - $inputs.proxyName
+    successCriteria:
+    - condition: $statusCode == 201
+    outputs:
+      productCreateStatus: $statusCode
+  - stepId: confirmProduct
+    description: Read the API product back to confirm it bundles the proxy.
+    operationId: getAPIProduct
+    parameters:
+    - name: name
+      in: path
+      value: $inputs.productName
+    successCriteria:
+    - condition: $statusCode == 200
+    outputs:
+      productStatus: $response.body#/d/status
+      bundledProxies: $response.body#/d/apiProxies
+  outputs:
+    createdProxyName: $steps.createProxy.outputs.createdProxyName
+    productStatus: $steps.confirmProduct.outputs.productStatus
+    bundledProxies: $steps.confirmProduct.outputs.bundledProxies

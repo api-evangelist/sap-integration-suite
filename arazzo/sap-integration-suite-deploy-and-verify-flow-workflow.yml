@@ -1,0 +1,123 @@
+arazzo: 1.0.1
+info:
+  title: SAP Integration Suite Deploy And Verify Flow
+  summary: Deploy an integration flow, wait for it to start, then verify recent message processing succeeded.
+  description: >-
+    A deploy-then-verify loop that closes the gap between deployment and live
+    traffic. The workflow deploys a design-time integration artifact to the
+    runtime, polls the runtime artifact until it reports STARTED, and then reads
+    the most recent message processing logs for that integration flow to confirm
+    messages are completing rather than failing. Because the deploy is an OData
+    V2 write, the POST carries an X-CSRF-Token header supplied as an input.
+    Every step spells out its request inline so the flow can be read and
+    executed without opening the underlying OpenAPI description.
+  version: 1.0.0
+sourceDescriptions:
+- name: cloudIntegrationApi
+  url: ../openapi/sap-integration-suite-cloud-integration-openapi.yml
+  type: openapi
+workflows:
+- workflowId: deploy-and-verify-flow
+  summary: Deploy a flow, wait for STARTED, then check its recent message logs.
+  description: >-
+    Deploys an artifact, polls the runtime until it starts, and inspects the
+    most recent message processing logs for the flow to confirm healthy
+    processing.
+  inputs:
+    type: object
+    required:
+    - artifactId
+    - artifactVersion
+    - integrationFlowName
+    - csrfToken
+    properties:
+      artifactId:
+        type: string
+        description: Identifier of the design-time integration flow artifact to deploy.
+      artifactVersion:
+        type: string
+        description: Version of the artifact to deploy.
+      integrationFlowName:
+        type: string
+        description: Integration flow name used to scope the message log verification.
+      csrfToken:
+        type: string
+        description: X-CSRF-Token value fetched ahead of time for the OData write call.
+  steps:
+  - stepId: deployArtifact
+    description: >-
+      Trigger deployment of the design-time artifact to the runtime using the
+      X-CSRF-Token header for the OData write.
+    operationId: deployIntegrationDesigntimeArtifact
+    parameters:
+    - name: Id
+      in: query
+      value: $inputs.artifactId
+    - name: Version
+      in: query
+      value: $inputs.artifactVersion
+    - name: X-CSRF-Token
+      in: header
+      value: $inputs.csrfToken
+    successCriteria:
+    - condition: $statusCode == 202
+    outputs:
+      taskId: $response.body#/d/TaskId
+  - stepId: pollRuntime
+    description: Poll the runtime artifact until it reports STARTED or fails with ERROR.
+    operationId: getRuntimeArtifact
+    parameters:
+    - name: Id
+      in: path
+      value: $inputs.artifactId
+    successCriteria:
+    - condition: $statusCode == 200
+    outputs:
+      runtimeStatus: $response.body#/d/Status
+    onSuccess:
+    - name: started
+      type: goto
+      stepId: verifyMessages
+      criteria:
+      - context: $response.body
+        condition: $.d.Status == "STARTED"
+        type: jsonpath
+    - name: failed
+      type: end
+      criteria:
+      - context: $response.body
+        condition: $.d.Status == "ERROR"
+        type: jsonpath
+    - name: keepPolling
+      type: retry
+      stepId: pollRuntime
+      retryAfter: 10
+      retryLimit: 30
+      criteria:
+      - context: $response.body
+        condition: $.d.Status == "STARTING"
+        type: jsonpath
+  - stepId: verifyMessages
+    description: >-
+      Read the most recent message processing logs for the deployed flow to
+      confirm messages are completing rather than failing.
+    operationId: listMessageProcessingLogs
+    parameters:
+    - name: $filter
+      in: query
+      value: "IntegrationFlowName eq '$inputs.integrationFlowName'"
+    - name: $orderby
+      in: query
+      value: "LogStart desc"
+    - name: $top
+      in: query
+      value: 10
+    successCriteria:
+    - condition: $statusCode == 200
+    outputs:
+      recentLogs: $response.body#/d/results
+      latestStatus: $response.body#/d/results/0/Status
+  outputs:
+    taskId: $steps.deployArtifact.outputs.taskId
+    runtimeStatus: $steps.pollRuntime.outputs.runtimeStatus
+    latestMessageStatus: $steps.verifyMessages.outputs.latestStatus

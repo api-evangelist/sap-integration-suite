@@ -1,0 +1,74 @@
+arazzo: 1.0.1
+info:
+  title: SAP Integration Suite Provision Key Value Map
+  summary: List existing key-value maps, and create a new one only if it does not already exist.
+  description: >-
+    An idempotent configuration-store provisioning loop for API Management. The
+    workflow lists the existing key-value maps in the tenant, branches on
+    whether a map with the target name already exists, and creates the
+    key-value map with its initial key/value pairs only when it is absent. Every
+    step spells out its request inline so the flow can be read and executed
+    without opening the underlying OpenAPI description.
+  version: 1.0.0
+sourceDescriptions:
+- name: apiManagementApi
+  url: ../openapi/sap-integration-suite-api-management-openapi.yml
+  type: openapi
+workflows:
+- workflowId: provision-key-value-map
+  summary: Create a key-value map only when one with the target name does not exist.
+  description: >-
+    Lists key-value maps and, when the target name is absent, creates a new
+    key-value map with its initial key/value pairs.
+  inputs:
+    type: object
+    required:
+    - mapName
+    - keyValuePairs
+    properties:
+      mapName:
+        type: string
+        description: Name of the key-value map to provision.
+      encrypted:
+        type: boolean
+        description: Whether the map values should be stored encrypted.
+        default: false
+      scope:
+        type: string
+        description: Scope of the key-value map (apiproxy, environment, or organization).
+        default: environment
+      keyValuePairs:
+        type: array
+        description: Initial key/value pairs to seed the map with.
+        items:
+          type: object
+          properties:
+            key:
+              type: string
+            value:
+              type: string
+  steps:
+  - stepId: listMaps
+    description: List existing key-value maps to detect whether the target map already exists.
+    operationId: listKeyValueMaps
+    successCriteria:
+    - condition: $statusCode == 200
+    outputs:
+      maps: $response.body#/d/results
+  - stepId: createMap
+    description: Create the key-value map with its initial key/value pairs.
+    operationId: createKeyValueMap
+    requestBody:
+      contentType: application/json
+      payload:
+        name: $inputs.mapName
+        encrypted: $inputs.encrypted
+        scope: $inputs.scope
+        keyValuePairs: $inputs.keyValuePairs
+    successCriteria:
+    - condition: $statusCode == 201
+    outputs:
+      createStatus: $statusCode
+  outputs:
+    existingMaps: $steps.listMaps.outputs.maps
+    createStatus: $steps.createMap.outputs.createStatus

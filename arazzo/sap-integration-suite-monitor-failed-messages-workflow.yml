@@ -1,0 +1,101 @@
+arazzo: 1.0.1
+info:
+  title: SAP Integration Suite Monitor Failed Messages
+  summary: Find failed message processing logs, read the worst offender in detail, and pull its adapter attributes.
+  description: >-
+    An operations triage loop for Cloud Integration message monitoring. The
+    workflow queries message processing logs filtered to a FAILED status and
+    ordered by most recent, branches on whether any failures exist, reads the
+    top failed log entry in full, and then retrieves the adapter-specific
+    attributes for that message to aid root-cause analysis. When no failures are
+    present the workflow ends cleanly. Every step spells out its request inline
+    so the flow can be read and executed without opening the underlying OpenAPI
+    description.
+  version: 1.0.0
+sourceDescriptions:
+- name: cloudIntegrationApi
+  url: ../openapi/sap-integration-suite-cloud-integration-openapi.yml
+  type: openapi
+workflows:
+- workflowId: monitor-failed-messages
+  summary: Triage failed message processing logs and inspect adapter attributes.
+  description: >-
+    Lists FAILED message processing logs, and when at least one exists reads the
+    most recent failure and its adapter attributes for diagnosis.
+  inputs:
+    type: object
+    properties:
+      integrationFlowName:
+        type: string
+        description: Optional integration flow name to scope the failure search to.
+      maxLogs:
+        type: integer
+        description: Maximum number of failed log entries to return.
+        default: 25
+  steps:
+  - stepId: findFailures
+    description: >-
+      List message processing logs filtered to a FAILED status, ordered by the
+      most recent processing start time.
+    operationId: listMessageProcessingLogs
+    parameters:
+    - name: $filter
+      in: query
+      value: "Status eq 'FAILED'"
+    - name: $orderby
+      in: query
+      value: "LogStart desc"
+    - name: $top
+      in: query
+      value: $inputs.maxLogs
+    successCriteria:
+    - condition: $statusCode == 200
+    outputs:
+      failures: $response.body#/d/results
+      topFailureGuid: $response.body#/d/results/0/MessageGuid
+    onSuccess:
+    - name: hasFailures
+      type: goto
+      stepId: getFailedLog
+      criteria:
+      - context: $response.body
+        condition: $.d.results.length > 0
+        type: jsonpath
+    - name: noFailures
+      type: end
+      criteria:
+      - context: $response.body
+        condition: $.d.results.length == 0
+        type: jsonpath
+  - stepId: getFailedLog
+    description: Read the most recent failed message processing log entry in full.
+    operationId: getMessageProcessingLog
+    parameters:
+    - name: MessageGuid
+      in: path
+      value: $steps.findFailures.outputs.topFailureGuid
+    successCriteria:
+    - condition: $statusCode == 200
+    outputs:
+      messageGuid: $response.body#/d/MessageGuid
+      status: $response.body#/d/Status
+      integrationFlowName: $response.body#/d/IntegrationFlowName
+      logEnd: $response.body#/d/LogEnd
+  - stepId: getAdapterAttributes
+    description: >-
+      Retrieve the adapter-specific attributes for the failed message to support
+      root-cause analysis.
+    operationId: getMessageProcessingLogAdapterAttributes
+    parameters:
+    - name: MessageGuid
+      in: path
+      value: $steps.findFailures.outputs.topFailureGuid
+    successCriteria:
+    - condition: $statusCode == 200
+    outputs:
+      adapterAttributes: $response.body#/d
+  outputs:
+    failureCount: $steps.findFailures.outputs.failures
+    failedMessageGuid: $steps.getFailedLog.outputs.messageGuid
+    failedFlowName: $steps.getFailedLog.outputs.integrationFlowName
+    adapterAttributes: $steps.getAdapterAttributes.outputs.adapterAttributes

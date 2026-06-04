@@ -1,0 +1,70 @@
+arazzo: 1.0.1
+info:
+  title: SAP Integration Suite Undeploy Runtime Artifact
+  summary: Confirm a runtime artifact is deployed, undeploy it, and verify it is gone.
+  description: >-
+    A safe teardown loop for deployed integration artifacts. The workflow first
+    reads the runtime artifact to confirm it exists and capture its current
+    status, undeploys it from the runtime, and then re-reads the runtime
+    artifact and branches on whether the artifact has been removed (a 404) or is
+    still present. Every step spells out its request inline so the flow can be
+    read and executed without opening the underlying OpenAPI description.
+  version: 1.0.0
+sourceDescriptions:
+- name: cloudIntegrationApi
+  url: ../openapi/sap-integration-suite-cloud-integration-openapi.yml
+  type: openapi
+workflows:
+- workflowId: undeploy-runtime-artifact
+  summary: Verify, undeploy, and confirm removal of a runtime integration artifact.
+  description: >-
+    Reads the runtime artifact to confirm it is deployed, issues an undeploy,
+    and re-reads to confirm the artifact has been removed from the runtime.
+  inputs:
+    type: object
+    required:
+    - artifactId
+    properties:
+      artifactId:
+        type: string
+        description: Identifier of the deployed runtime artifact to undeploy.
+  steps:
+  - stepId: confirmDeployed
+    description: Read the runtime artifact to confirm it is currently deployed.
+    operationId: getRuntimeArtifact
+    parameters:
+    - name: Id
+      in: path
+      value: $inputs.artifactId
+    successCriteria:
+    - condition: $statusCode == 200
+    outputs:
+      currentStatus: $response.body#/d/Status
+      artifactName: $response.body#/d/Name
+  - stepId: undeploy
+    description: Remove the deployed integration artifact from the runtime.
+    operationId: undeployRuntimeArtifact
+    parameters:
+    - name: Id
+      in: path
+      value: $inputs.artifactId
+    successCriteria:
+    - condition: $statusCode == 202
+    outputs:
+      undeployStatus: $statusCode
+  - stepId: confirmRemoved
+    description: >-
+      Re-read the runtime artifact and branch on whether it has been removed
+      (404) or is still present (200).
+    operationId: getRuntimeArtifact
+    parameters:
+    - name: Id
+      in: path
+      value: $inputs.artifactId
+    successCriteria:
+    - condition: $statusCode == 404 || $statusCode == 200
+    outputs:
+      removalCheckStatus: $statusCode
+  outputs:
+    priorStatus: $steps.confirmDeployed.outputs.currentStatus
+    removalCheckStatus: $steps.confirmRemoved.outputs.removalCheckStatus

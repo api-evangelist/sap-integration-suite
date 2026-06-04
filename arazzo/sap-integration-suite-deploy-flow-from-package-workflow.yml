@@ -1,0 +1,159 @@
+arazzo: 1.0.1
+info:
+  title: SAP Integration Suite Deploy Flow From Package
+  summary: Discover an integration flow inside a package, deploy it, and poll the runtime until it starts.
+  description: >-
+    The core Cloud Integration deployment loop. The workflow resolves a target
+    integration package, lists the design-time artifacts it contains, reads the
+    specific integration flow artifact to confirm its version, triggers a
+    deployment of that artifact to the runtime, and then polls the runtime
+    artifact until it reports a STARTED status (or surfaces an ERROR). Because
+    Cloud Integration exposes an OData V2 surface, the deploy POST carries an
+    X-CSRF-Token header that must be obtained from a prior token-fetch call;
+    that token is supplied as a workflow input. Every step spells out its
+    request inline so the flow can be read and executed without opening the
+    underlying OpenAPI description.
+  version: 1.0.0
+sourceDescriptions:
+- name: cloudIntegrationApi
+  url: ../openapi/sap-integration-suite-cloud-integration-openapi.yml
+  type: openapi
+workflows:
+- workflowId: deploy-flow-from-package
+  summary: Locate an integration flow in a package, deploy it, and wait for it to start.
+  description: >-
+    Resolves a package, finds the named design-time integration flow artifact
+    within it, deploys that artifact, and polls the runtime artifact until it
+    reaches a STARTED status.
+  inputs:
+    type: object
+    required:
+    - packageId
+    - artifactId
+    - artifactVersion
+    - csrfToken
+    properties:
+      packageId:
+        type: string
+        description: Identifier of the integration package that holds the flow.
+      artifactId:
+        type: string
+        description: Identifier of the design-time integration flow artifact to deploy.
+      artifactVersion:
+        type: string
+        description: Version of the artifact to deploy (e.g. "active" or a semantic version).
+      csrfToken:
+        type: string
+        description: X-CSRF-Token value fetched ahead of time for the OData write call.
+  steps:
+  - stepId: getPackage
+    description: Confirm the target integration package exists before inspecting its contents.
+    operationId: getIntegrationPackage
+    parameters:
+    - name: Id
+      in: path
+      value: $inputs.packageId
+    successCriteria:
+    - condition: $statusCode == 200
+    outputs:
+      packageName: $response.body#/d/Name
+  - stepId: listArtifacts
+    description: List the design-time artifacts in the package to verify the flow is present.
+    operationId: listIntegrationDesigntimeArtifacts
+    parameters:
+    - name: Id
+      in: path
+      value: $inputs.packageId
+    successCriteria:
+    - condition: $statusCode == 200
+    outputs:
+      artifacts: $response.body#/d/results
+  - stepId: getArtifact
+    description: Read the specific design-time artifact to confirm its version before deploying.
+    operationId: getIntegrationDesigntimeArtifact
+    parameters:
+    - name: Id
+      in: path
+      value: $inputs.artifactId
+    - name: Version
+      in: path
+      value: $inputs.artifactVersion
+    successCriteria:
+    - condition: $statusCode == 200
+    outputs:
+      artifactName: $response.body#/d/Name
+      resolvedVersion: $response.body#/d/Version
+  - stepId: deployArtifact
+    description: >-
+      Trigger deployment of the design-time artifact to the runtime. The OData
+      write requires the X-CSRF-Token header supplied as an input.
+    operationId: deployIntegrationDesigntimeArtifact
+    parameters:
+    - name: Id
+      in: query
+      value: $inputs.artifactId
+    - name: Version
+      in: query
+      value: $inputs.artifactVersion
+    - name: X-CSRF-Token
+      in: header
+      value: $inputs.csrfToken
+    successCriteria:
+    - condition: $statusCode == 202
+    outputs:
+      taskId: $response.body#/d/TaskId
+  - stepId: pollRuntime
+    description: >-
+      Poll the runtime artifact until it reports STARTED. A status of ERROR ends
+      the poll and routes to the failure branch.
+    operationId: getRuntimeArtifact
+    parameters:
+    - name: Id
+      in: path
+      value: $inputs.artifactId
+    successCriteria:
+    - condition: $statusCode == 200
+    outputs:
+      runtimeStatus: $response.body#/d/Status
+      errorInformation: $response.body#/d/ErrorInformation
+    onSuccess:
+    - name: started
+      type: end
+      criteria:
+      - context: $response.body
+        condition: $.d.Status == "STARTED"
+        type: jsonpath
+    - name: deployFailed
+      type: goto
+      stepId: reportError
+      criteria:
+      - context: $response.body
+        condition: $.d.Status == "ERROR"
+        type: jsonpath
+    - name: keepPolling
+      type: retry
+      stepId: pollRuntime
+      retryAfter: 10
+      retryLimit: 30
+      criteria:
+      - context: $response.body
+        condition: $.d.Status == "STARTING"
+        type: jsonpath
+  - stepId: reportError
+    description: >-
+      Re-read the runtime artifact to capture the final error details when the
+      deployment lands in an ERROR state.
+    operationId: getRuntimeArtifact
+    parameters:
+    - name: Id
+      in: path
+      value: $inputs.artifactId
+    successCriteria:
+    - condition: $statusCode == 200
+    outputs:
+      failureStatus: $response.body#/d/Status
+      failureInformation: $response.body#/d/ErrorInformation
+  outputs:
+    taskId: $steps.deployArtifact.outputs.taskId
+    runtimeStatus: $steps.pollRuntime.outputs.runtimeStatus
+    failureInformation: $steps.reportError.outputs.failureInformation

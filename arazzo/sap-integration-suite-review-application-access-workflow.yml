@@ -1,0 +1,82 @@
+arazzo: 1.0.1
+info:
+  title: SAP Integration Suite Review Application Access
+  summary: Verify a developer exists, read their application, and confirm the API product it subscribes to.
+  description: >-
+    A developer-portal access review. The workflow lists the registered
+    developers to confirm the target developer is present, reads a specific
+    application to capture its approval status and the API products it
+    subscribes to, and then reads one of those API products to confirm its
+    publication status and quota. Every step spells out its request inline so
+    the flow can be read and executed without opening the underlying OpenAPI
+    description.
+  version: 1.0.0
+sourceDescriptions:
+- name: apiManagementApi
+  url: ../openapi/sap-integration-suite-api-management-openapi.yml
+  type: openapi
+workflows:
+- workflowId: review-application-access
+  summary: Confirm a developer, inspect their application, and verify the subscribed product.
+  description: >-
+    Lists developers to confirm presence, reads an application for its status
+    and subscriptions, and reads a subscribed API product to confirm its
+    publication state.
+  inputs:
+    type: object
+    required:
+    - applicationId
+    - productName
+    properties:
+      applicationId:
+        type: string
+        description: Identifier of the developer application to review.
+      productName:
+        type: string
+        description: Name of the API product the application subscribes to.
+      maxDevelopers:
+        type: integer
+        description: Maximum number of developers to list.
+        default: 100
+  steps:
+  - stepId: listDevelopers
+    description: List registered developers to confirm the portal membership.
+    operationId: listDevelopers
+    parameters:
+    - name: $top
+      in: query
+      value: $inputs.maxDevelopers
+    successCriteria:
+    - condition: $statusCode == 200
+    outputs:
+      developers: $response.body#/d/results
+  - stepId: getApplication
+    description: Read the developer application to capture its status and subscriptions.
+    operationId: getApplication
+    parameters:
+    - name: id
+      in: path
+      value: $inputs.applicationId
+    successCriteria:
+    - condition: $statusCode == 200
+    outputs:
+      applicationStatus: $response.body#/d/status
+      developerEmail: $response.body#/d/developerEmail
+      subscribedProducts: $response.body#/d/apiProducts
+  - stepId: getProduct
+    description: Read the subscribed API product to confirm its publication status and quota.
+    operationId: getAPIProduct
+    parameters:
+    - name: name
+      in: path
+      value: $inputs.productName
+    successCriteria:
+    - condition: $statusCode == 200
+    outputs:
+      productStatus: $response.body#/d/status
+      quota: $response.body#/d/quota
+      quotaTimeUnit: $response.body#/d/quotaTimeUnit
+  outputs:
+    applicationStatus: $steps.getApplication.outputs.applicationStatus
+    subscribedProducts: $steps.getApplication.outputs.subscribedProducts
+    productStatus: $steps.getProduct.outputs.productStatus
