@@ -1,0 +1,2515 @@
+{
+  "item": [
+    {
+      "id": "65a6eef9-1878-4c1c-a7c2-b7da9336b545",
+      "name": "Integration Packages",
+      "description": {
+        "content": "Manage integration packages and their content",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "7bfbbeb9-c7f8-4111-b4ff-961f902852bd",
+          "name": "List Integration Packages",
+          "request": {
+            "name": "List Integration Packages",
+            "description": {
+              "content": "Retrieve all integration packages available in the tenant.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "IntegrationPackages"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "$top",
+                  "value": "<integer>",
+                  "description": "Maximum number of records to return"
+                },
+                {
+                  "disabled": false,
+                  "key": "$skip",
+                  "value": "<integer>",
+                  "description": "Number of records to skip for pagination"
+                },
+                {
+                  "disabled": false,
+                  "key": "$filter",
+                  "value": "<string>",
+                  "description": "OData filter expression"
+                },
+                {
+                  "disabled": false,
+                  "key": "$orderby",
+                  "value": "<string>",
+                  "description": "OData orderby expression"
+                }
+              ],
+              "variable": [
+                {
+                  "description": "SAP Integration Suite tenant host",
+                  "type": "any",
+                  "value": "{{tenant-host}}",
+                  "key": "tenant-host"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "8f8bd214-eb3b-496d-9123-b0d261cd1943",
+              "name": "List of integration packages",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "IntegrationPackages"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "$top",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "$skip",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "$filter",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "$orderby",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "description": "SAP Integration Suite tenant host",
+                      "type": "any",
+                      "value": "{{tenant-host}}",
+                      "key": "tenant-host"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: oauth2",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"d\": {\n    \"results\": [\n      {\n        \"Id\": \"string\",\n        \"Name\": \"string\",\n        \"Description\": \"string\",\n        \"ShortText\": \"string\",\n        \"Version\": \"string\",\n        \"Vendor\": \"string\",\n        \"Mode\": \"EDIT_ALLOWED\",\n        \"SupportedPlatform\": \"string\",\n        \"CreationDate\": \"string\",\n        \"ModifiedDate\": \"string\"\n      },\n      {\n        \"Id\": \"string\",\n        \"Name\": \"string\",\n        \"Description\": \"string\",\n        \"ShortText\": \"string\",\n        \"Version\": \"string\",\n        \"Vendor\": \"string\",\n        \"Mode\": \"EDIT_ALLOWED\",\n        \"SupportedPlatform\": \"string\",\n        \"CreationDate\": \"string\",\n        \"ModifiedDate\": \"string\"\n      }\n    ]\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "f95690c4-e74c-414d-a5e7-6d2da8097586",
+              "name": "Unauthorized",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "IntegrationPackages"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "$top",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "$skip",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "$filter",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "$orderby",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "description": "SAP Integration Suite tenant host",
+                      "type": "any",
+                      "value": "{{tenant-host}}",
+                      "key": "tenant-host"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: oauth2",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<token>"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "233a5fb6-441d-4715-9cc7-bde4dc8e2767",
+              "name": "Forbidden",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "IntegrationPackages"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "$top",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "$skip",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "$filter",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "$orderby",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "description": "SAP Integration Suite tenant host",
+                      "type": "any",
+                      "value": "{{tenant-host}}",
+                      "key": "tenant-host"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: oauth2",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<token>"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Forbidden",
+              "code": 403,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "45f593ca-bddb-44fc-8cff-34ea9c6770fe",
+          "name": "Get Integration Package",
+          "request": {
+            "name": "Get Integration Package",
+            "description": {
+              "content": "Retrieve a specific integration package by its ID.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "IntegrationPackages('{{Id}}')"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "description": "SAP Integration Suite tenant host",
+                  "type": "any",
+                  "value": "{{tenant-host}}",
+                  "key": "tenant-host"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "6b313b1b-8b26-4a90-851d-14a8b36eae41",
+              "name": "Integration package details",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "IntegrationPackages('{{Id}}')"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "description": "SAP Integration Suite tenant host",
+                      "type": "any",
+                      "value": "{{tenant-host}}",
+                      "key": "tenant-host"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: oauth2",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"d\": {\n    \"Id\": \"string\",\n    \"Name\": \"string\",\n    \"Description\": \"string\",\n    \"ShortText\": \"string\",\n    \"Version\": \"string\",\n    \"Vendor\": \"string\",\n    \"Mode\": \"READONLY\",\n    \"SupportedPlatform\": \"string\",\n    \"CreationDate\": \"string\",\n    \"ModifiedDate\": \"string\"\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "d45ff7db-474b-423a-92ab-1e74633b7a3d",
+              "name": "Unauthorized",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "IntegrationPackages('{{Id}}')"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "description": "SAP Integration Suite tenant host",
+                      "type": "any",
+                      "value": "{{tenant-host}}",
+                      "key": "tenant-host"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: oauth2",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<token>"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "f1d0c9e3-07f8-4d3d-8fe9-4bfcf3443bd4",
+              "name": "Package not found",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "IntegrationPackages('{{Id}}')"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "description": "SAP Integration Suite tenant host",
+                      "type": "any",
+                      "value": "{{tenant-host}}",
+                      "key": "tenant-host"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: oauth2",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<token>"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    },
+    {
+      "id": "5b41caea-e5b9-42a5-9cc0-fbad5c5a8c47",
+      "name": "Integration Flows",
+      "description": {
+        "content": "Deploy and manage integration flow artifacts",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "336efa1d-5fb9-42cb-b337-c63264754199",
+          "name": "List Design-Time Artifacts in Package",
+          "request": {
+            "name": "List Design-Time Artifacts in Package",
+            "description": {
+              "content": "Retrieve all design-time integration artifacts within a package.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "IntegrationPackages('{{Id}}')",
+                "IntegrationDesigntimeArtifacts"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "description": "SAP Integration Suite tenant host",
+                  "type": "any",
+                  "value": "{{tenant-host}}",
+                  "key": "tenant-host"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "c47d265b-2bda-4a97-84ab-9c2222a53952",
+              "name": "List of design-time artifacts",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "IntegrationPackages('{{Id}}')",
+                    "IntegrationDesigntimeArtifacts"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "description": "SAP Integration Suite tenant host",
+                      "type": "any",
+                      "value": "{{tenant-host}}",
+                      "key": "tenant-host"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: oauth2",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"d\": {\n    \"results\": [\n      {\n        \"Id\": \"string\",\n        \"Version\": \"string\",\n        \"PackageId\": \"string\",\n        \"Name\": \"string\",\n        \"Description\": \"string\",\n        \"Type\": \"IFlow\",\n        \"ModifiedBy\": \"string\",\n        \"ModifiedAt\": \"string\"\n      },\n      {\n        \"Id\": \"string\",\n        \"Version\": \"string\",\n        \"PackageId\": \"string\",\n        \"Name\": \"string\",\n        \"Description\": \"string\",\n        \"Type\": \"RestApi\",\n        \"ModifiedBy\": \"string\",\n        \"ModifiedAt\": \"string\"\n      }\n    ]\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "dfda39c8-490f-4d85-b2fd-7e5058401c4e",
+              "name": "Unauthorized",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "IntegrationPackages('{{Id}}')",
+                    "IntegrationDesigntimeArtifacts"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "description": "SAP Integration Suite tenant host",
+                      "type": "any",
+                      "value": "{{tenant-host}}",
+                      "key": "tenant-host"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: oauth2",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<token>"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "4bc4a5ae-aae6-4621-9458-12dc68032dd1",
+          "name": "Get Design-Time Artifact",
+          "request": {
+            "name": "Get Design-Time Artifact",
+            "description": {
+              "content": "Retrieve a specific design-time integration artifact.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "IntegrationDesigntimeArtifacts(Id='{{Id}}',Version='{{Version}}')"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "description": "SAP Integration Suite tenant host",
+                  "type": "any",
+                  "value": "{{tenant-host}}",
+                  "key": "tenant-host"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "8f067246-60ee-4a62-ab48-7859dd93c6e5",
+              "name": "Design-time artifact details",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "IntegrationDesigntimeArtifacts(Id='{{Id}}',Version='{{Version}}')"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "description": "SAP Integration Suite tenant host",
+                      "type": "any",
+                      "value": "{{tenant-host}}",
+                      "key": "tenant-host"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: oauth2",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"d\": {\n    \"Id\": \"string\",\n    \"Version\": \"string\",\n    \"PackageId\": \"string\",\n    \"Name\": \"string\",\n    \"Description\": \"string\",\n    \"Type\": \"IFlow\",\n    \"ModifiedBy\": \"string\",\n    \"ModifiedAt\": \"string\"\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "da4aa9f8-8bfd-4fca-84f9-a3cc3095b7aa",
+              "name": "Unauthorized",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "IntegrationDesigntimeArtifacts(Id='{{Id}}',Version='{{Version}}')"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "description": "SAP Integration Suite tenant host",
+                      "type": "any",
+                      "value": "{{tenant-host}}",
+                      "key": "tenant-host"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: oauth2",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<token>"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "bd1c5aab-6e1f-4beb-894e-04d9cf60902e",
+              "name": "Artifact not found",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "IntegrationDesigntimeArtifacts(Id='{{Id}}',Version='{{Version}}')"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "description": "SAP Integration Suite tenant host",
+                      "type": "any",
+                      "value": "{{tenant-host}}",
+                      "key": "tenant-host"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: oauth2",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<token>"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "63691479-6775-4d7a-8a09-81fd5c9e888a",
+          "name": "Deploy Integration Flow",
+          "request": {
+            "name": "Deploy Integration Flow",
+            "description": {
+              "content": "Deploy a design-time integration artifact to the runtime. Triggers compilation and deployment of the integration flow.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "DeployIntegrationDesigntimeArtifact"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "Id",
+                  "value": "<string>",
+                  "description": "(Required) Artifact identifier to deploy"
+                },
+                {
+                  "disabled": false,
+                  "key": "Version",
+                  "value": "<string>",
+                  "description": "(Required) Artifact version to deploy"
+                }
+              ],
+              "variable": [
+                {
+                  "description": "SAP Integration Suite tenant host",
+                  "type": "any",
+                  "value": "{{tenant-host}}",
+                  "key": "tenant-host"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "43ff7d16-538f-4793-b3b0-7fdd86c8103d",
+              "name": "Deployment accepted",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "DeployIntegrationDesigntimeArtifact"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "Id",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "Version",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "description": "SAP Integration Suite tenant host",
+                      "type": "any",
+                      "value": "{{tenant-host}}",
+                      "key": "tenant-host"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: oauth2",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {}
+              },
+              "status": "Accepted",
+              "code": 202,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"d\": {\n    \"TaskId\": \"string\"\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "c5a30ead-0333-4d45-9c22-7cec545fce49",
+              "name": "Bad request",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "DeployIntegrationDesigntimeArtifact"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "Id",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "Version",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "description": "SAP Integration Suite tenant host",
+                      "type": "any",
+                      "value": "{{tenant-host}}",
+                      "key": "tenant-host"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: oauth2",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<token>"
+                  }
+                ],
+                "method": "POST",
+                "body": {}
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "5450ceb6-e93e-4a10-a5e3-5ef619cc778b",
+              "name": "Unauthorized",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "DeployIntegrationDesigntimeArtifact"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "Id",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "Version",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "description": "SAP Integration Suite tenant host",
+                      "type": "any",
+                      "value": "{{tenant-host}}",
+                      "key": "tenant-host"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: oauth2",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<token>"
+                  }
+                ],
+                "method": "POST",
+                "body": {}
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    },
+    {
+      "id": "9d07d3ad-9d4b-4c8b-b5a6-c1b9df035859",
+      "name": "Message Processing Logs",
+      "description": {
+        "content": "Retrieve message processing logs and audit information",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "342e509c-5ffd-4c7a-be65-ac6cefd70b7c",
+          "name": "List Message Processing Logs",
+          "request": {
+            "name": "List Message Processing Logs",
+            "description": {
+              "content": "Retrieve message processing logs for all integration flows. Supports filtering by time range, status, and integration flow ID.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "MessageProcessingLogs"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "$filter",
+                  "value": "<string>",
+                  "description": "OData filter expression (e.g., Status eq 'FAILED')"
+                },
+                {
+                  "disabled": false,
+                  "key": "$top",
+                  "value": "<integer>",
+                  "description": "Maximum number of log entries to return"
+                },
+                {
+                  "disabled": false,
+                  "key": "$skip",
+                  "value": "<integer>"
+                },
+                {
+                  "disabled": false,
+                  "key": "$orderby",
+                  "value": "<string>"
+                }
+              ],
+              "variable": [
+                {
+                  "description": "SAP Integration Suite tenant host",
+                  "type": "any",
+                  "value": "{{tenant-host}}",
+                  "key": "tenant-host"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "1a4d060f-93fa-44ee-bc09-16e3feb75a01",
+              "name": "List of message processing logs",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "MessageProcessingLogs"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "$filter",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "$top",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "$skip",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "$orderby",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "description": "SAP Integration Suite tenant host",
+                      "type": "any",
+                      "value": "{{tenant-host}}",
+                      "key": "tenant-host"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: oauth2",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"d\": {\n    \"results\": [\n      {\n        \"MessageGuid\": \"string\",\n        \"CorrelationId\": \"string\",\n        \"ApplicationMessageId\": \"string\",\n        \"ApplicationMessageType\": \"string\",\n        \"LogStart\": \"string\",\n        \"LogEnd\": \"string\",\n        \"Sender\": \"string\",\n        \"Receiver\": \"string\",\n        \"IntegrationFlowName\": \"string\",\n        \"Status\": \"COMPLETED\",\n        \"LogLevel\": \"TRACE\"\n      },\n      {\n        \"MessageGuid\": \"string\",\n        \"CorrelationId\": \"string\",\n        \"ApplicationMessageId\": \"string\",\n        \"ApplicationMessageType\": \"string\",\n        \"LogStart\": \"string\",\n        \"LogEnd\": \"string\",\n        \"Sender\": \"string\",\n        \"Receiver\": \"string\",\n        \"IntegrationFlowName\": \"string\",\n        \"Status\": \"ESCALATED\",\n        \"LogLevel\": \"TRACE\"\n      }\n    ]\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "a2d527eb-e09e-4a28-babb-0a8f1b3f7573",
+              "name": "Unauthorized",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "MessageProcessingLogs"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "$filter",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "$top",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "$skip",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "$orderby",
+                      "value": "<string>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "description": "SAP Integration Suite tenant host",
+                      "type": "any",
+                      "value": "{{tenant-host}}",
+                      "key": "tenant-host"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: oauth2",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<token>"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "973b70d1-62a9-413d-b01c-e0905b8d8f29",
+          "name": "Get Message Processing Log",
+          "request": {
+            "name": "Get Message Processing Log",
+            "description": {
+              "content": "Retrieve a specific message processing log entry by its GUID.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "MessageProcessingLogs('{{MessageGuid}}')"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "description": "SAP Integration Suite tenant host",
+                  "type": "any",
+                  "value": "{{tenant-host}}",
+                  "key": "tenant-host"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "e7d9b04f-4588-40d9-95eb-390b25869bbd",
+              "name": "Message processing log details",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "MessageProcessingLogs('{{MessageGuid}}')"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "description": "SAP Integration Suite tenant host",
+                      "type": "any",
+                      "value": "{{tenant-host}}",
+                      "key": "tenant-host"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: oauth2",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"d\": {\n    \"MessageGuid\": \"string\",\n    \"CorrelationId\": \"string\",\n    \"ApplicationMessageId\": \"string\",\n    \"ApplicationMessageType\": \"string\",\n    \"LogStart\": \"string\",\n    \"LogEnd\": \"string\",\n    \"Sender\": \"string\",\n    \"Receiver\": \"string\",\n    \"IntegrationFlowName\": \"string\",\n    \"Status\": \"PROCESSING\",\n    \"LogLevel\": \"INFO\"\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "99655325-8e86-4df8-be3a-d4757a6e0ee9",
+              "name": "Unauthorized",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "MessageProcessingLogs('{{MessageGuid}}')"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "description": "SAP Integration Suite tenant host",
+                      "type": "any",
+                      "value": "{{tenant-host}}",
+                      "key": "tenant-host"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: oauth2",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<token>"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "305b877e-55f5-4750-9fd6-08bdba29408c",
+              "name": "Log entry not found",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "MessageProcessingLogs('{{MessageGuid}}')"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "description": "SAP Integration Suite tenant host",
+                      "type": "any",
+                      "value": "{{tenant-host}}",
+                      "key": "tenant-host"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: oauth2",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<token>"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "735955a3-cab7-4e0f-b2f3-fdb04b7a4b7c",
+          "name": "Get Message Log Adapter Attributes",
+          "request": {
+            "name": "Get Message Log Adapter Attributes",
+            "description": {
+              "content": "Retrieve adapter-specific attributes for a message processing log entry.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "MessageProcessingLogs('{{MessageGuid}}')",
+                "AdapterAttributes"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "description": "SAP Integration Suite tenant host",
+                  "type": "any",
+                  "value": "{{tenant-host}}",
+                  "key": "tenant-host"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "de03fafc-000a-45e1-8748-a696407b05eb",
+              "name": "Adapter attributes for the message log",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "MessageProcessingLogs('{{MessageGuid}}')",
+                    "AdapterAttributes"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "description": "SAP Integration Suite tenant host",
+                      "type": "any",
+                      "value": "{{tenant-host}}",
+                      "key": "tenant-host"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: oauth2",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "d1f93e47-dfa7-4ae9-9ec1-f1b9aa159831",
+              "name": "Unauthorized",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "MessageProcessingLogs('{{MessageGuid}}')",
+                    "AdapterAttributes"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "description": "SAP Integration Suite tenant host",
+                      "type": "any",
+                      "value": "{{tenant-host}}",
+                      "key": "tenant-host"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: oauth2",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<token>"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    },
+    {
+      "id": "ec6e1686-44c3-4a4b-b956-d966d78af7ee",
+      "name": "Runtime Artifacts",
+      "description": {
+        "content": "Manage deployed runtime artifacts",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "a6e6da71-9d1a-4016-b2d3-6f6e75725001",
+          "name": "List Runtime Artifacts",
+          "request": {
+            "name": "List Runtime Artifacts",
+            "description": {
+              "content": "Retrieve all currently deployed integration artifacts in the runtime.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "IntegrationRuntimeArtifacts"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "$filter",
+                  "value": "<string>",
+                  "description": "OData filter expression"
+                },
+                {
+                  "disabled": false,
+                  "key": "$top",
+                  "value": "<integer>"
+                },
+                {
+                  "disabled": false,
+                  "key": "$skip",
+                  "value": "<integer>"
+                }
+              ],
+              "variable": [
+                {
+                  "description": "SAP Integration Suite tenant host",
+                  "type": "any",
+                  "value": "{{tenant-host}}",
+                  "key": "tenant-host"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "f42398a4-4371-4141-87d6-69b5a8cf26c2",
+              "name": "List of runtime artifacts",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "IntegrationRuntimeArtifacts"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "$filter",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "$top",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "$skip",
+                      "value": "<integer>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "description": "SAP Integration Suite tenant host",
+                      "type": "any",
+                      "value": "{{tenant-host}}",
+                      "key": "tenant-host"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: oauth2",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"d\": {\n    \"results\": [\n      {\n        \"Id\": \"string\",\n        \"Version\": \"string\",\n        \"Name\": \"string\",\n        \"Type\": \"string\",\n        \"Status\": \"ERROR\",\n        \"DeployedBy\": \"string\",\n        \"DeployedOn\": \"string\",\n        \"ErrorInformation\": \"string\"\n      },\n      {\n        \"Id\": \"string\",\n        \"Version\": \"string\",\n        \"Name\": \"string\",\n        \"Type\": \"string\",\n        \"Status\": \"STARTING\",\n        \"DeployedBy\": \"string\",\n        \"DeployedOn\": \"string\",\n        \"ErrorInformation\": \"string\"\n      }\n    ]\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "d191432c-4143-4f3f-90e6-c8d5d59ab6cf",
+              "name": "Unauthorized",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "IntegrationRuntimeArtifacts"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "$filter",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "$top",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "$skip",
+                      "value": "<integer>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "description": "SAP Integration Suite tenant host",
+                      "type": "any",
+                      "value": "{{tenant-host}}",
+                      "key": "tenant-host"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: oauth2",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<token>"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "4c26d94d-036a-40ab-8100-c6a553ac821f",
+          "name": "Get Runtime Artifact",
+          "request": {
+            "name": "Get Runtime Artifact",
+            "description": {
+              "content": "Retrieve a specific deployed runtime artifact and its status.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "IntegrationRuntimeArtifacts('{{Id}}')"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "description": "SAP Integration Suite tenant host",
+                  "type": "any",
+                  "value": "{{tenant-host}}",
+                  "key": "tenant-host"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "48aecd36-8848-4367-bdcd-379e91f5c490",
+              "name": "Runtime artifact details",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "IntegrationRuntimeArtifacts('{{Id}}')"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "description": "SAP Integration Suite tenant host",
+                      "type": "any",
+                      "value": "{{tenant-host}}",
+                      "key": "tenant-host"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: oauth2",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"d\": {\n    \"Id\": \"string\",\n    \"Version\": \"string\",\n    \"Name\": \"string\",\n    \"Type\": \"string\",\n    \"Status\": \"ERROR\",\n    \"DeployedBy\": \"string\",\n    \"DeployedOn\": \"string\",\n    \"ErrorInformation\": \"string\"\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "dffaa0e8-81e3-48e9-ad14-a6faaed29304",
+              "name": "Artifact not found",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "IntegrationRuntimeArtifacts('{{Id}}')"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "description": "SAP Integration Suite tenant host",
+                      "type": "any",
+                      "value": "{{tenant-host}}",
+                      "key": "tenant-host"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: oauth2",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<token>"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "31182b0c-9897-48b4-b07f-1e12be5d95fa",
+          "name": "Undeploy Runtime Artifact",
+          "request": {
+            "name": "Undeploy Runtime Artifact",
+            "description": {
+              "content": "Remove a deployed integration artifact from the runtime.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "IntegrationRuntimeArtifacts('{{Id}}')"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "description": "SAP Integration Suite tenant host",
+                  "type": "any",
+                  "value": "{{tenant-host}}",
+                  "key": "tenant-host"
+                }
+              ]
+            },
+            "method": "DELETE",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "10eea509-9a61-47a7-922c-71bf3d105156",
+              "name": "Undeploy accepted",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "IntegrationRuntimeArtifacts('{{Id}}')"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "description": "SAP Integration Suite tenant host",
+                      "type": "any",
+                      "value": "{{tenant-host}}",
+                      "key": "tenant-host"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: oauth2",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<token>"
+                  }
+                ],
+                "method": "DELETE",
+                "body": {}
+              },
+              "status": "Accepted",
+              "code": 202,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "246d21b9-ca5d-4bf2-90a3-796f2c7f2f57",
+              "name": "Unauthorized",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "IntegrationRuntimeArtifacts('{{Id}}')"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "description": "SAP Integration Suite tenant host",
+                      "type": "any",
+                      "value": "{{tenant-host}}",
+                      "key": "tenant-host"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: oauth2",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<token>"
+                  }
+                ],
+                "method": "DELETE",
+                "body": {}
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "24bad44e-83ab-4071-a76b-28a413bd411b",
+              "name": "Artifact not found",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "IntegrationRuntimeArtifacts('{{Id}}')"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "description": "SAP Integration Suite tenant host",
+                      "type": "any",
+                      "value": "{{tenant-host}}",
+                      "key": "tenant-host"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: oauth2",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<token>"
+                  }
+                ],
+                "method": "DELETE",
+                "body": {}
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    },
+    {
+      "id": "aa8c9cc6-4e4e-420b-b544-56a0ca8471be",
+      "name": "Service Endpoints",
+      "description": {
+        "content": "Discover and manage service endpoints",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "1d741967-26f8-4a0a-acd5-02d0994e5795",
+          "name": "List Service Endpoints",
+          "request": {
+            "name": "List Service Endpoints",
+            "description": {
+              "content": "Retrieve all service endpoints registered in the Integration Suite tenant. Supports pagination with $top and $skip parameters.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "ServiceEndpoints"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "$top",
+                  "value": "<integer>"
+                },
+                {
+                  "disabled": false,
+                  "key": "$skip",
+                  "value": "<integer>"
+                },
+                {
+                  "disabled": false,
+                  "key": "$count",
+                  "value": "<boolean>"
+                }
+              ],
+              "variable": [
+                {
+                  "description": "SAP Integration Suite tenant host",
+                  "type": "any",
+                  "value": "{{tenant-host}}",
+                  "key": "tenant-host"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "837fcaf1-9eb6-418a-b8b4-1c51b3963168",
+              "name": "List of service endpoints",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "ServiceEndpoints"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "$top",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "$skip",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "$count",
+                      "value": "<boolean>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "description": "SAP Integration Suite tenant host",
+                      "type": "any",
+                      "value": "{{tenant-host}}",
+                      "key": "tenant-host"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: oauth2",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"d\": {\n    \"results\": [\n      {\n        \"Name\": \"string\",\n        \"Id\": \"string\",\n        \"Title\": \"string\",\n        \"Protocol\": \"string\",\n        \"Url\": \"string\"\n      },\n      {\n        \"Name\": \"string\",\n        \"Id\": \"string\",\n        \"Title\": \"string\",\n        \"Protocol\": \"string\",\n        \"Url\": \"string\"\n      }\n    ]\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "73f53f7c-95ee-4f06-9471-54ba49ab810b",
+              "name": "Unauthorized",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "ServiceEndpoints"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "$top",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "$skip",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "$count",
+                      "value": "<boolean>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "description": "SAP Integration Suite tenant host",
+                      "type": "any",
+                      "value": "{{tenant-host}}",
+                      "key": "tenant-host"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: oauth2",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<token>"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    },
+    {
+      "id": "c91721bc-3155-4de4-8dff-355c66ade1f9",
+      "name": "Value Mappings",
+      "description": {
+        "content": "Manage value mapping artifacts",
+        "type": "text/plain"
+      },
+      "item": [],
+      "event": []
+    },
+    {
+      "id": "d024aec7-4f81-4ed9-9287-822a9aeaf9ec",
+      "name": "Variables",
+      "description": {
+        "content": "Manage global and local variables",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "183b922b-53f8-451c-a6bd-193ee7853fd3",
+          "name": "List Variables",
+          "request": {
+            "name": "List Variables",
+            "description": {
+              "content": "Retrieve all integration variables defined in the tenant.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "Variables"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "$filter",
+                  "value": "<string>"
+                },
+                {
+                  "disabled": false,
+                  "key": "$top",
+                  "value": "<integer>"
+                },
+                {
+                  "disabled": false,
+                  "key": "$skip",
+                  "value": "<integer>"
+                }
+              ],
+              "variable": [
+                {
+                  "description": "SAP Integration Suite tenant host",
+                  "type": "any",
+                  "value": "{{tenant-host}}",
+                  "key": "tenant-host"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "60dc8035-5fee-45ff-a2ca-98498b4342a0",
+              "name": "List of variables",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "Variables"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "$filter",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "$top",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "$skip",
+                      "value": "<integer>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "description": "SAP Integration Suite tenant host",
+                      "type": "any",
+                      "value": "{{tenant-host}}",
+                      "key": "tenant-host"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: oauth2",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"d\": {\n    \"results\": [\n      {\n        \"VariableName\": \"string\",\n        \"IntegrationFlow\": \"string\",\n        \"Visibility\": \"Global\",\n        \"UpdatedAt\": \"string\",\n        \"RetainUntil\": \"string\"\n      },\n      {\n        \"VariableName\": \"string\",\n        \"IntegrationFlow\": \"string\",\n        \"Visibility\": \"Local\",\n        \"UpdatedAt\": \"string\",\n        \"RetainUntil\": \"string\"\n      }\n    ]\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "35419ab9-0b06-4937-ba98-35fafda75b4d",
+              "name": "Unauthorized",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "Variables"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "$filter",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "$top",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "$skip",
+                      "value": "<integer>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "description": "SAP Integration Suite tenant host",
+                      "type": "any",
+                      "value": "{{tenant-host}}",
+                      "key": "tenant-host"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: oauth2",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<token>"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "description": {
+        "content": "SAP Integration Suite tenant host",
+        "type": "text/plain"
+      },
+      "type": "any",
+      "value": "my-tenant.integrationsuite.cfapps.sap.hana.ondemand.com",
+      "key": "tenant-host"
+    },
+    {
+      "type": "string",
+      "value": "https://{{tenant-host}}/api/v1",
+      "key": "baseUrl"
+    },
+    {
+      "disabled": false,
+      "description": {
+        "content": "(Required) Runtime artifact identifier",
+        "type": "text/plain"
+      },
+      "type": "any",
+      "value": "<string>",
+      "key": "Id"
+    },
+    {
+      "disabled": false,
+      "description": {
+        "content": "(Required) Message processing log GUID",
+        "type": "text/plain"
+      },
+      "type": "any",
+      "value": "<string>",
+      "key": "MessageGuid"
+    },
+    {
+      "disabled": false,
+      "description": {
+        "content": "(Required) Artifact version (use 'active' for latest)",
+        "type": "text/plain"
+      },
+      "type": "any",
+      "value": "<string>",
+      "key": "Version"
+    }
+  ],
+  "auth": {
+    "type": "oauth2",
+    "oauth2": [
+      {
+        "key": "accessTokenUrl",
+        "value": "https://{tenant}.authentication.sap.hana.ondemand.com/oauth/token"
+      },
+      {
+        "key": "grant_type",
+        "value": "client_credentials"
+      }
+    ]
+  },
+  "info": {
+    "_postman_id": "b71db14b-5cc4-460c-a5b6-20e33ff2bdde",
+    "name": "SAP Cloud Integration API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "The SAP Cloud Integration API (Process Integration Runtime API) provides OData V2 and REST endpoints for deploying, monitoring, and managing integration flows, artifacts, packages, and runtime operations on SAP Integration Suite hosted on SAP Business Technology Platform. It supports message processing log retrieval, integration package lifecycle management, artifact deployment, and service endpoint discovery.\n\nContact Support:\n Name: SAP Support",
+      "type": "text/plain"
+    }
+  }
+}

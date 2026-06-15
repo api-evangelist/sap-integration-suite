@@ -1,0 +1,1975 @@
+{
+  "info": {
+    "_postman_id": "250c580b-2c25-4ed7-acb8-ee96417b1292",
+    "name": "SAP API Management API",
+    "description": "The SAP API Management API enables programmatic management of APIs, products, applications, and developer portals within SAP Integration Suite. It supports creating and publishing API proxies, managing rate plans, configuring policies, administering developer portals, and managing the full API lifecycle within SAP Business Technology Platform.\n\nContact Support:\n Name: SAP Support",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "createdAt": "2026-06-05T15:16:18.000Z",
+    "updatedAt": "2026-06-05T15:16:18.000Z",
+    "lastUpdatedBy": "35240",
+    "uid": "35240-250c580b-2c25-4ed7-acb8-ee96417b1292"
+  },
+  "item": [
+    {
+      "name": "Management",
+      "item": [
+        {
+          "name": "APIProxies",
+          "item": [
+            {
+              "name": "List API Proxies",
+              "id": "d1e576cb-5714-45c6-821d-643499560b55",
+              "protocolProfileBehavior": {
+                "disableBodyPruning": true
+              },
+              "request": {
+                "method": "GET",
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "url": {
+                  "raw": "{{baseUrl}}/Management/APIProxies?$top=<integer>&$skip=<integer>&$filter=<string>&$orderby=<string>",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "Management",
+                    "APIProxies"
+                  ],
+                  "query": [
+                    {
+                      "description": "Maximum number of results to return",
+                      "key": "$top",
+                      "value": "<integer>"
+                    },
+                    {
+                      "description": "Number of results to skip for pagination",
+                      "key": "$skip",
+                      "value": "<integer>"
+                    },
+                    {
+                      "description": "OData filter expression",
+                      "key": "$filter",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "$orderby",
+                      "value": "<string>"
+                    }
+                  ]
+                },
+                "description": "Retrieve all API proxies defined in the API Management tenant."
+              },
+              "response": [
+                {
+                  "id": "389dc631-0fe9-48d0-ac20-278c487f6f3e",
+                  "name": "List of API proxies",
+                  "originalRequest": {
+                    "method": "GET",
+                    "header": [
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      },
+                      {
+                        "description": "Added as a part of security scheme: oauth2",
+                        "key": "Authorization",
+                        "value": "<token>"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{baseUrl}}/Management/APIProxies?$top=<integer>&$skip=<integer>&$filter=<string>&$orderby=<string>",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "Management",
+                        "APIProxies"
+                      ],
+                      "query": [
+                        {
+                          "description": "Maximum number of results to return",
+                          "key": "$top",
+                          "value": "<integer>"
+                        },
+                        {
+                          "description": "Number of results to skip for pagination",
+                          "key": "$skip",
+                          "value": "<integer>"
+                        },
+                        {
+                          "description": "OData filter expression",
+                          "key": "$filter",
+                          "value": "<string>"
+                        },
+                        {
+                          "key": "$orderby",
+                          "value": "<string>"
+                        }
+                      ]
+                    }
+                  },
+                  "status": "OK",
+                  "code": 200,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "{\n  \"d\": {\n    \"results\": [\n      {\n        \"name\": \"<string>\",\n        \"title\": \"<string>\",\n        \"description\": \"<string>\",\n        \"version\": \"<string>\",\n        \"basePath\": \"<string>\",\n        \"virtualHost\": \"<string>\",\n        \"targetEndpoint\": \"<string>\",\n        \"isDeployed\": \"<boolean>\",\n        \"createdAt\": \"<dateTime>\",\n        \"updatedAt\": \"<dateTime>\"\n      },\n      {\n        \"name\": \"<string>\",\n        \"title\": \"<string>\",\n        \"description\": \"<string>\",\n        \"version\": \"<string>\",\n        \"basePath\": \"<string>\",\n        \"virtualHost\": \"<string>\",\n        \"targetEndpoint\": \"<string>\",\n        \"isDeployed\": \"<boolean>\",\n        \"createdAt\": \"<dateTime>\",\n        \"updatedAt\": \"<dateTime>\"\n      }\n    ]\n  }\n}",
+                  "createdAt": "2026-06-05T15:16:19.000Z",
+                  "updatedAt": "2026-06-05T15:16:19.000Z",
+                  "uid": "35240-389dc631-0fe9-48d0-ac20-278c487f6f3e"
+                },
+                {
+                  "id": "f5c20e9d-51fc-4894-b1c7-e535ff9eee48",
+                  "name": "Unauthorized",
+                  "originalRequest": {
+                    "method": "GET",
+                    "header": [
+                      {
+                        "description": "Added as a part of security scheme: oauth2",
+                        "key": "Authorization",
+                        "value": "<token>"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{baseUrl}}/Management/APIProxies?$top=<integer>&$skip=<integer>&$filter=<string>&$orderby=<string>",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "Management",
+                        "APIProxies"
+                      ],
+                      "query": [
+                        {
+                          "description": "Maximum number of results to return",
+                          "key": "$top",
+                          "value": "<integer>"
+                        },
+                        {
+                          "description": "Number of results to skip for pagination",
+                          "key": "$skip",
+                          "value": "<integer>"
+                        },
+                        {
+                          "description": "OData filter expression",
+                          "key": "$filter",
+                          "value": "<string>"
+                        },
+                        {
+                          "key": "$orderby",
+                          "value": "<string>"
+                        }
+                      ]
+                    }
+                  },
+                  "status": "Unauthorized",
+                  "code": 401,
+                  "_postman_previewlanguage": "text",
+                  "header": [],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": null,
+                  "createdAt": "2026-06-05T15:16:19.000Z",
+                  "updatedAt": "2026-06-05T15:16:19.000Z",
+                  "uid": "35240-f5c20e9d-51fc-4894-b1c7-e535ff9eee48"
+                }
+              ],
+              "createdAt": "2026-06-05T15:16:19.000Z",
+              "updatedAt": "2026-06-05T15:16:19.000Z",
+              "uid": "35240-d1e576cb-5714-45c6-821d-643499560b55"
+            },
+            {
+              "name": "Create API Proxy",
+              "id": "9034f948-0d5a-4784-b7b3-5cbc9dba7a4c",
+              "protocolProfileBehavior": {
+                "disableBodyPruning": true
+              },
+              "request": {
+                "method": "POST",
+                "header": [
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"name\": \"<string>\",\n  \"targetEndpoint\": \"<string>\",\n  \"title\": \"<string>\",\n  \"description\": \"<string>\",\n  \"basePath\": \"<string>\",\n  \"version\": \"<string>\"\n}",
+                  "options": {
+                    "raw": {
+                      "headerFamily": "json",
+                      "language": "json"
+                    }
+                  }
+                },
+                "url": {
+                  "raw": "{{baseUrl}}/Management/APIProxies",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "Management",
+                    "APIProxies"
+                  ]
+                },
+                "description": "Create a new API proxy in the API Management tenant."
+              },
+              "response": [
+                {
+                  "id": "8b967b1a-a137-4076-8d12-bc9bddc0b20f",
+                  "name": "API proxy created",
+                  "originalRequest": {
+                    "method": "POST",
+                    "header": [
+                      {
+                        "key": "Content-Type",
+                        "value": "application/json"
+                      },
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      },
+                      {
+                        "description": "Added as a part of security scheme: oauth2",
+                        "key": "Authorization",
+                        "value": "<token>"
+                      }
+                    ],
+                    "body": {
+                      "mode": "raw",
+                      "raw": "{\n  \"name\": \"<string>\",\n  \"targetEndpoint\": \"<string>\",\n  \"title\": \"<string>\",\n  \"description\": \"<string>\",\n  \"basePath\": \"<string>\",\n  \"version\": \"<string>\"\n}",
+                      "options": {
+                        "raw": {
+                          "headerFamily": "json",
+                          "language": "json"
+                        }
+                      }
+                    },
+                    "url": {
+                      "raw": "{{baseUrl}}/Management/APIProxies",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "Management",
+                        "APIProxies"
+                      ]
+                    }
+                  },
+                  "status": "Created",
+                  "code": 201,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "{\n  \"d\": {\n    \"name\": \"<string>\",\n    \"title\": \"<string>\",\n    \"description\": \"<string>\",\n    \"version\": \"<string>\",\n    \"basePath\": \"<string>\",\n    \"virtualHost\": \"<string>\",\n    \"targetEndpoint\": \"<string>\",\n    \"isDeployed\": \"<boolean>\",\n    \"createdAt\": \"<dateTime>\",\n    \"updatedAt\": \"<dateTime>\"\n  }\n}",
+                  "createdAt": "2026-06-05T15:16:19.000Z",
+                  "updatedAt": "2026-06-05T15:16:19.000Z",
+                  "uid": "35240-8b967b1a-a137-4076-8d12-bc9bddc0b20f"
+                },
+                {
+                  "id": "7ea16ead-a81d-46b4-896b-4a9afe34c9e5",
+                  "name": "Bad request",
+                  "originalRequest": {
+                    "method": "POST",
+                    "header": [
+                      {
+                        "key": "Content-Type",
+                        "value": "application/json"
+                      },
+                      {
+                        "description": "Added as a part of security scheme: oauth2",
+                        "key": "Authorization",
+                        "value": "<token>"
+                      }
+                    ],
+                    "body": {
+                      "mode": "raw",
+                      "raw": "{\n  \"name\": \"<string>\",\n  \"targetEndpoint\": \"<string>\",\n  \"title\": \"<string>\",\n  \"description\": \"<string>\",\n  \"basePath\": \"<string>\",\n  \"version\": \"<string>\"\n}",
+                      "options": {
+                        "raw": {
+                          "headerFamily": "json",
+                          "language": "json"
+                        }
+                      }
+                    },
+                    "url": {
+                      "raw": "{{baseUrl}}/Management/APIProxies",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "Management",
+                        "APIProxies"
+                      ]
+                    }
+                  },
+                  "status": "Bad Request",
+                  "code": 400,
+                  "_postman_previewlanguage": "text",
+                  "header": [],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": null,
+                  "createdAt": "2026-06-05T15:16:19.000Z",
+                  "updatedAt": "2026-06-05T15:16:19.000Z",
+                  "uid": "35240-7ea16ead-a81d-46b4-896b-4a9afe34c9e5"
+                },
+                {
+                  "id": "bb162107-b4df-4b5b-a334-29a86e171c12",
+                  "name": "Unauthorized",
+                  "originalRequest": {
+                    "method": "POST",
+                    "header": [
+                      {
+                        "key": "Content-Type",
+                        "value": "application/json"
+                      },
+                      {
+                        "description": "Added as a part of security scheme: oauth2",
+                        "key": "Authorization",
+                        "value": "<token>"
+                      }
+                    ],
+                    "body": {
+                      "mode": "raw",
+                      "raw": "{\n  \"name\": \"<string>\",\n  \"targetEndpoint\": \"<string>\",\n  \"title\": \"<string>\",\n  \"description\": \"<string>\",\n  \"basePath\": \"<string>\",\n  \"version\": \"<string>\"\n}",
+                      "options": {
+                        "raw": {
+                          "headerFamily": "json",
+                          "language": "json"
+                        }
+                      }
+                    },
+                    "url": {
+                      "raw": "{{baseUrl}}/Management/APIProxies",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "Management",
+                        "APIProxies"
+                      ]
+                    }
+                  },
+                  "status": "Unauthorized",
+                  "code": 401,
+                  "_postman_previewlanguage": "text",
+                  "header": [],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": null,
+                  "createdAt": "2026-06-05T15:16:19.000Z",
+                  "updatedAt": "2026-06-05T15:16:19.000Z",
+                  "uid": "35240-bb162107-b4df-4b5b-a334-29a86e171c12"
+                }
+              ],
+              "createdAt": "2026-06-05T15:16:19.000Z",
+              "updatedAt": "2026-06-05T15:16:19.000Z",
+              "uid": "35240-9034f948-0d5a-4784-b7b3-5cbc9dba7a4c"
+            }
+          ],
+          "id": "d1c36013-e5f8-4451-af98-bb2927cc31d6",
+          "createdAt": "2026-06-05T15:16:19.000Z",
+          "updatedAt": "2026-06-05T15:16:19.000Z",
+          "uid": "35240-d1c36013-e5f8-4451-af98-bb2927cc31d6"
+        },
+        {
+          "name": "APIProxies('{name}')",
+          "item": [
+            {
+              "name": "Get API Proxy",
+              "id": "567acb02-24c7-4b70-8cbd-6ebd19fbe246",
+              "protocolProfileBehavior": {
+                "disableBodyPruning": true
+              },
+              "request": {
+                "method": "GET",
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "url": {
+                  "raw": "{{baseUrl}}/Management/APIProxies('{{name}}')",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "Management",
+                    "APIProxies('{{name}}')"
+                  ]
+                },
+                "description": "Retrieve a specific API proxy by name."
+              },
+              "response": [
+                {
+                  "id": "8a3cd90f-b65e-4409-b938-cbb09cbb6a72",
+                  "name": "API proxy details",
+                  "originalRequest": {
+                    "method": "GET",
+                    "header": [
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      },
+                      {
+                        "description": "Added as a part of security scheme: oauth2",
+                        "key": "Authorization",
+                        "value": "<token>"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{baseUrl}}/Management/APIProxies('{{name}}')",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "Management",
+                        "APIProxies('{{name}}')"
+                      ]
+                    }
+                  },
+                  "status": "OK",
+                  "code": 200,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "{\n  \"d\": {\n    \"name\": \"<string>\",\n    \"title\": \"<string>\",\n    \"description\": \"<string>\",\n    \"version\": \"<string>\",\n    \"basePath\": \"<string>\",\n    \"virtualHost\": \"<string>\",\n    \"targetEndpoint\": \"<string>\",\n    \"isDeployed\": \"<boolean>\",\n    \"createdAt\": \"<dateTime>\",\n    \"updatedAt\": \"<dateTime>\"\n  }\n}",
+                  "createdAt": "2026-06-05T15:16:19.000Z",
+                  "updatedAt": "2026-06-05T15:16:19.000Z",
+                  "uid": "35240-8a3cd90f-b65e-4409-b938-cbb09cbb6a72"
+                },
+                {
+                  "id": "cb12eab2-476c-4407-9a4b-f4da35a9f6ac",
+                  "name": "API proxy not found",
+                  "originalRequest": {
+                    "method": "GET",
+                    "header": [
+                      {
+                        "description": "Added as a part of security scheme: oauth2",
+                        "key": "Authorization",
+                        "value": "<token>"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{baseUrl}}/Management/APIProxies('{{name}}')",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "Management",
+                        "APIProxies('{{name}}')"
+                      ]
+                    }
+                  },
+                  "status": "Not Found",
+                  "code": 404,
+                  "_postman_previewlanguage": "text",
+                  "header": [],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": null,
+                  "createdAt": "2026-06-05T15:16:19.000Z",
+                  "updatedAt": "2026-06-05T15:16:19.000Z",
+                  "uid": "35240-cb12eab2-476c-4407-9a4b-f4da35a9f6ac"
+                }
+              ],
+              "createdAt": "2026-06-05T15:16:19.000Z",
+              "updatedAt": "2026-06-05T15:16:19.000Z",
+              "uid": "35240-567acb02-24c7-4b70-8cbd-6ebd19fbe246"
+            },
+            {
+              "name": "Update API Proxy",
+              "id": "dd6083f8-4e81-4903-a4bd-2056799ab3cf",
+              "protocolProfileBehavior": {
+                "disableBodyPruning": true
+              },
+              "request": {
+                "method": "PUT",
+                "header": [
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json"
+                  }
+                ],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"name\": \"<string>\",\n  \"targetEndpoint\": \"<string>\",\n  \"title\": \"<string>\",\n  \"description\": \"<string>\",\n  \"basePath\": \"<string>\",\n  \"version\": \"<string>\"\n}",
+                  "options": {
+                    "raw": {
+                      "headerFamily": "json",
+                      "language": "json"
+                    }
+                  }
+                },
+                "url": {
+                  "raw": "{{baseUrl}}/Management/APIProxies('{{name}}')",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "Management",
+                    "APIProxies('{{name}}')"
+                  ]
+                },
+                "description": "Update an existing API proxy."
+              },
+              "response": [
+                {
+                  "id": "50c0bf49-6756-4642-bbe3-e9b8a6d4c714",
+                  "name": "API proxy updated",
+                  "originalRequest": {
+                    "method": "PUT",
+                    "header": [
+                      {
+                        "key": "Content-Type",
+                        "value": "application/json"
+                      },
+                      {
+                        "description": "Added as a part of security scheme: oauth2",
+                        "key": "Authorization",
+                        "value": "<token>"
+                      }
+                    ],
+                    "body": {
+                      "mode": "raw",
+                      "raw": "{\n  \"name\": \"<string>\",\n  \"targetEndpoint\": \"<string>\",\n  \"title\": \"<string>\",\n  \"description\": \"<string>\",\n  \"basePath\": \"<string>\",\n  \"version\": \"<string>\"\n}",
+                      "options": {
+                        "raw": {
+                          "headerFamily": "json",
+                          "language": "json"
+                        }
+                      }
+                    },
+                    "url": {
+                      "raw": "{{baseUrl}}/Management/APIProxies('{{name}}')",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "Management",
+                        "APIProxies('{{name}}')"
+                      ]
+                    }
+                  },
+                  "status": "OK",
+                  "code": 200,
+                  "_postman_previewlanguage": "text",
+                  "header": [],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": null,
+                  "createdAt": "2026-06-05T15:16:19.000Z",
+                  "updatedAt": "2026-06-05T15:16:19.000Z",
+                  "uid": "35240-50c0bf49-6756-4642-bbe3-e9b8a6d4c714"
+                },
+                {
+                  "id": "8184d77b-d846-4c62-9b64-2b2aee5ae506",
+                  "name": "Bad request",
+                  "originalRequest": {
+                    "method": "PUT",
+                    "header": [
+                      {
+                        "key": "Content-Type",
+                        "value": "application/json"
+                      },
+                      {
+                        "description": "Added as a part of security scheme: oauth2",
+                        "key": "Authorization",
+                        "value": "<token>"
+                      }
+                    ],
+                    "body": {
+                      "mode": "raw",
+                      "raw": "{\n  \"name\": \"<string>\",\n  \"targetEndpoint\": \"<string>\",\n  \"title\": \"<string>\",\n  \"description\": \"<string>\",\n  \"basePath\": \"<string>\",\n  \"version\": \"<string>\"\n}",
+                      "options": {
+                        "raw": {
+                          "headerFamily": "json",
+                          "language": "json"
+                        }
+                      }
+                    },
+                    "url": {
+                      "raw": "{{baseUrl}}/Management/APIProxies('{{name}}')",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "Management",
+                        "APIProxies('{{name}}')"
+                      ]
+                    }
+                  },
+                  "status": "Bad Request",
+                  "code": 400,
+                  "_postman_previewlanguage": "text",
+                  "header": [],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": null,
+                  "createdAt": "2026-06-05T15:16:19.000Z",
+                  "updatedAt": "2026-06-05T15:16:19.000Z",
+                  "uid": "35240-8184d77b-d846-4c62-9b64-2b2aee5ae506"
+                },
+                {
+                  "id": "4e88140e-0d9f-4791-bed6-dee516615972",
+                  "name": "Not found",
+                  "originalRequest": {
+                    "method": "PUT",
+                    "header": [
+                      {
+                        "key": "Content-Type",
+                        "value": "application/json"
+                      },
+                      {
+                        "description": "Added as a part of security scheme: oauth2",
+                        "key": "Authorization",
+                        "value": "<token>"
+                      }
+                    ],
+                    "body": {
+                      "mode": "raw",
+                      "raw": "{\n  \"name\": \"<string>\",\n  \"targetEndpoint\": \"<string>\",\n  \"title\": \"<string>\",\n  \"description\": \"<string>\",\n  \"basePath\": \"<string>\",\n  \"version\": \"<string>\"\n}",
+                      "options": {
+                        "raw": {
+                          "headerFamily": "json",
+                          "language": "json"
+                        }
+                      }
+                    },
+                    "url": {
+                      "raw": "{{baseUrl}}/Management/APIProxies('{{name}}')",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "Management",
+                        "APIProxies('{{name}}')"
+                      ]
+                    }
+                  },
+                  "status": "Not Found",
+                  "code": 404,
+                  "_postman_previewlanguage": "text",
+                  "header": [],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": null,
+                  "createdAt": "2026-06-05T15:16:19.000Z",
+                  "updatedAt": "2026-06-05T15:16:19.000Z",
+                  "uid": "35240-4e88140e-0d9f-4791-bed6-dee516615972"
+                }
+              ],
+              "createdAt": "2026-06-05T15:16:19.000Z",
+              "updatedAt": "2026-06-05T15:16:19.000Z",
+              "uid": "35240-dd6083f8-4e81-4903-a4bd-2056799ab3cf"
+            },
+            {
+              "name": "Delete API Proxy",
+              "id": "7d22ace2-aad2-4491-84e5-6b9f1aa2a183",
+              "protocolProfileBehavior": {
+                "disableBodyPruning": true
+              },
+              "request": {
+                "method": "DELETE",
+                "header": [],
+                "url": {
+                  "raw": "{{baseUrl}}/Management/APIProxies('{{name}}')",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "Management",
+                    "APIProxies('{{name}}')"
+                  ]
+                },
+                "description": "Delete an existing API proxy from the tenant."
+              },
+              "response": [
+                {
+                  "id": "973ded14-612a-4b7e-8293-b49b0f41f772",
+                  "name": "Deleted successfully",
+                  "originalRequest": {
+                    "method": "DELETE",
+                    "header": [
+                      {
+                        "description": "Added as a part of security scheme: oauth2",
+                        "key": "Authorization",
+                        "value": "<token>"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{baseUrl}}/Management/APIProxies('{{name}}')",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "Management",
+                        "APIProxies('{{name}}')"
+                      ]
+                    }
+                  },
+                  "status": "No Content",
+                  "code": 204,
+                  "_postman_previewlanguage": "text",
+                  "header": [],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": null,
+                  "createdAt": "2026-06-05T15:16:19.000Z",
+                  "updatedAt": "2026-06-05T15:16:19.000Z",
+                  "uid": "35240-973ded14-612a-4b7e-8293-b49b0f41f772"
+                },
+                {
+                  "id": "66983427-35dd-4a29-bd7f-0f7e4a872609",
+                  "name": "API proxy not found",
+                  "originalRequest": {
+                    "method": "DELETE",
+                    "header": [
+                      {
+                        "description": "Added as a part of security scheme: oauth2",
+                        "key": "Authorization",
+                        "value": "<token>"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{baseUrl}}/Management/APIProxies('{{name}}')",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "Management",
+                        "APIProxies('{{name}}')"
+                      ]
+                    }
+                  },
+                  "status": "Not Found",
+                  "code": 404,
+                  "_postman_previewlanguage": "text",
+                  "header": [],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": null,
+                  "createdAt": "2026-06-05T15:16:19.000Z",
+                  "updatedAt": "2026-06-05T15:16:19.000Z",
+                  "uid": "35240-66983427-35dd-4a29-bd7f-0f7e4a872609"
+                }
+              ],
+              "createdAt": "2026-06-05T15:16:19.000Z",
+              "updatedAt": "2026-06-05T15:16:19.000Z",
+              "uid": "35240-7d22ace2-aad2-4491-84e5-6b9f1aa2a183"
+            }
+          ],
+          "id": "59db4a74-79c2-40a1-8ad5-36b4b7f699d6",
+          "createdAt": "2026-06-05T15:16:19.000Z",
+          "updatedAt": "2026-06-05T15:16:19.000Z",
+          "uid": "35240-59db4a74-79c2-40a1-8ad5-36b4b7f699d6"
+        },
+        {
+          "name": "APIProducts",
+          "item": [
+            {
+              "name": "List API Products",
+              "id": "4aa1b63c-df89-476d-bd64-eb58502d4965",
+              "protocolProfileBehavior": {
+                "disableBodyPruning": true
+              },
+              "request": {
+                "method": "GET",
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "url": {
+                  "raw": "{{baseUrl}}/Management/APIProducts?$top=<integer>&$skip=<integer>&$filter=<string>",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "Management",
+                    "APIProducts"
+                  ],
+                  "query": [
+                    {
+                      "key": "$top",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "$skip",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "$filter",
+                      "value": "<string>"
+                    }
+                  ]
+                },
+                "description": "Retrieve all API products available in the API Management tenant."
+              },
+              "response": [
+                {
+                  "id": "36d7a2ca-103a-4004-8fb3-9c9a632ded24",
+                  "name": "List of API products",
+                  "originalRequest": {
+                    "method": "GET",
+                    "header": [
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      },
+                      {
+                        "description": "Added as a part of security scheme: oauth2",
+                        "key": "Authorization",
+                        "value": "<token>"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{baseUrl}}/Management/APIProducts?$top=<integer>&$skip=<integer>&$filter=<string>",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "Management",
+                        "APIProducts"
+                      ],
+                      "query": [
+                        {
+                          "key": "$top",
+                          "value": "<integer>"
+                        },
+                        {
+                          "key": "$skip",
+                          "value": "<integer>"
+                        },
+                        {
+                          "key": "$filter",
+                          "value": "<string>"
+                        }
+                      ]
+                    }
+                  },
+                  "status": "OK",
+                  "code": 200,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "{\n  \"d\": {\n    \"results\": [\n      {\n        \"name\": \"<string>\",\n        \"title\": \"<string>\",\n        \"description\": \"<string>\",\n        \"status\": \"DEPRECATED\",\n        \"quota\": \"<integer>\",\n        \"quotaInterval\": \"<integer>\",\n        \"quotaTimeUnit\": \"day\",\n        \"apiProxies\": [\n          \"<string>\",\n          \"<string>\"\n        ]\n      },\n      {\n        \"name\": \"<string>\",\n        \"title\": \"<string>\",\n        \"description\": \"<string>\",\n        \"status\": \"PUBLISHED\",\n        \"quota\": \"<integer>\",\n        \"quotaInterval\": \"<integer>\",\n        \"quotaTimeUnit\": \"hour\",\n        \"apiProxies\": [\n          \"<string>\",\n          \"<string>\"\n        ]\n      }\n    ]\n  }\n}",
+                  "createdAt": "2026-06-05T15:16:19.000Z",
+                  "updatedAt": "2026-06-05T15:16:19.000Z",
+                  "uid": "35240-36d7a2ca-103a-4004-8fb3-9c9a632ded24"
+                },
+                {
+                  "id": "5e4549d1-461c-43b2-a757-927a3ea536cd",
+                  "name": "Unauthorized",
+                  "originalRequest": {
+                    "method": "GET",
+                    "header": [
+                      {
+                        "description": "Added as a part of security scheme: oauth2",
+                        "key": "Authorization",
+                        "value": "<token>"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{baseUrl}}/Management/APIProducts?$top=<integer>&$skip=<integer>&$filter=<string>",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "Management",
+                        "APIProducts"
+                      ],
+                      "query": [
+                        {
+                          "key": "$top",
+                          "value": "<integer>"
+                        },
+                        {
+                          "key": "$skip",
+                          "value": "<integer>"
+                        },
+                        {
+                          "key": "$filter",
+                          "value": "<string>"
+                        }
+                      ]
+                    }
+                  },
+                  "status": "Unauthorized",
+                  "code": 401,
+                  "_postman_previewlanguage": "text",
+                  "header": [],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": null,
+                  "createdAt": "2026-06-05T15:16:19.000Z",
+                  "updatedAt": "2026-06-05T15:16:19.000Z",
+                  "uid": "35240-5e4549d1-461c-43b2-a757-927a3ea536cd"
+                }
+              ],
+              "createdAt": "2026-06-05T15:16:19.000Z",
+              "updatedAt": "2026-06-05T15:16:19.000Z",
+              "uid": "35240-4aa1b63c-df89-476d-bd64-eb58502d4965"
+            },
+            {
+              "name": "Create API Product",
+              "id": "d5beff59-c464-45ef-9779-235b6a4d7d31",
+              "protocolProfileBehavior": {
+                "disableBodyPruning": true
+              },
+              "request": {
+                "method": "POST",
+                "header": [
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json"
+                  }
+                ],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"name\": \"<string>\",\n  \"title\": \"<string>\",\n  \"description\": \"<string>\",\n  \"apiProxies\": [\n    \"<string>\",\n    \"<string>\"\n  ]\n}",
+                  "options": {
+                    "raw": {
+                      "headerFamily": "json",
+                      "language": "json"
+                    }
+                  }
+                },
+                "url": {
+                  "raw": "{{baseUrl}}/Management/APIProducts",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "Management",
+                    "APIProducts"
+                  ]
+                },
+                "description": "Create a new API product bundling one or more API proxies."
+              },
+              "response": [
+                {
+                  "id": "eaae4b78-db3e-4401-bd67-6acbf9f354ce",
+                  "name": "API product created",
+                  "originalRequest": {
+                    "method": "POST",
+                    "header": [
+                      {
+                        "key": "Content-Type",
+                        "value": "application/json"
+                      },
+                      {
+                        "description": "Added as a part of security scheme: oauth2",
+                        "key": "Authorization",
+                        "value": "<token>"
+                      }
+                    ],
+                    "body": {
+                      "mode": "raw",
+                      "raw": "{\n  \"name\": \"<string>\",\n  \"title\": \"<string>\",\n  \"description\": \"<string>\",\n  \"apiProxies\": [\n    \"<string>\",\n    \"<string>\"\n  ]\n}",
+                      "options": {
+                        "raw": {
+                          "headerFamily": "json",
+                          "language": "json"
+                        }
+                      }
+                    },
+                    "url": {
+                      "raw": "{{baseUrl}}/Management/APIProducts",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "Management",
+                        "APIProducts"
+                      ]
+                    }
+                  },
+                  "status": "Created",
+                  "code": 201,
+                  "_postman_previewlanguage": "text",
+                  "header": [],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": null,
+                  "createdAt": "2026-06-05T15:16:19.000Z",
+                  "updatedAt": "2026-06-05T15:16:19.000Z",
+                  "uid": "35240-eaae4b78-db3e-4401-bd67-6acbf9f354ce"
+                },
+                {
+                  "id": "5989498d-5377-43c0-85b1-87a562c9a540",
+                  "name": "Bad request",
+                  "originalRequest": {
+                    "method": "POST",
+                    "header": [
+                      {
+                        "key": "Content-Type",
+                        "value": "application/json"
+                      },
+                      {
+                        "description": "Added as a part of security scheme: oauth2",
+                        "key": "Authorization",
+                        "value": "<token>"
+                      }
+                    ],
+                    "body": {
+                      "mode": "raw",
+                      "raw": "{\n  \"name\": \"<string>\",\n  \"title\": \"<string>\",\n  \"description\": \"<string>\",\n  \"apiProxies\": [\n    \"<string>\",\n    \"<string>\"\n  ]\n}",
+                      "options": {
+                        "raw": {
+                          "headerFamily": "json",
+                          "language": "json"
+                        }
+                      }
+                    },
+                    "url": {
+                      "raw": "{{baseUrl}}/Management/APIProducts",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "Management",
+                        "APIProducts"
+                      ]
+                    }
+                  },
+                  "status": "Bad Request",
+                  "code": 400,
+                  "_postman_previewlanguage": "text",
+                  "header": [],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": null,
+                  "createdAt": "2026-06-05T15:16:19.000Z",
+                  "updatedAt": "2026-06-05T15:16:19.000Z",
+                  "uid": "35240-5989498d-5377-43c0-85b1-87a562c9a540"
+                },
+                {
+                  "id": "55f7ca9c-6a2e-418d-8588-b9c8a1e3214f",
+                  "name": "Unauthorized",
+                  "originalRequest": {
+                    "method": "POST",
+                    "header": [
+                      {
+                        "key": "Content-Type",
+                        "value": "application/json"
+                      },
+                      {
+                        "description": "Added as a part of security scheme: oauth2",
+                        "key": "Authorization",
+                        "value": "<token>"
+                      }
+                    ],
+                    "body": {
+                      "mode": "raw",
+                      "raw": "{\n  \"name\": \"<string>\",\n  \"title\": \"<string>\",\n  \"description\": \"<string>\",\n  \"apiProxies\": [\n    \"<string>\",\n    \"<string>\"\n  ]\n}",
+                      "options": {
+                        "raw": {
+                          "headerFamily": "json",
+                          "language": "json"
+                        }
+                      }
+                    },
+                    "url": {
+                      "raw": "{{baseUrl}}/Management/APIProducts",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "Management",
+                        "APIProducts"
+                      ]
+                    }
+                  },
+                  "status": "Unauthorized",
+                  "code": 401,
+                  "_postman_previewlanguage": "text",
+                  "header": [],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": null,
+                  "createdAt": "2026-06-05T15:16:19.000Z",
+                  "updatedAt": "2026-06-05T15:16:19.000Z",
+                  "uid": "35240-55f7ca9c-6a2e-418d-8588-b9c8a1e3214f"
+                }
+              ],
+              "createdAt": "2026-06-05T15:16:19.000Z",
+              "updatedAt": "2026-06-05T15:16:19.000Z",
+              "uid": "35240-d5beff59-c464-45ef-9779-235b6a4d7d31"
+            }
+          ],
+          "id": "2f38dfc4-c95f-4866-91d2-d160d7501d63",
+          "createdAt": "2026-06-05T15:16:19.000Z",
+          "updatedAt": "2026-06-05T15:16:19.000Z",
+          "uid": "35240-2f38dfc4-c95f-4866-91d2-d160d7501d63"
+        },
+        {
+          "name": "APIProducts('{name}')",
+          "item": [
+            {
+              "name": "Get API Product",
+              "id": "d108f9d8-66fc-481e-ac9e-36fb5ab0ef57",
+              "protocolProfileBehavior": {
+                "disableBodyPruning": true
+              },
+              "request": {
+                "method": "GET",
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "url": {
+                  "raw": "{{baseUrl}}/Management/APIProducts('{{name}}')",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "Management",
+                    "APIProducts('{{name}}')"
+                  ]
+                },
+                "description": "Retrieve a specific API product by name."
+              },
+              "response": [
+                {
+                  "id": "60e714d7-6e49-44f6-aa6f-83e8cf0a9808",
+                  "name": "API product details",
+                  "originalRequest": {
+                    "method": "GET",
+                    "header": [
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      },
+                      {
+                        "description": "Added as a part of security scheme: oauth2",
+                        "key": "Authorization",
+                        "value": "<token>"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{baseUrl}}/Management/APIProducts('{{name}}')",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "Management",
+                        "APIProducts('{{name}}')"
+                      ]
+                    }
+                  },
+                  "status": "OK",
+                  "code": 200,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "{\n  \"d\": {\n    \"name\": \"<string>\",\n    \"title\": \"<string>\",\n    \"description\": \"<string>\",\n    \"status\": \"UNPUBLISHED\",\n    \"quota\": \"<integer>\",\n    \"quotaInterval\": \"<integer>\",\n    \"quotaTimeUnit\": \"hour\",\n    \"apiProxies\": [\n      \"<string>\",\n      \"<string>\"\n    ]\n  }\n}",
+                  "createdAt": "2026-06-05T15:16:19.000Z",
+                  "updatedAt": "2026-06-05T15:16:19.000Z",
+                  "uid": "35240-60e714d7-6e49-44f6-aa6f-83e8cf0a9808"
+                },
+                {
+                  "id": "461f0364-311e-4f7a-8037-771da8b1cf39",
+                  "name": "API product not found",
+                  "originalRequest": {
+                    "method": "GET",
+                    "header": [
+                      {
+                        "description": "Added as a part of security scheme: oauth2",
+                        "key": "Authorization",
+                        "value": "<token>"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{baseUrl}}/Management/APIProducts('{{name}}')",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "Management",
+                        "APIProducts('{{name}}')"
+                      ]
+                    }
+                  },
+                  "status": "Not Found",
+                  "code": 404,
+                  "_postman_previewlanguage": "text",
+                  "header": [],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": null,
+                  "createdAt": "2026-06-05T15:16:19.000Z",
+                  "updatedAt": "2026-06-05T15:16:19.000Z",
+                  "uid": "35240-461f0364-311e-4f7a-8037-771da8b1cf39"
+                }
+              ],
+              "createdAt": "2026-06-05T15:16:19.000Z",
+              "updatedAt": "2026-06-05T15:16:19.000Z",
+              "uid": "35240-d108f9d8-66fc-481e-ac9e-36fb5ab0ef57"
+            }
+          ],
+          "id": "07220e50-aece-42d1-8706-771a79f6f399",
+          "createdAt": "2026-06-05T15:16:19.000Z",
+          "updatedAt": "2026-06-05T15:16:19.000Z",
+          "uid": "35240-07220e50-aece-42d1-8706-771a79f6f399"
+        },
+        {
+          "name": "Applications",
+          "item": [
+            {
+              "name": "List Applications",
+              "id": "37cd9ccc-0caf-4f0a-b40a-91992dbc03ca",
+              "protocolProfileBehavior": {
+                "disableBodyPruning": true
+              },
+              "request": {
+                "method": "GET",
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "url": {
+                  "raw": "{{baseUrl}}/Management/Applications?$top=<integer>&$skip=<integer>&$filter=<string>",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "Management",
+                    "Applications"
+                  ],
+                  "query": [
+                    {
+                      "key": "$top",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "$skip",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "$filter",
+                      "value": "<string>"
+                    }
+                  ]
+                },
+                "description": "Retrieve all developer applications registered in the API portal."
+              },
+              "response": [
+                {
+                  "id": "8db54267-042b-426f-a43d-86dff14eeb87",
+                  "name": "List of applications",
+                  "originalRequest": {
+                    "method": "GET",
+                    "header": [
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      },
+                      {
+                        "description": "Added as a part of security scheme: oauth2",
+                        "key": "Authorization",
+                        "value": "<token>"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{baseUrl}}/Management/Applications?$top=<integer>&$skip=<integer>&$filter=<string>",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "Management",
+                        "Applications"
+                      ],
+                      "query": [
+                        {
+                          "key": "$top",
+                          "value": "<integer>"
+                        },
+                        {
+                          "key": "$skip",
+                          "value": "<integer>"
+                        },
+                        {
+                          "key": "$filter",
+                          "value": "<string>"
+                        }
+                      ]
+                    }
+                  },
+                  "status": "OK",
+                  "code": 200,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "{\n  \"d\": {\n    \"results\": [\n      {\n        \"id\": \"<string>\",\n        \"name\": \"<string>\",\n        \"title\": \"<string>\",\n        \"description\": \"<string>\",\n        \"status\": \"APPROVED\",\n        \"developerEmail\": \"<string>\",\n        \"apiProducts\": [\n          \"<string>\",\n          \"<string>\"\n        ],\n        \"createdAt\": \"<dateTime>\"\n      },\n      {\n        \"id\": \"<string>\",\n        \"name\": \"<string>\",\n        \"title\": \"<string>\",\n        \"description\": \"<string>\",\n        \"status\": \"PENDING\",\n        \"developerEmail\": \"<string>\",\n        \"apiProducts\": [\n          \"<string>\",\n          \"<string>\"\n        ],\n        \"createdAt\": \"<dateTime>\"\n      }\n    ]\n  }\n}",
+                  "createdAt": "2026-06-05T15:16:19.000Z",
+                  "updatedAt": "2026-06-05T15:16:19.000Z",
+                  "uid": "35240-8db54267-042b-426f-a43d-86dff14eeb87"
+                },
+                {
+                  "id": "db815ad6-b899-4628-826d-037e8a9758c0",
+                  "name": "Unauthorized",
+                  "originalRequest": {
+                    "method": "GET",
+                    "header": [
+                      {
+                        "description": "Added as a part of security scheme: oauth2",
+                        "key": "Authorization",
+                        "value": "<token>"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{baseUrl}}/Management/Applications?$top=<integer>&$skip=<integer>&$filter=<string>",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "Management",
+                        "Applications"
+                      ],
+                      "query": [
+                        {
+                          "key": "$top",
+                          "value": "<integer>"
+                        },
+                        {
+                          "key": "$skip",
+                          "value": "<integer>"
+                        },
+                        {
+                          "key": "$filter",
+                          "value": "<string>"
+                        }
+                      ]
+                    }
+                  },
+                  "status": "Unauthorized",
+                  "code": 401,
+                  "_postman_previewlanguage": "text",
+                  "header": [],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": null,
+                  "createdAt": "2026-06-05T15:16:19.000Z",
+                  "updatedAt": "2026-06-05T15:16:19.000Z",
+                  "uid": "35240-db815ad6-b899-4628-826d-037e8a9758c0"
+                }
+              ],
+              "createdAt": "2026-06-05T15:16:19.000Z",
+              "updatedAt": "2026-06-05T15:16:19.000Z",
+              "uid": "35240-37cd9ccc-0caf-4f0a-b40a-91992dbc03ca"
+            }
+          ],
+          "id": "85e9aa20-a9de-4925-90cf-3b0783b45301",
+          "createdAt": "2026-06-05T15:16:19.000Z",
+          "updatedAt": "2026-06-05T15:16:19.000Z",
+          "uid": "35240-85e9aa20-a9de-4925-90cf-3b0783b45301"
+        },
+        {
+          "name": "Applications('{id}')",
+          "item": [
+            {
+              "name": "Get Application",
+              "id": "ee96aeaf-0fa9-44a8-addb-e5ea35008783",
+              "protocolProfileBehavior": {
+                "disableBodyPruning": true
+              },
+              "request": {
+                "method": "GET",
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "url": {
+                  "raw": "{{baseUrl}}/Management/Applications('{{id}}')",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "Management",
+                    "Applications('{{id}}')"
+                  ]
+                },
+                "description": "Retrieve a specific developer application by ID."
+              },
+              "response": [
+                {
+                  "id": "b82274c4-c45f-4e4e-a620-8aaae3a31ecd",
+                  "name": "Application details",
+                  "originalRequest": {
+                    "method": "GET",
+                    "header": [
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      },
+                      {
+                        "description": "Added as a part of security scheme: oauth2",
+                        "key": "Authorization",
+                        "value": "<token>"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{baseUrl}}/Management/Applications('{{id}}')",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "Management",
+                        "Applications('{{id}}')"
+                      ]
+                    }
+                  },
+                  "status": "OK",
+                  "code": 200,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "{\n  \"d\": {\n    \"id\": \"<string>\",\n    \"name\": \"<string>\",\n    \"title\": \"<string>\",\n    \"description\": \"<string>\",\n    \"status\": \"REJECTED\",\n    \"developerEmail\": \"<string>\",\n    \"apiProducts\": [\n      \"<string>\",\n      \"<string>\"\n    ],\n    \"createdAt\": \"<dateTime>\"\n  }\n}",
+                  "createdAt": "2026-06-05T15:16:19.000Z",
+                  "updatedAt": "2026-06-05T15:16:19.000Z",
+                  "uid": "35240-b82274c4-c45f-4e4e-a620-8aaae3a31ecd"
+                },
+                {
+                  "id": "f645366a-a5d3-470d-b655-f811a5f5dc72",
+                  "name": "Application not found",
+                  "originalRequest": {
+                    "method": "GET",
+                    "header": [
+                      {
+                        "description": "Added as a part of security scheme: oauth2",
+                        "key": "Authorization",
+                        "value": "<token>"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{baseUrl}}/Management/Applications('{{id}}')",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "Management",
+                        "Applications('{{id}}')"
+                      ]
+                    }
+                  },
+                  "status": "Not Found",
+                  "code": 404,
+                  "_postman_previewlanguage": "text",
+                  "header": [],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": null,
+                  "createdAt": "2026-06-05T15:16:19.000Z",
+                  "updatedAt": "2026-06-05T15:16:19.000Z",
+                  "uid": "35240-f645366a-a5d3-470d-b655-f811a5f5dc72"
+                }
+              ],
+              "createdAt": "2026-06-05T15:16:19.000Z",
+              "updatedAt": "2026-06-05T15:16:19.000Z",
+              "uid": "35240-ee96aeaf-0fa9-44a8-addb-e5ea35008783"
+            }
+          ],
+          "id": "7756684e-f93a-4ed7-b0a2-bf7f68a917ea",
+          "createdAt": "2026-06-05T15:16:19.000Z",
+          "updatedAt": "2026-06-05T15:16:19.000Z",
+          "uid": "35240-7756684e-f93a-4ed7-b0a2-bf7f68a917ea"
+        },
+        {
+          "name": "Developers",
+          "item": [
+            {
+              "name": "List Developers",
+              "id": "b988dad0-4d98-4706-990b-7276944df72e",
+              "protocolProfileBehavior": {
+                "disableBodyPruning": true
+              },
+              "request": {
+                "method": "GET",
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "url": {
+                  "raw": "{{baseUrl}}/Management/Developers?$top=<integer>&$skip=<integer>",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "Management",
+                    "Developers"
+                  ],
+                  "query": [
+                    {
+                      "key": "$top",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "$skip",
+                      "value": "<integer>"
+                    }
+                  ]
+                },
+                "description": "Retrieve all developers registered in the API portal."
+              },
+              "response": [
+                {
+                  "id": "b236e622-af1d-4179-8374-37605b437fc3",
+                  "name": "List of developers",
+                  "originalRequest": {
+                    "method": "GET",
+                    "header": [
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      },
+                      {
+                        "description": "Added as a part of security scheme: oauth2",
+                        "key": "Authorization",
+                        "value": "<token>"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{baseUrl}}/Management/Developers?$top=<integer>&$skip=<integer>",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "Management",
+                        "Developers"
+                      ],
+                      "query": [
+                        {
+                          "key": "$top",
+                          "value": "<integer>"
+                        },
+                        {
+                          "key": "$skip",
+                          "value": "<integer>"
+                        }
+                      ]
+                    }
+                  },
+                  "status": "OK",
+                  "code": 200,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "{\n  \"d\": {\n    \"results\": [\n      {\n        \"email\": \"<string>\",\n        \"firstName\": \"<string>\",\n        \"lastName\": \"<string>\",\n        \"status\": \"ACTIVE\",\n        \"createdAt\": \"<dateTime>\",\n        \"updatedAt\": \"<dateTime>\"\n      },\n      {\n        \"email\": \"<string>\",\n        \"firstName\": \"<string>\",\n        \"lastName\": \"<string>\",\n        \"status\": \"INACTIVE\",\n        \"createdAt\": \"<dateTime>\",\n        \"updatedAt\": \"<dateTime>\"\n      }\n    ]\n  }\n}",
+                  "createdAt": "2026-06-05T15:16:19.000Z",
+                  "updatedAt": "2026-06-05T15:16:19.000Z",
+                  "uid": "35240-b236e622-af1d-4179-8374-37605b437fc3"
+                },
+                {
+                  "id": "e98edfa0-13e0-4c15-bb42-c0bba54061a4",
+                  "name": "Unauthorized",
+                  "originalRequest": {
+                    "method": "GET",
+                    "header": [
+                      {
+                        "description": "Added as a part of security scheme: oauth2",
+                        "key": "Authorization",
+                        "value": "<token>"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{baseUrl}}/Management/Developers?$top=<integer>&$skip=<integer>",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "Management",
+                        "Developers"
+                      ],
+                      "query": [
+                        {
+                          "key": "$top",
+                          "value": "<integer>"
+                        },
+                        {
+                          "key": "$skip",
+                          "value": "<integer>"
+                        }
+                      ]
+                    }
+                  },
+                  "status": "Unauthorized",
+                  "code": 401,
+                  "_postman_previewlanguage": "text",
+                  "header": [],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": null,
+                  "createdAt": "2026-06-05T15:16:19.000Z",
+                  "updatedAt": "2026-06-05T15:16:19.000Z",
+                  "uid": "35240-e98edfa0-13e0-4c15-bb42-c0bba54061a4"
+                }
+              ],
+              "createdAt": "2026-06-05T15:16:19.000Z",
+              "updatedAt": "2026-06-05T15:16:19.000Z",
+              "uid": "35240-b988dad0-4d98-4706-990b-7276944df72e"
+            }
+          ],
+          "id": "217f5d7e-fbb9-40fa-9dda-74d7876e0f01",
+          "createdAt": "2026-06-05T15:16:19.000Z",
+          "updatedAt": "2026-06-05T15:16:19.000Z",
+          "uid": "35240-217f5d7e-fbb9-40fa-9dda-74d7876e0f01"
+        }
+      ],
+      "id": "9eaf2157-cf33-46a2-aa4d-601afbbab53a",
+      "createdAt": "2026-06-05T15:16:19.000Z",
+      "updatedAt": "2026-06-05T15:16:19.000Z",
+      "uid": "35240-9eaf2157-cf33-46a2-aa4d-601afbbab53a"
+    },
+    {
+      "name": "KeyValueMaps",
+      "item": [
+        {
+          "name": "List Key Value Maps",
+          "id": "ab0acd14-63b8-4bda-b2ad-ded4c55ffd9f",
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          },
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "url": {
+              "raw": "{{baseUrl}}/KeyValueMaps",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "KeyValueMaps"
+              ]
+            },
+            "description": "Retrieve all key-value maps configured in the API Management tenant."
+          },
+          "response": [
+            {
+              "id": "b2803fcb-23e9-4c35-8bf8-e27c3731b8be",
+              "name": "List of key-value maps",
+              "originalRequest": {
+                "method": "GET",
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  },
+                  {
+                    "description": "Added as a part of security scheme: oauth2",
+                    "key": "Authorization",
+                    "value": "<token>"
+                  }
+                ],
+                "url": {
+                  "raw": "{{baseUrl}}/KeyValueMaps",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "KeyValueMaps"
+                  ]
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "_postman_previewlanguage": "json",
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "cookie": [],
+              "responseTime": null,
+              "body": "{\n  \"d\": {\n    \"results\": [\n      {\n        \"name\": \"<string>\",\n        \"encrypted\": \"<boolean>\",\n        \"scope\": \"apiproxy\",\n        \"keyValuePairs\": [\n          {\n            \"key\": \"<string>\",\n            \"value\": \"<string>\"\n          },\n          {\n            \"key\": \"<string>\",\n            \"value\": \"<string>\"\n          }\n        ]\n      },\n      {\n        \"name\": \"<string>\",\n        \"encrypted\": \"<boolean>\",\n        \"scope\": \"environment\",\n        \"keyValuePairs\": [\n          {\n            \"key\": \"<string>\",\n            \"value\": \"<string>\"\n          },\n          {\n            \"key\": \"<string>\",\n            \"value\": \"<string>\"\n          }\n        ]\n      }\n    ]\n  }\n}",
+              "createdAt": "2026-06-05T15:16:19.000Z",
+              "updatedAt": "2026-06-05T15:16:19.000Z",
+              "uid": "35240-b2803fcb-23e9-4c35-8bf8-e27c3731b8be"
+            },
+            {
+              "id": "8ea143a1-0fd0-4983-b2f8-63a7bdf78744",
+              "name": "Unauthorized",
+              "originalRequest": {
+                "method": "GET",
+                "header": [
+                  {
+                    "description": "Added as a part of security scheme: oauth2",
+                    "key": "Authorization",
+                    "value": "<token>"
+                  }
+                ],
+                "url": {
+                  "raw": "{{baseUrl}}/KeyValueMaps",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "KeyValueMaps"
+                  ]
+                }
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "_postman_previewlanguage": "text",
+              "header": [],
+              "cookie": [],
+              "responseTime": null,
+              "body": null,
+              "createdAt": "2026-06-05T15:16:19.000Z",
+              "updatedAt": "2026-06-05T15:16:19.000Z",
+              "uid": "35240-8ea143a1-0fd0-4983-b2f8-63a7bdf78744"
+            }
+          ],
+          "createdAt": "2026-06-05T15:16:19.000Z",
+          "updatedAt": "2026-06-05T15:16:19.000Z",
+          "uid": "35240-ab0acd14-63b8-4bda-b2ad-ded4c55ffd9f"
+        },
+        {
+          "name": "Create Key Value Map",
+          "id": "24fc8049-6db0-48de-8ed9-f374da6f8847",
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          },
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"name\": \"<string>\",\n  \"encrypted\": \"<boolean>\",\n  \"scope\": \"organization\",\n  \"keyValuePairs\": [\n    {\n      \"key\": \"<string>\",\n      \"value\": \"<string>\"\n    },\n    {\n      \"key\": \"<string>\",\n      \"value\": \"<string>\"\n    }\n  ]\n}",
+              "options": {
+                "raw": {
+                  "headerFamily": "json",
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "{{baseUrl}}/KeyValueMaps",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "KeyValueMaps"
+              ]
+            },
+            "description": "Create a new key-value map for storing configuration data."
+          },
+          "response": [
+            {
+              "id": "877eb867-e6ac-4512-bcdb-8c29304ef930",
+              "name": "Key-value map created",
+              "originalRequest": {
+                "method": "POST",
+                "header": [
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json"
+                  },
+                  {
+                    "description": "Added as a part of security scheme: oauth2",
+                    "key": "Authorization",
+                    "value": "<token>"
+                  }
+                ],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"name\": \"<string>\",\n  \"encrypted\": \"<boolean>\",\n  \"scope\": \"organization\",\n  \"keyValuePairs\": [\n    {\n      \"key\": \"<string>\",\n      \"value\": \"<string>\"\n    },\n    {\n      \"key\": \"<string>\",\n      \"value\": \"<string>\"\n    }\n  ]\n}",
+                  "options": {
+                    "raw": {
+                      "headerFamily": "json",
+                      "language": "json"
+                    }
+                  }
+                },
+                "url": {
+                  "raw": "{{baseUrl}}/KeyValueMaps",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "KeyValueMaps"
+                  ]
+                }
+              },
+              "status": "Created",
+              "code": 201,
+              "_postman_previewlanguage": "text",
+              "header": [],
+              "cookie": [],
+              "responseTime": null,
+              "body": null,
+              "createdAt": "2026-06-05T15:16:19.000Z",
+              "updatedAt": "2026-06-05T15:16:19.000Z",
+              "uid": "35240-877eb867-e6ac-4512-bcdb-8c29304ef930"
+            },
+            {
+              "id": "d86455e4-5bbb-4dc5-a4b3-e59c6206ac09",
+              "name": "Bad request",
+              "originalRequest": {
+                "method": "POST",
+                "header": [
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json"
+                  },
+                  {
+                    "description": "Added as a part of security scheme: oauth2",
+                    "key": "Authorization",
+                    "value": "<token>"
+                  }
+                ],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"name\": \"<string>\",\n  \"encrypted\": \"<boolean>\",\n  \"scope\": \"organization\",\n  \"keyValuePairs\": [\n    {\n      \"key\": \"<string>\",\n      \"value\": \"<string>\"\n    },\n    {\n      \"key\": \"<string>\",\n      \"value\": \"<string>\"\n    }\n  ]\n}",
+                  "options": {
+                    "raw": {
+                      "headerFamily": "json",
+                      "language": "json"
+                    }
+                  }
+                },
+                "url": {
+                  "raw": "{{baseUrl}}/KeyValueMaps",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "KeyValueMaps"
+                  ]
+                }
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "_postman_previewlanguage": "text",
+              "header": [],
+              "cookie": [],
+              "responseTime": null,
+              "body": null,
+              "createdAt": "2026-06-05T15:16:19.000Z",
+              "updatedAt": "2026-06-05T15:16:19.000Z",
+              "uid": "35240-d86455e4-5bbb-4dc5-a4b3-e59c6206ac09"
+            }
+          ],
+          "createdAt": "2026-06-05T15:16:19.000Z",
+          "updatedAt": "2026-06-05T15:16:19.000Z",
+          "uid": "35240-24fc8049-6db0-48de-8ed9-f374da6f8847"
+        }
+      ],
+      "id": "5bccdbde-aa9d-4d06-bce6-1ead7be8be14",
+      "createdAt": "2026-06-05T15:16:19.000Z",
+      "updatedAt": "2026-06-05T15:16:19.000Z",
+      "uid": "35240-5bccdbde-aa9d-4d06-bce6-1ead7be8be14"
+    }
+  ],
+  "auth": {
+    "type": "oauth2",
+    "oauth2": [
+      {
+        "key": "accessTokenUrl",
+        "value": "https://{tenant}.authentication.sap.hana.ondemand.com/oauth/token",
+        "type": "string"
+      },
+      {
+        "key": "grant_type",
+        "value": "client_credentials",
+        "type": "string"
+      }
+    ]
+  },
+  "variable": [
+    {
+      "key": "api-portal-host",
+      "value": "my-tenant.apimanagement.sap.hana.ondemand.com"
+    },
+    {
+      "key": "baseUrl",
+      "value": "https://{{api-portal-host}}/apiportal/api/1.0"
+    },
+    {
+      "key": "name",
+      "value": "<string>"
+    },
+    {
+      "key": "id",
+      "value": "<string>"
+    }
+  ]
+}

@@ -1,0 +1,2052 @@
+{
+  "info": {
+    "_postman_id": "f0ef0d5b-bffb-47ff-b1fb-3396e51af9a3",
+    "name": "SAP Cloud Integration API",
+    "description": "The SAP Cloud Integration API (Process Integration Runtime API) provides OData V2 and REST endpoints for deploying, monitoring, and managing integration flows, artifacts, packages, and runtime operations on SAP Integration Suite hosted on SAP Business Technology Platform. It supports message processing log retrieval, integration package lifecycle management, artifact deployment, and service endpoint discovery.\n\nContact Support:\n Name: SAP Support",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "createdAt": "2026-06-05T15:16:17.000Z",
+    "updatedAt": "2026-06-05T15:16:17.000Z",
+    "lastUpdatedBy": "35240",
+    "uid": "35240-f0ef0d5b-bffb-47ff-b1fb-3396e51af9a3"
+  },
+  "item": [
+    {
+      "name": "IntegrationPackages",
+      "item": [
+        {
+          "name": "List Integration Packages",
+          "id": "0d9e6dac-d752-4e94-8e27-40daa0f1b85b",
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          },
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "url": {
+              "raw": "{{baseUrl}}/IntegrationPackages?$top=<integer>&$skip=<integer>&$filter=<string>&$orderby=<string>",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "IntegrationPackages"
+              ],
+              "query": [
+                {
+                  "description": "Maximum number of records to return",
+                  "key": "$top",
+                  "value": "<integer>"
+                },
+                {
+                  "description": "Number of records to skip for pagination",
+                  "key": "$skip",
+                  "value": "<integer>"
+                },
+                {
+                  "description": "OData filter expression",
+                  "key": "$filter",
+                  "value": "<string>"
+                },
+                {
+                  "description": "OData orderby expression",
+                  "key": "$orderby",
+                  "value": "<string>"
+                }
+              ]
+            },
+            "description": "Retrieve all integration packages available in the tenant."
+          },
+          "response": [
+            {
+              "id": "7bbd02d3-4a09-499b-acab-1a7300c20da9",
+              "name": "List of integration packages",
+              "originalRequest": {
+                "method": "GET",
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  },
+                  {
+                    "description": "Added as a part of security scheme: oauth2",
+                    "key": "Authorization",
+                    "value": "<token>"
+                  }
+                ],
+                "url": {
+                  "raw": "{{baseUrl}}/IntegrationPackages?$top=<integer>&$skip=<integer>&$filter=<string>&$orderby=<string>",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "IntegrationPackages"
+                  ],
+                  "query": [
+                    {
+                      "description": "Maximum number of records to return",
+                      "key": "$top",
+                      "value": "<integer>"
+                    },
+                    {
+                      "description": "Number of records to skip for pagination",
+                      "key": "$skip",
+                      "value": "<integer>"
+                    },
+                    {
+                      "description": "OData filter expression",
+                      "key": "$filter",
+                      "value": "<string>"
+                    },
+                    {
+                      "description": "OData orderby expression",
+                      "key": "$orderby",
+                      "value": "<string>"
+                    }
+                  ]
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "_postman_previewlanguage": "json",
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "cookie": [],
+              "responseTime": null,
+              "body": "{\n  \"d\": {\n    \"results\": [\n      {\n        \"Id\": \"<string>\",\n        \"Name\": \"<string>\",\n        \"Description\": \"<string>\",\n        \"ShortText\": \"<string>\",\n        \"Version\": \"<string>\",\n        \"Vendor\": \"<string>\",\n        \"Mode\": \"EDIT_ALLOWED\",\n        \"SupportedPlatform\": \"<string>\",\n        \"CreationDate\": \"<string>\",\n        \"ModifiedDate\": \"<string>\"\n      },\n      {\n        \"Id\": \"<string>\",\n        \"Name\": \"<string>\",\n        \"Description\": \"<string>\",\n        \"ShortText\": \"<string>\",\n        \"Version\": \"<string>\",\n        \"Vendor\": \"<string>\",\n        \"Mode\": \"EDIT_ALLOWED\",\n        \"SupportedPlatform\": \"<string>\",\n        \"CreationDate\": \"<string>\",\n        \"ModifiedDate\": \"<string>\"\n      }\n    ]\n  }\n}",
+              "createdAt": "2026-06-05T15:16:17.000Z",
+              "updatedAt": "2026-06-05T15:16:17.000Z",
+              "uid": "35240-7bbd02d3-4a09-499b-acab-1a7300c20da9"
+            },
+            {
+              "id": "5451133d-956a-4761-a08d-0168f35e347f",
+              "name": "Unauthorized",
+              "originalRequest": {
+                "method": "GET",
+                "header": [
+                  {
+                    "description": "Added as a part of security scheme: oauth2",
+                    "key": "Authorization",
+                    "value": "<token>"
+                  }
+                ],
+                "url": {
+                  "raw": "{{baseUrl}}/IntegrationPackages?$top=<integer>&$skip=<integer>&$filter=<string>&$orderby=<string>",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "IntegrationPackages"
+                  ],
+                  "query": [
+                    {
+                      "description": "Maximum number of records to return",
+                      "key": "$top",
+                      "value": "<integer>"
+                    },
+                    {
+                      "description": "Number of records to skip for pagination",
+                      "key": "$skip",
+                      "value": "<integer>"
+                    },
+                    {
+                      "description": "OData filter expression",
+                      "key": "$filter",
+                      "value": "<string>"
+                    },
+                    {
+                      "description": "OData orderby expression",
+                      "key": "$orderby",
+                      "value": "<string>"
+                    }
+                  ]
+                }
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "_postman_previewlanguage": "text",
+              "header": [],
+              "cookie": [],
+              "responseTime": null,
+              "body": null,
+              "createdAt": "2026-06-05T15:16:17.000Z",
+              "updatedAt": "2026-06-05T15:16:17.000Z",
+              "uid": "35240-5451133d-956a-4761-a08d-0168f35e347f"
+            },
+            {
+              "id": "90e2ffa7-e052-49fa-8b69-e57ab7ef96cf",
+              "name": "Forbidden",
+              "originalRequest": {
+                "method": "GET",
+                "header": [
+                  {
+                    "description": "Added as a part of security scheme: oauth2",
+                    "key": "Authorization",
+                    "value": "<token>"
+                  }
+                ],
+                "url": {
+                  "raw": "{{baseUrl}}/IntegrationPackages?$top=<integer>&$skip=<integer>&$filter=<string>&$orderby=<string>",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "IntegrationPackages"
+                  ],
+                  "query": [
+                    {
+                      "description": "Maximum number of records to return",
+                      "key": "$top",
+                      "value": "<integer>"
+                    },
+                    {
+                      "description": "Number of records to skip for pagination",
+                      "key": "$skip",
+                      "value": "<integer>"
+                    },
+                    {
+                      "description": "OData filter expression",
+                      "key": "$filter",
+                      "value": "<string>"
+                    },
+                    {
+                      "description": "OData orderby expression",
+                      "key": "$orderby",
+                      "value": "<string>"
+                    }
+                  ]
+                }
+              },
+              "status": "Forbidden",
+              "code": 403,
+              "_postman_previewlanguage": "text",
+              "header": [],
+              "cookie": [],
+              "responseTime": null,
+              "body": null,
+              "createdAt": "2026-06-05T15:16:17.000Z",
+              "updatedAt": "2026-06-05T15:16:17.000Z",
+              "uid": "35240-90e2ffa7-e052-49fa-8b69-e57ab7ef96cf"
+            }
+          ],
+          "createdAt": "2026-06-05T15:16:17.000Z",
+          "updatedAt": "2026-06-05T15:16:17.000Z",
+          "uid": "35240-0d9e6dac-d752-4e94-8e27-40daa0f1b85b"
+        }
+      ],
+      "id": "dde8dca6-eace-4d0f-9e8f-6809d50f5992",
+      "createdAt": "2026-06-05T15:16:17.000Z",
+      "updatedAt": "2026-06-05T15:16:17.000Z",
+      "uid": "35240-dde8dca6-eace-4d0f-9e8f-6809d50f5992"
+    },
+    {
+      "name": "IntegrationPackages('{Id}')",
+      "item": [
+        {
+          "name": "IntegrationDesigntimeArtifacts",
+          "item": [
+            {
+              "name": "List Design-Time Artifacts in Package",
+              "id": "6b265b13-d67f-49b3-834e-5fe8e4bacffb",
+              "protocolProfileBehavior": {
+                "disableBodyPruning": true
+              },
+              "request": {
+                "method": "GET",
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "url": {
+                  "raw": "{{baseUrl}}/IntegrationPackages('{{Id}}')/IntegrationDesigntimeArtifacts",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "IntegrationPackages('{{Id}}')",
+                    "IntegrationDesigntimeArtifacts"
+                  ]
+                },
+                "description": "Retrieve all design-time integration artifacts within a package."
+              },
+              "response": [
+                {
+                  "id": "cf3b0803-a867-4ad8-a330-ac658b2a13e1",
+                  "name": "List of design-time artifacts",
+                  "originalRequest": {
+                    "method": "GET",
+                    "header": [
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      },
+                      {
+                        "description": "Added as a part of security scheme: oauth2",
+                        "key": "Authorization",
+                        "value": "<token>"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{baseUrl}}/IntegrationPackages('{{Id}}')/IntegrationDesigntimeArtifacts",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "IntegrationPackages('{{Id}}')",
+                        "IntegrationDesigntimeArtifacts"
+                      ]
+                    }
+                  },
+                  "status": "OK",
+                  "code": 200,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "{\n  \"d\": {\n    \"results\": [\n      {\n        \"Id\": \"<string>\",\n        \"Version\": \"<string>\",\n        \"PackageId\": \"<string>\",\n        \"Name\": \"<string>\",\n        \"Description\": \"<string>\",\n        \"Type\": \"ODataApi\",\n        \"ModifiedBy\": \"<string>\",\n        \"ModifiedAt\": \"<string>\"\n      },\n      {\n        \"Id\": \"<string>\",\n        \"Version\": \"<string>\",\n        \"PackageId\": \"<string>\",\n        \"Name\": \"<string>\",\n        \"Description\": \"<string>\",\n        \"Type\": \"IFlow\",\n        \"ModifiedBy\": \"<string>\",\n        \"ModifiedAt\": \"<string>\"\n      }\n    ]\n  }\n}",
+                  "createdAt": "2026-06-05T15:16:17.000Z",
+                  "updatedAt": "2026-06-05T15:16:17.000Z",
+                  "uid": "35240-cf3b0803-a867-4ad8-a330-ac658b2a13e1"
+                },
+                {
+                  "id": "f6147978-b874-4a23-bbcf-728dc6ad1af1",
+                  "name": "Unauthorized",
+                  "originalRequest": {
+                    "method": "GET",
+                    "header": [
+                      {
+                        "description": "Added as a part of security scheme: oauth2",
+                        "key": "Authorization",
+                        "value": "<token>"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{baseUrl}}/IntegrationPackages('{{Id}}')/IntegrationDesigntimeArtifacts",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "IntegrationPackages('{{Id}}')",
+                        "IntegrationDesigntimeArtifacts"
+                      ]
+                    }
+                  },
+                  "status": "Unauthorized",
+                  "code": 401,
+                  "_postman_previewlanguage": "text",
+                  "header": [],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": null,
+                  "createdAt": "2026-06-05T15:16:17.000Z",
+                  "updatedAt": "2026-06-05T15:16:17.000Z",
+                  "uid": "35240-f6147978-b874-4a23-bbcf-728dc6ad1af1"
+                }
+              ],
+              "createdAt": "2026-06-05T15:16:17.000Z",
+              "updatedAt": "2026-06-05T15:16:17.000Z",
+              "uid": "35240-6b265b13-d67f-49b3-834e-5fe8e4bacffb"
+            }
+          ],
+          "id": "5c219818-db1f-4a6c-89f1-8fe295616f84",
+          "createdAt": "2026-06-05T15:16:17.000Z",
+          "updatedAt": "2026-06-05T15:16:17.000Z",
+          "uid": "35240-5c219818-db1f-4a6c-89f1-8fe295616f84"
+        },
+        {
+          "name": "Get Integration Package",
+          "id": "c64b3830-83a7-4bee-8e8a-ec8da1517f99",
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          },
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "url": {
+              "raw": "{{baseUrl}}/IntegrationPackages('{{Id}}')",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "IntegrationPackages('{{Id}}')"
+              ]
+            },
+            "description": "Retrieve a specific integration package by its ID."
+          },
+          "response": [
+            {
+              "id": "95503945-fdf7-45e9-bc5b-031ef7cd01ff",
+              "name": "Integration package details",
+              "originalRequest": {
+                "method": "GET",
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  },
+                  {
+                    "description": "Added as a part of security scheme: oauth2",
+                    "key": "Authorization",
+                    "value": "<token>"
+                  }
+                ],
+                "url": {
+                  "raw": "{{baseUrl}}/IntegrationPackages('{{Id}}')",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "IntegrationPackages('{{Id}}')"
+                  ]
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "_postman_previewlanguage": "json",
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "cookie": [],
+              "responseTime": null,
+              "body": "{\n  \"d\": {\n    \"Id\": \"<string>\",\n    \"Name\": \"<string>\",\n    \"Description\": \"<string>\",\n    \"ShortText\": \"<string>\",\n    \"Version\": \"<string>\",\n    \"Vendor\": \"<string>\",\n    \"Mode\": \"READONLY\",\n    \"SupportedPlatform\": \"<string>\",\n    \"CreationDate\": \"<string>\",\n    \"ModifiedDate\": \"<string>\"\n  }\n}",
+              "createdAt": "2026-06-05T15:16:17.000Z",
+              "updatedAt": "2026-06-05T15:16:17.000Z",
+              "uid": "35240-95503945-fdf7-45e9-bc5b-031ef7cd01ff"
+            },
+            {
+              "id": "6d6412dd-309d-46e3-94ea-48997884256b",
+              "name": "Unauthorized",
+              "originalRequest": {
+                "method": "GET",
+                "header": [
+                  {
+                    "description": "Added as a part of security scheme: oauth2",
+                    "key": "Authorization",
+                    "value": "<token>"
+                  }
+                ],
+                "url": {
+                  "raw": "{{baseUrl}}/IntegrationPackages('{{Id}}')",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "IntegrationPackages('{{Id}}')"
+                  ]
+                }
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "_postman_previewlanguage": "text",
+              "header": [],
+              "cookie": [],
+              "responseTime": null,
+              "body": null,
+              "createdAt": "2026-06-05T15:16:17.000Z",
+              "updatedAt": "2026-06-05T15:16:17.000Z",
+              "uid": "35240-6d6412dd-309d-46e3-94ea-48997884256b"
+            },
+            {
+              "id": "1fd736f8-f873-481d-a0af-78864357736d",
+              "name": "Package not found",
+              "originalRequest": {
+                "method": "GET",
+                "header": [
+                  {
+                    "description": "Added as a part of security scheme: oauth2",
+                    "key": "Authorization",
+                    "value": "<token>"
+                  }
+                ],
+                "url": {
+                  "raw": "{{baseUrl}}/IntegrationPackages('{{Id}}')",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "IntegrationPackages('{{Id}}')"
+                  ]
+                }
+              },
+              "status": "Not Found",
+              "code": 404,
+              "_postman_previewlanguage": "text",
+              "header": [],
+              "cookie": [],
+              "responseTime": null,
+              "body": null,
+              "createdAt": "2026-06-05T15:16:17.000Z",
+              "updatedAt": "2026-06-05T15:16:17.000Z",
+              "uid": "35240-1fd736f8-f873-481d-a0af-78864357736d"
+            }
+          ],
+          "createdAt": "2026-06-05T15:16:17.000Z",
+          "updatedAt": "2026-06-05T15:16:17.000Z",
+          "uid": "35240-c64b3830-83a7-4bee-8e8a-ec8da1517f99"
+        }
+      ],
+      "id": "1f8b3c1d-6286-4321-ad4f-1ec4704754c1",
+      "createdAt": "2026-06-05T15:16:17.000Z",
+      "updatedAt": "2026-06-05T15:16:17.000Z",
+      "uid": "35240-1f8b3c1d-6286-4321-ad4f-1ec4704754c1"
+    },
+    {
+      "name": "IntegrationDesigntimeArtifacts(Id='{Id}',Version='{Version}')",
+      "item": [
+        {
+          "name": "Get Design-Time Artifact",
+          "id": "136dac32-1a06-4a88-9e85-b077af5c7b99",
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          },
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "url": {
+              "raw": "{{baseUrl}}/IntegrationDesigntimeArtifacts(Id='{{Id}}',Version='{{Version}}')",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "IntegrationDesigntimeArtifacts(Id='{{Id}}',Version='{{Version}}')"
+              ]
+            },
+            "description": "Retrieve a specific design-time integration artifact."
+          },
+          "response": [
+            {
+              "id": "0a4a3fbe-c4a1-419f-88f5-d11a425dd2ab",
+              "name": "Design-time artifact details",
+              "originalRequest": {
+                "method": "GET",
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  },
+                  {
+                    "description": "Added as a part of security scheme: oauth2",
+                    "key": "Authorization",
+                    "value": "<token>"
+                  }
+                ],
+                "url": {
+                  "raw": "{{baseUrl}}/IntegrationDesigntimeArtifacts(Id='{{Id}}',Version='{{Version}}')",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "IntegrationDesigntimeArtifacts(Id='{{Id}}',Version='{{Version}}')"
+                  ]
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "_postman_previewlanguage": "json",
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "cookie": [],
+              "responseTime": null,
+              "body": "{\n  \"d\": {\n    \"Id\": \"<string>\",\n    \"Version\": \"<string>\",\n    \"PackageId\": \"<string>\",\n    \"Name\": \"<string>\",\n    \"Description\": \"<string>\",\n    \"Type\": \"SoapApi\",\n    \"ModifiedBy\": \"<string>\",\n    \"ModifiedAt\": \"<string>\"\n  }\n}",
+              "createdAt": "2026-06-05T15:16:17.000Z",
+              "updatedAt": "2026-06-05T15:16:17.000Z",
+              "uid": "35240-0a4a3fbe-c4a1-419f-88f5-d11a425dd2ab"
+            },
+            {
+              "id": "fbe9d47b-936b-4b99-abc5-6f9b407a6815",
+              "name": "Unauthorized",
+              "originalRequest": {
+                "method": "GET",
+                "header": [
+                  {
+                    "description": "Added as a part of security scheme: oauth2",
+                    "key": "Authorization",
+                    "value": "<token>"
+                  }
+                ],
+                "url": {
+                  "raw": "{{baseUrl}}/IntegrationDesigntimeArtifacts(Id='{{Id}}',Version='{{Version}}')",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "IntegrationDesigntimeArtifacts(Id='{{Id}}',Version='{{Version}}')"
+                  ]
+                }
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "_postman_previewlanguage": "text",
+              "header": [],
+              "cookie": [],
+              "responseTime": null,
+              "body": null,
+              "createdAt": "2026-06-05T15:16:17.000Z",
+              "updatedAt": "2026-06-05T15:16:17.000Z",
+              "uid": "35240-fbe9d47b-936b-4b99-abc5-6f9b407a6815"
+            },
+            {
+              "id": "bf002c3f-8f2c-4913-8816-fedb98ee540d",
+              "name": "Artifact not found",
+              "originalRequest": {
+                "method": "GET",
+                "header": [
+                  {
+                    "description": "Added as a part of security scheme: oauth2",
+                    "key": "Authorization",
+                    "value": "<token>"
+                  }
+                ],
+                "url": {
+                  "raw": "{{baseUrl}}/IntegrationDesigntimeArtifacts(Id='{{Id}}',Version='{{Version}}')",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "IntegrationDesigntimeArtifacts(Id='{{Id}}',Version='{{Version}}')"
+                  ]
+                }
+              },
+              "status": "Not Found",
+              "code": 404,
+              "_postman_previewlanguage": "text",
+              "header": [],
+              "cookie": [],
+              "responseTime": null,
+              "body": null,
+              "createdAt": "2026-06-05T15:16:17.000Z",
+              "updatedAt": "2026-06-05T15:16:17.000Z",
+              "uid": "35240-bf002c3f-8f2c-4913-8816-fedb98ee540d"
+            }
+          ],
+          "createdAt": "2026-06-05T15:16:17.000Z",
+          "updatedAt": "2026-06-05T15:16:17.000Z",
+          "uid": "35240-136dac32-1a06-4a88-9e85-b077af5c7b99"
+        }
+      ],
+      "id": "686fa575-002e-40d4-a29a-8214ab055276",
+      "createdAt": "2026-06-05T15:16:17.000Z",
+      "updatedAt": "2026-06-05T15:16:17.000Z",
+      "uid": "35240-686fa575-002e-40d4-a29a-8214ab055276"
+    },
+    {
+      "name": "DeployIntegrationDesigntimeArtifact",
+      "item": [
+        {
+          "name": "Deploy Integration Flow",
+          "id": "28b5fbc5-0ac3-49be-bc5f-922fbc297800",
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          },
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "url": {
+              "raw": "{{baseUrl}}/DeployIntegrationDesigntimeArtifact?Id=<string>&Version=<string>",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "DeployIntegrationDesigntimeArtifact"
+              ],
+              "query": [
+                {
+                  "description": "(Required) Artifact identifier to deploy",
+                  "key": "Id",
+                  "value": "<string>"
+                },
+                {
+                  "description": "(Required) Artifact version to deploy",
+                  "key": "Version",
+                  "value": "<string>"
+                }
+              ]
+            },
+            "description": "Deploy a design-time integration artifact to the runtime. Triggers compilation and deployment of the integration flow."
+          },
+          "response": [
+            {
+              "id": "6551b4ea-0ebe-4321-bca1-d474673a192e",
+              "name": "Deployment accepted",
+              "originalRequest": {
+                "method": "POST",
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  },
+                  {
+                    "description": "Added as a part of security scheme: oauth2",
+                    "key": "Authorization",
+                    "value": "<token>"
+                  }
+                ],
+                "url": {
+                  "raw": "{{baseUrl}}/DeployIntegrationDesigntimeArtifact?Id=<string>&Version=<string>",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "DeployIntegrationDesigntimeArtifact"
+                  ],
+                  "query": [
+                    {
+                      "description": "(Required) Artifact identifier to deploy",
+                      "key": "Id",
+                      "value": "<string>"
+                    },
+                    {
+                      "description": "(Required) Artifact version to deploy",
+                      "key": "Version",
+                      "value": "<string>"
+                    }
+                  ]
+                }
+              },
+              "status": "Accepted",
+              "code": 202,
+              "_postman_previewlanguage": "json",
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "cookie": [],
+              "responseTime": null,
+              "body": "{\n  \"d\": {\n    \"TaskId\": \"<string>\"\n  }\n}",
+              "createdAt": "2026-06-05T15:16:17.000Z",
+              "updatedAt": "2026-06-05T15:16:17.000Z",
+              "uid": "35240-6551b4ea-0ebe-4321-bca1-d474673a192e"
+            },
+            {
+              "id": "d36e7ba1-b92d-402b-a8be-c25b55fc6e04",
+              "name": "Bad request",
+              "originalRequest": {
+                "method": "POST",
+                "header": [
+                  {
+                    "description": "Added as a part of security scheme: oauth2",
+                    "key": "Authorization",
+                    "value": "<token>"
+                  }
+                ],
+                "url": {
+                  "raw": "{{baseUrl}}/DeployIntegrationDesigntimeArtifact?Id=<string>&Version=<string>",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "DeployIntegrationDesigntimeArtifact"
+                  ],
+                  "query": [
+                    {
+                      "description": "(Required) Artifact identifier to deploy",
+                      "key": "Id",
+                      "value": "<string>"
+                    },
+                    {
+                      "description": "(Required) Artifact version to deploy",
+                      "key": "Version",
+                      "value": "<string>"
+                    }
+                  ]
+                }
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "_postman_previewlanguage": "text",
+              "header": [],
+              "cookie": [],
+              "responseTime": null,
+              "body": null,
+              "createdAt": "2026-06-05T15:16:17.000Z",
+              "updatedAt": "2026-06-05T15:16:17.000Z",
+              "uid": "35240-d36e7ba1-b92d-402b-a8be-c25b55fc6e04"
+            },
+            {
+              "id": "fa9c350b-d208-4764-bcc2-e268fea59a04",
+              "name": "Unauthorized",
+              "originalRequest": {
+                "method": "POST",
+                "header": [
+                  {
+                    "description": "Added as a part of security scheme: oauth2",
+                    "key": "Authorization",
+                    "value": "<token>"
+                  }
+                ],
+                "url": {
+                  "raw": "{{baseUrl}}/DeployIntegrationDesigntimeArtifact?Id=<string>&Version=<string>",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "DeployIntegrationDesigntimeArtifact"
+                  ],
+                  "query": [
+                    {
+                      "description": "(Required) Artifact identifier to deploy",
+                      "key": "Id",
+                      "value": "<string>"
+                    },
+                    {
+                      "description": "(Required) Artifact version to deploy",
+                      "key": "Version",
+                      "value": "<string>"
+                    }
+                  ]
+                }
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "_postman_previewlanguage": "text",
+              "header": [],
+              "cookie": [],
+              "responseTime": null,
+              "body": null,
+              "createdAt": "2026-06-05T15:16:17.000Z",
+              "updatedAt": "2026-06-05T15:16:17.000Z",
+              "uid": "35240-fa9c350b-d208-4764-bcc2-e268fea59a04"
+            }
+          ],
+          "createdAt": "2026-06-05T15:16:17.000Z",
+          "updatedAt": "2026-06-05T15:16:17.000Z",
+          "uid": "35240-28b5fbc5-0ac3-49be-bc5f-922fbc297800"
+        }
+      ],
+      "id": "e769e2cc-725d-4db3-9463-f0c98b6c2b1a",
+      "createdAt": "2026-06-05T15:16:17.000Z",
+      "updatedAt": "2026-06-05T15:16:17.000Z",
+      "uid": "35240-e769e2cc-725d-4db3-9463-f0c98b6c2b1a"
+    },
+    {
+      "name": "IntegrationRuntimeArtifacts",
+      "item": [
+        {
+          "name": "List Runtime Artifacts",
+          "id": "b2fa0c26-0390-4078-ba7f-dbf5ab92e691",
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          },
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "url": {
+              "raw": "{{baseUrl}}/IntegrationRuntimeArtifacts?$filter=<string>&$top=<integer>&$skip=<integer>",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "IntegrationRuntimeArtifacts"
+              ],
+              "query": [
+                {
+                  "description": "OData filter expression",
+                  "key": "$filter",
+                  "value": "<string>"
+                },
+                {
+                  "key": "$top",
+                  "value": "<integer>"
+                },
+                {
+                  "key": "$skip",
+                  "value": "<integer>"
+                }
+              ]
+            },
+            "description": "Retrieve all currently deployed integration artifacts in the runtime."
+          },
+          "response": [
+            {
+              "id": "7be29d38-8758-4e2a-947e-b181f9a20a4a",
+              "name": "List of runtime artifacts",
+              "originalRequest": {
+                "method": "GET",
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  },
+                  {
+                    "description": "Added as a part of security scheme: oauth2",
+                    "key": "Authorization",
+                    "value": "<token>"
+                  }
+                ],
+                "url": {
+                  "raw": "{{baseUrl}}/IntegrationRuntimeArtifacts?$filter=<string>&$top=<integer>&$skip=<integer>",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "IntegrationRuntimeArtifacts"
+                  ],
+                  "query": [
+                    {
+                      "description": "OData filter expression",
+                      "key": "$filter",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "$top",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "$skip",
+                      "value": "<integer>"
+                    }
+                  ]
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "_postman_previewlanguage": "json",
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "cookie": [],
+              "responseTime": null,
+              "body": "{\n  \"d\": {\n    \"results\": [\n      {\n        \"Id\": \"<string>\",\n        \"Version\": \"<string>\",\n        \"Name\": \"<string>\",\n        \"Type\": \"<string>\",\n        \"Status\": \"ERROR\",\n        \"DeployedBy\": \"<string>\",\n        \"DeployedOn\": \"<string>\",\n        \"ErrorInformation\": \"<string>\"\n      },\n      {\n        \"Id\": \"<string>\",\n        \"Version\": \"<string>\",\n        \"Name\": \"<string>\",\n        \"Type\": \"<string>\",\n        \"Status\": \"ERROR\",\n        \"DeployedBy\": \"<string>\",\n        \"DeployedOn\": \"<string>\",\n        \"ErrorInformation\": \"<string>\"\n      }\n    ]\n  }\n}",
+              "createdAt": "2026-06-05T15:16:17.000Z",
+              "updatedAt": "2026-06-05T15:16:17.000Z",
+              "uid": "35240-7be29d38-8758-4e2a-947e-b181f9a20a4a"
+            },
+            {
+              "id": "7a20947b-ad1d-4933-af13-b3e808ab8f46",
+              "name": "Unauthorized",
+              "originalRequest": {
+                "method": "GET",
+                "header": [
+                  {
+                    "description": "Added as a part of security scheme: oauth2",
+                    "key": "Authorization",
+                    "value": "<token>"
+                  }
+                ],
+                "url": {
+                  "raw": "{{baseUrl}}/IntegrationRuntimeArtifacts?$filter=<string>&$top=<integer>&$skip=<integer>",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "IntegrationRuntimeArtifacts"
+                  ],
+                  "query": [
+                    {
+                      "description": "OData filter expression",
+                      "key": "$filter",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "$top",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "$skip",
+                      "value": "<integer>"
+                    }
+                  ]
+                }
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "_postman_previewlanguage": "text",
+              "header": [],
+              "cookie": [],
+              "responseTime": null,
+              "body": null,
+              "createdAt": "2026-06-05T15:16:17.000Z",
+              "updatedAt": "2026-06-05T15:16:17.000Z",
+              "uid": "35240-7a20947b-ad1d-4933-af13-b3e808ab8f46"
+            }
+          ],
+          "createdAt": "2026-06-05T15:16:17.000Z",
+          "updatedAt": "2026-06-05T15:16:17.000Z",
+          "uid": "35240-b2fa0c26-0390-4078-ba7f-dbf5ab92e691"
+        }
+      ],
+      "id": "3e0d1694-2e5b-4d88-b07e-5d50451a5c40",
+      "createdAt": "2026-06-05T15:16:17.000Z",
+      "updatedAt": "2026-06-05T15:16:17.000Z",
+      "uid": "35240-3e0d1694-2e5b-4d88-b07e-5d50451a5c40"
+    },
+    {
+      "name": "IntegrationRuntimeArtifacts('{Id}')",
+      "item": [
+        {
+          "name": "Get Runtime Artifact",
+          "id": "3f3bde52-3926-4504-9cdd-9e4d965c89aa",
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          },
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "url": {
+              "raw": "{{baseUrl}}/IntegrationRuntimeArtifacts('{{Id}}')",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "IntegrationRuntimeArtifacts('{{Id}}')"
+              ]
+            },
+            "description": "Retrieve a specific deployed runtime artifact and its status."
+          },
+          "response": [
+            {
+              "id": "11acecdd-f2e4-44b5-a02a-435466079f6d",
+              "name": "Runtime artifact details",
+              "originalRequest": {
+                "method": "GET",
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  },
+                  {
+                    "description": "Added as a part of security scheme: oauth2",
+                    "key": "Authorization",
+                    "value": "<token>"
+                  }
+                ],
+                "url": {
+                  "raw": "{{baseUrl}}/IntegrationRuntimeArtifacts('{{Id}}')",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "IntegrationRuntimeArtifacts('{{Id}}')"
+                  ]
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "_postman_previewlanguage": "json",
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "cookie": [],
+              "responseTime": null,
+              "body": "{\n  \"d\": {\n    \"Id\": \"<string>\",\n    \"Version\": \"<string>\",\n    \"Name\": \"<string>\",\n    \"Type\": \"<string>\",\n    \"Status\": \"STOPPED\",\n    \"DeployedBy\": \"<string>\",\n    \"DeployedOn\": \"<string>\",\n    \"ErrorInformation\": \"<string>\"\n  }\n}",
+              "createdAt": "2026-06-05T15:16:17.000Z",
+              "updatedAt": "2026-06-05T15:16:17.000Z",
+              "uid": "35240-11acecdd-f2e4-44b5-a02a-435466079f6d"
+            },
+            {
+              "id": "8f6f0879-17f3-453d-8557-e58cbfb5ac9e",
+              "name": "Artifact not found",
+              "originalRequest": {
+                "method": "GET",
+                "header": [
+                  {
+                    "description": "Added as a part of security scheme: oauth2",
+                    "key": "Authorization",
+                    "value": "<token>"
+                  }
+                ],
+                "url": {
+                  "raw": "{{baseUrl}}/IntegrationRuntimeArtifacts('{{Id}}')",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "IntegrationRuntimeArtifacts('{{Id}}')"
+                  ]
+                }
+              },
+              "status": "Not Found",
+              "code": 404,
+              "_postman_previewlanguage": "text",
+              "header": [],
+              "cookie": [],
+              "responseTime": null,
+              "body": null,
+              "createdAt": "2026-06-05T15:16:17.000Z",
+              "updatedAt": "2026-06-05T15:16:17.000Z",
+              "uid": "35240-8f6f0879-17f3-453d-8557-e58cbfb5ac9e"
+            }
+          ],
+          "createdAt": "2026-06-05T15:16:17.000Z",
+          "updatedAt": "2026-06-05T15:16:17.000Z",
+          "uid": "35240-3f3bde52-3926-4504-9cdd-9e4d965c89aa"
+        },
+        {
+          "name": "Undeploy Runtime Artifact",
+          "id": "7d583164-9643-411f-8ffc-3202e256872a",
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          },
+          "request": {
+            "method": "DELETE",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}/IntegrationRuntimeArtifacts('{{Id}}')",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "IntegrationRuntimeArtifacts('{{Id}}')"
+              ]
+            },
+            "description": "Remove a deployed integration artifact from the runtime."
+          },
+          "response": [
+            {
+              "id": "c0bcde22-99d5-43d2-aa07-8e7de7a1d618",
+              "name": "Undeploy accepted",
+              "originalRequest": {
+                "method": "DELETE",
+                "header": [
+                  {
+                    "description": "Added as a part of security scheme: oauth2",
+                    "key": "Authorization",
+                    "value": "<token>"
+                  }
+                ],
+                "url": {
+                  "raw": "{{baseUrl}}/IntegrationRuntimeArtifacts('{{Id}}')",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "IntegrationRuntimeArtifacts('{{Id}}')"
+                  ]
+                }
+              },
+              "status": "Accepted",
+              "code": 202,
+              "_postman_previewlanguage": "text",
+              "header": [],
+              "cookie": [],
+              "responseTime": null,
+              "body": null,
+              "createdAt": "2026-06-05T15:16:17.000Z",
+              "updatedAt": "2026-06-05T15:16:17.000Z",
+              "uid": "35240-c0bcde22-99d5-43d2-aa07-8e7de7a1d618"
+            },
+            {
+              "id": "57070714-42cf-45e8-9052-81f5a5e2f279",
+              "name": "Unauthorized",
+              "originalRequest": {
+                "method": "DELETE",
+                "header": [
+                  {
+                    "description": "Added as a part of security scheme: oauth2",
+                    "key": "Authorization",
+                    "value": "<token>"
+                  }
+                ],
+                "url": {
+                  "raw": "{{baseUrl}}/IntegrationRuntimeArtifacts('{{Id}}')",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "IntegrationRuntimeArtifacts('{{Id}}')"
+                  ]
+                }
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "_postman_previewlanguage": "text",
+              "header": [],
+              "cookie": [],
+              "responseTime": null,
+              "body": null,
+              "createdAt": "2026-06-05T15:16:17.000Z",
+              "updatedAt": "2026-06-05T15:16:17.000Z",
+              "uid": "35240-57070714-42cf-45e8-9052-81f5a5e2f279"
+            },
+            {
+              "id": "f837e23a-97d7-41b9-aac7-8f66cc2aafbc",
+              "name": "Artifact not found",
+              "originalRequest": {
+                "method": "DELETE",
+                "header": [
+                  {
+                    "description": "Added as a part of security scheme: oauth2",
+                    "key": "Authorization",
+                    "value": "<token>"
+                  }
+                ],
+                "url": {
+                  "raw": "{{baseUrl}}/IntegrationRuntimeArtifacts('{{Id}}')",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "IntegrationRuntimeArtifacts('{{Id}}')"
+                  ]
+                }
+              },
+              "status": "Not Found",
+              "code": 404,
+              "_postman_previewlanguage": "text",
+              "header": [],
+              "cookie": [],
+              "responseTime": null,
+              "body": null,
+              "createdAt": "2026-06-05T15:16:17.000Z",
+              "updatedAt": "2026-06-05T15:16:17.000Z",
+              "uid": "35240-f837e23a-97d7-41b9-aac7-8f66cc2aafbc"
+            }
+          ],
+          "createdAt": "2026-06-05T15:16:17.000Z",
+          "updatedAt": "2026-06-05T15:16:17.000Z",
+          "uid": "35240-7d583164-9643-411f-8ffc-3202e256872a"
+        }
+      ],
+      "id": "83734f58-d731-48fb-ae9b-da88a6182c2b",
+      "createdAt": "2026-06-05T15:16:17.000Z",
+      "updatedAt": "2026-06-05T15:16:17.000Z",
+      "uid": "35240-83734f58-d731-48fb-ae9b-da88a6182c2b"
+    },
+    {
+      "name": "MessageProcessingLogs",
+      "item": [
+        {
+          "name": "List Message Processing Logs",
+          "id": "b3f2de91-3ae3-442e-8f6c-e156dcace204",
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          },
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "url": {
+              "raw": "{{baseUrl}}/MessageProcessingLogs?$filter=<string>&$top=<integer>&$skip=<integer>&$orderby=<string>",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "MessageProcessingLogs"
+              ],
+              "query": [
+                {
+                  "description": "OData filter expression (e.g., Status eq 'FAILED')",
+                  "key": "$filter",
+                  "value": "<string>"
+                },
+                {
+                  "description": "Maximum number of log entries to return",
+                  "key": "$top",
+                  "value": "<integer>"
+                },
+                {
+                  "key": "$skip",
+                  "value": "<integer>"
+                },
+                {
+                  "key": "$orderby",
+                  "value": "<string>"
+                }
+              ]
+            },
+            "description": "Retrieve message processing logs for all integration flows. Supports filtering by time range, status, and integration flow ID."
+          },
+          "response": [
+            {
+              "id": "22dac8fa-7295-4773-8d4e-7225a7c405c2",
+              "name": "List of message processing logs",
+              "originalRequest": {
+                "method": "GET",
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  },
+                  {
+                    "description": "Added as a part of security scheme: oauth2",
+                    "key": "Authorization",
+                    "value": "<token>"
+                  }
+                ],
+                "url": {
+                  "raw": "{{baseUrl}}/MessageProcessingLogs?$filter=<string>&$top=<integer>&$skip=<integer>&$orderby=<string>",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "MessageProcessingLogs"
+                  ],
+                  "query": [
+                    {
+                      "description": "OData filter expression (e.g., Status eq 'FAILED')",
+                      "key": "$filter",
+                      "value": "<string>"
+                    },
+                    {
+                      "description": "Maximum number of log entries to return",
+                      "key": "$top",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "$skip",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "$orderby",
+                      "value": "<string>"
+                    }
+                  ]
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "_postman_previewlanguage": "json",
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "cookie": [],
+              "responseTime": null,
+              "body": "{\n  \"d\": {\n    \"results\": [\n      {\n        \"MessageGuid\": \"<string>\",\n        \"CorrelationId\": \"<string>\",\n        \"ApplicationMessageId\": \"<string>\",\n        \"ApplicationMessageType\": \"<string>\",\n        \"LogStart\": \"<string>\",\n        \"LogEnd\": \"<string>\",\n        \"Sender\": \"<string>\",\n        \"Receiver\": \"<string>\",\n        \"IntegrationFlowName\": \"<string>\",\n        \"Status\": \"DISCARDED\",\n        \"LogLevel\": \"INFO\"\n      },\n      {\n        \"MessageGuid\": \"<string>\",\n        \"CorrelationId\": \"<string>\",\n        \"ApplicationMessageId\": \"<string>\",\n        \"ApplicationMessageType\": \"<string>\",\n        \"LogStart\": \"<string>\",\n        \"LogEnd\": \"<string>\",\n        \"Sender\": \"<string>\",\n        \"Receiver\": \"<string>\",\n        \"IntegrationFlowName\": \"<string>\",\n        \"Status\": \"ABANDONED\",\n        \"LogLevel\": \"INFO\"\n      }\n    ]\n  }\n}",
+              "createdAt": "2026-06-05T15:16:17.000Z",
+              "updatedAt": "2026-06-05T15:16:17.000Z",
+              "uid": "35240-22dac8fa-7295-4773-8d4e-7225a7c405c2"
+            },
+            {
+              "id": "3c4921bc-fd08-4f67-b461-e840aaeb85c0",
+              "name": "Unauthorized",
+              "originalRequest": {
+                "method": "GET",
+                "header": [
+                  {
+                    "description": "Added as a part of security scheme: oauth2",
+                    "key": "Authorization",
+                    "value": "<token>"
+                  }
+                ],
+                "url": {
+                  "raw": "{{baseUrl}}/MessageProcessingLogs?$filter=<string>&$top=<integer>&$skip=<integer>&$orderby=<string>",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "MessageProcessingLogs"
+                  ],
+                  "query": [
+                    {
+                      "description": "OData filter expression (e.g., Status eq 'FAILED')",
+                      "key": "$filter",
+                      "value": "<string>"
+                    },
+                    {
+                      "description": "Maximum number of log entries to return",
+                      "key": "$top",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "$skip",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "$orderby",
+                      "value": "<string>"
+                    }
+                  ]
+                }
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "_postman_previewlanguage": "text",
+              "header": [],
+              "cookie": [],
+              "responseTime": null,
+              "body": null,
+              "createdAt": "2026-06-05T15:16:17.000Z",
+              "updatedAt": "2026-06-05T15:16:17.000Z",
+              "uid": "35240-3c4921bc-fd08-4f67-b461-e840aaeb85c0"
+            }
+          ],
+          "createdAt": "2026-06-05T15:16:17.000Z",
+          "updatedAt": "2026-06-05T15:16:17.000Z",
+          "uid": "35240-b3f2de91-3ae3-442e-8f6c-e156dcace204"
+        }
+      ],
+      "id": "e3244931-3375-4ef1-8784-dfd833d346d4",
+      "createdAt": "2026-06-05T15:16:17.000Z",
+      "updatedAt": "2026-06-05T15:16:17.000Z",
+      "uid": "35240-e3244931-3375-4ef1-8784-dfd833d346d4"
+    },
+    {
+      "name": "MessageProcessingLogs('{MessageGuid}')",
+      "item": [
+        {
+          "name": "AdapterAttributes",
+          "item": [
+            {
+              "name": "Get Message Log Adapter Attributes",
+              "id": "ba265168-1064-4646-ac41-60c4c67edbd9",
+              "protocolProfileBehavior": {
+                "disableBodyPruning": true
+              },
+              "request": {
+                "method": "GET",
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "url": {
+                  "raw": "{{baseUrl}}/MessageProcessingLogs('{{MessageGuid}}')/AdapterAttributes",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "MessageProcessingLogs('{{MessageGuid}}')",
+                    "AdapterAttributes"
+                  ]
+                },
+                "description": "Retrieve adapter-specific attributes for a message processing log entry."
+              },
+              "response": [
+                {
+                  "id": "6ae52d04-607f-4081-8442-5b3aeaef62aa",
+                  "name": "Adapter attributes for the message log",
+                  "originalRequest": {
+                    "method": "GET",
+                    "header": [
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      },
+                      {
+                        "description": "Added as a part of security scheme: oauth2",
+                        "key": "Authorization",
+                        "value": "<token>"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{baseUrl}}/MessageProcessingLogs('{{MessageGuid}}')/AdapterAttributes",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "MessageProcessingLogs('{{MessageGuid}}')",
+                        "AdapterAttributes"
+                      ]
+                    }
+                  },
+                  "status": "OK",
+                  "code": 200,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "{}",
+                  "createdAt": "2026-06-05T15:16:17.000Z",
+                  "updatedAt": "2026-06-05T15:16:17.000Z",
+                  "uid": "35240-6ae52d04-607f-4081-8442-5b3aeaef62aa"
+                },
+                {
+                  "id": "3666624c-8f47-4e54-b6b0-0f5ac70a362d",
+                  "name": "Unauthorized",
+                  "originalRequest": {
+                    "method": "GET",
+                    "header": [
+                      {
+                        "description": "Added as a part of security scheme: oauth2",
+                        "key": "Authorization",
+                        "value": "<token>"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{baseUrl}}/MessageProcessingLogs('{{MessageGuid}}')/AdapterAttributes",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "MessageProcessingLogs('{{MessageGuid}}')",
+                        "AdapterAttributes"
+                      ]
+                    }
+                  },
+                  "status": "Unauthorized",
+                  "code": 401,
+                  "_postman_previewlanguage": "text",
+                  "header": [],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": null,
+                  "createdAt": "2026-06-05T15:16:17.000Z",
+                  "updatedAt": "2026-06-05T15:16:17.000Z",
+                  "uid": "35240-3666624c-8f47-4e54-b6b0-0f5ac70a362d"
+                }
+              ],
+              "createdAt": "2026-06-05T15:16:17.000Z",
+              "updatedAt": "2026-06-05T15:16:17.000Z",
+              "uid": "35240-ba265168-1064-4646-ac41-60c4c67edbd9"
+            }
+          ],
+          "id": "dbb26a94-e13e-4269-a11a-b6314008f63f",
+          "createdAt": "2026-06-05T15:16:17.000Z",
+          "updatedAt": "2026-06-05T15:16:17.000Z",
+          "uid": "35240-dbb26a94-e13e-4269-a11a-b6314008f63f"
+        },
+        {
+          "name": "Get Message Processing Log",
+          "id": "f11fabcb-f976-4587-8288-8c8f8cab5f07",
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          },
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "url": {
+              "raw": "{{baseUrl}}/MessageProcessingLogs('{{MessageGuid}}')",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "MessageProcessingLogs('{{MessageGuid}}')"
+              ]
+            },
+            "description": "Retrieve a specific message processing log entry by its GUID."
+          },
+          "response": [
+            {
+              "id": "34f6748f-b573-419f-ae41-17011255d82c",
+              "name": "Message processing log details",
+              "originalRequest": {
+                "method": "GET",
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  },
+                  {
+                    "description": "Added as a part of security scheme: oauth2",
+                    "key": "Authorization",
+                    "value": "<token>"
+                  }
+                ],
+                "url": {
+                  "raw": "{{baseUrl}}/MessageProcessingLogs('{{MessageGuid}}')",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "MessageProcessingLogs('{{MessageGuid}}')"
+                  ]
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "_postman_previewlanguage": "json",
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "cookie": [],
+              "responseTime": null,
+              "body": "{\n  \"d\": {\n    \"MessageGuid\": \"<string>\",\n    \"CorrelationId\": \"<string>\",\n    \"ApplicationMessageId\": \"<string>\",\n    \"ApplicationMessageType\": \"<string>\",\n    \"LogStart\": \"<string>\",\n    \"LogEnd\": \"<string>\",\n    \"Sender\": \"<string>\",\n    \"Receiver\": \"<string>\",\n    \"IntegrationFlowName\": \"<string>\",\n    \"Status\": \"PROCESSING\",\n    \"LogLevel\": \"INFO\"\n  }\n}",
+              "createdAt": "2026-06-05T15:16:17.000Z",
+              "updatedAt": "2026-06-05T15:16:17.000Z",
+              "uid": "35240-34f6748f-b573-419f-ae41-17011255d82c"
+            },
+            {
+              "id": "ec34eff5-a86f-4476-8569-8acc17d1f149",
+              "name": "Unauthorized",
+              "originalRequest": {
+                "method": "GET",
+                "header": [
+                  {
+                    "description": "Added as a part of security scheme: oauth2",
+                    "key": "Authorization",
+                    "value": "<token>"
+                  }
+                ],
+                "url": {
+                  "raw": "{{baseUrl}}/MessageProcessingLogs('{{MessageGuid}}')",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "MessageProcessingLogs('{{MessageGuid}}')"
+                  ]
+                }
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "_postman_previewlanguage": "text",
+              "header": [],
+              "cookie": [],
+              "responseTime": null,
+              "body": null,
+              "createdAt": "2026-06-05T15:16:17.000Z",
+              "updatedAt": "2026-06-05T15:16:17.000Z",
+              "uid": "35240-ec34eff5-a86f-4476-8569-8acc17d1f149"
+            },
+            {
+              "id": "d60c8d88-f72a-493f-b5eb-346a9cbc0b8d",
+              "name": "Log entry not found",
+              "originalRequest": {
+                "method": "GET",
+                "header": [
+                  {
+                    "description": "Added as a part of security scheme: oauth2",
+                    "key": "Authorization",
+                    "value": "<token>"
+                  }
+                ],
+                "url": {
+                  "raw": "{{baseUrl}}/MessageProcessingLogs('{{MessageGuid}}')",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "MessageProcessingLogs('{{MessageGuid}}')"
+                  ]
+                }
+              },
+              "status": "Not Found",
+              "code": 404,
+              "_postman_previewlanguage": "text",
+              "header": [],
+              "cookie": [],
+              "responseTime": null,
+              "body": null,
+              "createdAt": "2026-06-05T15:16:17.000Z",
+              "updatedAt": "2026-06-05T15:16:17.000Z",
+              "uid": "35240-d60c8d88-f72a-493f-b5eb-346a9cbc0b8d"
+            }
+          ],
+          "createdAt": "2026-06-05T15:16:17.000Z",
+          "updatedAt": "2026-06-05T15:16:17.000Z",
+          "uid": "35240-f11fabcb-f976-4587-8288-8c8f8cab5f07"
+        }
+      ],
+      "id": "281404de-718b-4823-abba-2b901b7aea47",
+      "createdAt": "2026-06-05T15:16:17.000Z",
+      "updatedAt": "2026-06-05T15:16:17.000Z",
+      "uid": "35240-281404de-718b-4823-abba-2b901b7aea47"
+    },
+    {
+      "name": "ServiceEndpoints",
+      "item": [
+        {
+          "name": "List Service Endpoints",
+          "id": "36f94dcb-b0a1-41ae-a9ac-bed91fea2a41",
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          },
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "url": {
+              "raw": "{{baseUrl}}/ServiceEndpoints?$top=<integer>&$skip=<integer>&$count=<boolean>",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "ServiceEndpoints"
+              ],
+              "query": [
+                {
+                  "key": "$top",
+                  "value": "<integer>"
+                },
+                {
+                  "key": "$skip",
+                  "value": "<integer>"
+                },
+                {
+                  "key": "$count",
+                  "value": "<boolean>"
+                }
+              ]
+            },
+            "description": "Retrieve all service endpoints registered in the Integration Suite tenant. Supports pagination with $top and $skip parameters."
+          },
+          "response": [
+            {
+              "id": "ec297d67-762a-42e6-82ab-b5d86589a3d8",
+              "name": "List of service endpoints",
+              "originalRequest": {
+                "method": "GET",
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  },
+                  {
+                    "description": "Added as a part of security scheme: oauth2",
+                    "key": "Authorization",
+                    "value": "<token>"
+                  }
+                ],
+                "url": {
+                  "raw": "{{baseUrl}}/ServiceEndpoints?$top=<integer>&$skip=<integer>&$count=<boolean>",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "ServiceEndpoints"
+                  ],
+                  "query": [
+                    {
+                      "key": "$top",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "$skip",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "$count",
+                      "value": "<boolean>"
+                    }
+                  ]
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "_postman_previewlanguage": "json",
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "cookie": [],
+              "responseTime": null,
+              "body": "{\n  \"d\": {\n    \"results\": [\n      {\n        \"Name\": \"<string>\",\n        \"Id\": \"<string>\",\n        \"Title\": \"<string>\",\n        \"Protocol\": \"<string>\",\n        \"Url\": \"<string>\"\n      },\n      {\n        \"Name\": \"<string>\",\n        \"Id\": \"<string>\",\n        \"Title\": \"<string>\",\n        \"Protocol\": \"<string>\",\n        \"Url\": \"<string>\"\n      }\n    ]\n  }\n}",
+              "createdAt": "2026-06-05T15:16:17.000Z",
+              "updatedAt": "2026-06-05T15:16:17.000Z",
+              "uid": "35240-ec297d67-762a-42e6-82ab-b5d86589a3d8"
+            },
+            {
+              "id": "02f6ef40-f576-4fd6-8d98-8af8b3561e57",
+              "name": "Unauthorized",
+              "originalRequest": {
+                "method": "GET",
+                "header": [
+                  {
+                    "description": "Added as a part of security scheme: oauth2",
+                    "key": "Authorization",
+                    "value": "<token>"
+                  }
+                ],
+                "url": {
+                  "raw": "{{baseUrl}}/ServiceEndpoints?$top=<integer>&$skip=<integer>&$count=<boolean>",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "ServiceEndpoints"
+                  ],
+                  "query": [
+                    {
+                      "key": "$top",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "$skip",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "$count",
+                      "value": "<boolean>"
+                    }
+                  ]
+                }
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "_postman_previewlanguage": "text",
+              "header": [],
+              "cookie": [],
+              "responseTime": null,
+              "body": null,
+              "createdAt": "2026-06-05T15:16:17.000Z",
+              "updatedAt": "2026-06-05T15:16:17.000Z",
+              "uid": "35240-02f6ef40-f576-4fd6-8d98-8af8b3561e57"
+            }
+          ],
+          "createdAt": "2026-06-05T15:16:17.000Z",
+          "updatedAt": "2026-06-05T15:16:17.000Z",
+          "uid": "35240-36f94dcb-b0a1-41ae-a9ac-bed91fea2a41"
+        }
+      ],
+      "id": "0c445a80-1b89-48d6-b77b-44b657ea0e5b",
+      "createdAt": "2026-06-05T15:16:17.000Z",
+      "updatedAt": "2026-06-05T15:16:17.000Z",
+      "uid": "35240-0c445a80-1b89-48d6-b77b-44b657ea0e5b"
+    },
+    {
+      "name": "Variables",
+      "item": [
+        {
+          "name": "List Variables",
+          "id": "1bffbd84-7e29-4609-be8a-c7d17f6702b0",
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          },
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "url": {
+              "raw": "{{baseUrl}}/Variables?$filter=<string>&$top=<integer>&$skip=<integer>",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "Variables"
+              ],
+              "query": [
+                {
+                  "key": "$filter",
+                  "value": "<string>"
+                },
+                {
+                  "key": "$top",
+                  "value": "<integer>"
+                },
+                {
+                  "key": "$skip",
+                  "value": "<integer>"
+                }
+              ]
+            },
+            "description": "Retrieve all integration variables defined in the tenant."
+          },
+          "response": [
+            {
+              "id": "e5f73e39-ae1e-478d-875c-c2395eea5ee2",
+              "name": "List of variables",
+              "originalRequest": {
+                "method": "GET",
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  },
+                  {
+                    "description": "Added as a part of security scheme: oauth2",
+                    "key": "Authorization",
+                    "value": "<token>"
+                  }
+                ],
+                "url": {
+                  "raw": "{{baseUrl}}/Variables?$filter=<string>&$top=<integer>&$skip=<integer>",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "Variables"
+                  ],
+                  "query": [
+                    {
+                      "key": "$filter",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "$top",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "$skip",
+                      "value": "<integer>"
+                    }
+                  ]
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "_postman_previewlanguage": "json",
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "cookie": [],
+              "responseTime": null,
+              "body": "{\n  \"d\": {\n    \"results\": [\n      {\n        \"VariableName\": \"<string>\",\n        \"IntegrationFlow\": \"<string>\",\n        \"Visibility\": \"Local\",\n        \"UpdatedAt\": \"<string>\",\n        \"RetainUntil\": \"<string>\"\n      },\n      {\n        \"VariableName\": \"<string>\",\n        \"IntegrationFlow\": \"<string>\",\n        \"Visibility\": \"Local\",\n        \"UpdatedAt\": \"<string>\",\n        \"RetainUntil\": \"<string>\"\n      }\n    ]\n  }\n}",
+              "createdAt": "2026-06-05T15:16:17.000Z",
+              "updatedAt": "2026-06-05T15:16:17.000Z",
+              "uid": "35240-e5f73e39-ae1e-478d-875c-c2395eea5ee2"
+            },
+            {
+              "id": "fb559b33-374a-447e-b521-33f7e697c17a",
+              "name": "Unauthorized",
+              "originalRequest": {
+                "method": "GET",
+                "header": [
+                  {
+                    "description": "Added as a part of security scheme: oauth2",
+                    "key": "Authorization",
+                    "value": "<token>"
+                  }
+                ],
+                "url": {
+                  "raw": "{{baseUrl}}/Variables?$filter=<string>&$top=<integer>&$skip=<integer>",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "Variables"
+                  ],
+                  "query": [
+                    {
+                      "key": "$filter",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "$top",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "$skip",
+                      "value": "<integer>"
+                    }
+                  ]
+                }
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "_postman_previewlanguage": "text",
+              "header": [],
+              "cookie": [],
+              "responseTime": null,
+              "body": null,
+              "createdAt": "2026-06-05T15:16:17.000Z",
+              "updatedAt": "2026-06-05T15:16:17.000Z",
+              "uid": "35240-fb559b33-374a-447e-b521-33f7e697c17a"
+            }
+          ],
+          "createdAt": "2026-06-05T15:16:17.000Z",
+          "updatedAt": "2026-06-05T15:16:17.000Z",
+          "uid": "35240-1bffbd84-7e29-4609-be8a-c7d17f6702b0"
+        }
+      ],
+      "id": "57232ace-4734-46d7-839b-e445ef414063",
+      "createdAt": "2026-06-05T15:16:17.000Z",
+      "updatedAt": "2026-06-05T15:16:17.000Z",
+      "uid": "35240-57232ace-4734-46d7-839b-e445ef414063"
+    }
+  ],
+  "auth": {
+    "type": "oauth2",
+    "oauth2": [
+      {
+        "key": "accessTokenUrl",
+        "value": "https://{tenant}.authentication.sap.hana.ondemand.com/oauth/token",
+        "type": "string"
+      },
+      {
+        "key": "grant_type",
+        "value": "client_credentials",
+        "type": "string"
+      }
+    ]
+  },
+  "variable": [
+    {
+      "key": "tenant-host",
+      "value": "my-tenant.integrationsuite.cfapps.sap.hana.ondemand.com"
+    },
+    {
+      "key": "baseUrl",
+      "value": "https://{{tenant-host}}/api/v1"
+    },
+    {
+      "key": "Id",
+      "value": "<string>"
+    },
+    {
+      "key": "Version",
+      "value": "<string>"
+    },
+    {
+      "key": "MessageGuid",
+      "value": "<string>"
+    }
+  ]
+}

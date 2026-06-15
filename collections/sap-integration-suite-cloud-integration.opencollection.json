@@ -1,0 +1,390 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "SAP Cloud Integration API",
+    "version": "1.0.0"
+  },
+  "request": {
+    "auth": {
+      "type": "oauth2",
+      "flow": "client_credentials",
+      "accessTokenUrl": "https://{tenant}.authentication.sap.hana.ondemand.com/oauth/token",
+      "credentials": {
+        "clientId": "{{clientId}}",
+        "clientSecret": "{{clientSecret}}"
+      }
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Integration Packages",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "List Integration Packages",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://{tenant-host}/api/v1/IntegrationPackages",
+            "params": [
+              {
+                "name": "$top",
+                "value": "",
+                "type": "query",
+                "description": "Maximum number of records to return"
+              },
+              {
+                "name": "$skip",
+                "value": "",
+                "type": "query",
+                "description": "Number of records to skip for pagination"
+              },
+              {
+                "name": "$filter",
+                "value": "",
+                "type": "query",
+                "description": "OData filter expression"
+              },
+              {
+                "name": "$orderby",
+                "value": "",
+                "type": "query",
+                "description": "OData orderby expression"
+              }
+            ]
+          },
+          "docs": "Retrieve all integration packages available in the tenant."
+        },
+        {
+          "info": {
+            "name": "Get Integration Package",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://{tenant-host}/api/v1/IntegrationPackages(':Id')",
+            "params": [
+              {
+                "name": "Id",
+                "value": "",
+                "type": "path",
+                "description": "Integration package identifier"
+              }
+            ]
+          },
+          "docs": "Retrieve a specific integration package by its ID."
+        }
+      ]
+    },
+    {
+      "info": {
+        "name": "Integration Flows",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "List Design-Time Artifacts in Package",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://{tenant-host}/api/v1/IntegrationPackages(':Id')/IntegrationDesigntimeArtifacts",
+            "params": [
+              {
+                "name": "Id",
+                "value": "",
+                "type": "path",
+                "description": "Integration package identifier"
+              }
+            ]
+          },
+          "docs": "Retrieve all design-time integration artifacts within a package."
+        },
+        {
+          "info": {
+            "name": "Get Design-Time Artifact",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://{tenant-host}/api/v1/IntegrationDesigntimeArtifacts(Id=':Id',Version=':Version')",
+            "params": [
+              {
+                "name": "Id",
+                "value": "",
+                "type": "path",
+                "description": "Artifact identifier"
+              },
+              {
+                "name": "Version",
+                "value": "",
+                "type": "path",
+                "description": "Artifact version (use 'active' for latest)"
+              }
+            ]
+          },
+          "docs": "Retrieve a specific design-time integration artifact."
+        },
+        {
+          "info": {
+            "name": "Deploy Integration Flow",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://{tenant-host}/api/v1/DeployIntegrationDesigntimeArtifact",
+            "params": [
+              {
+                "name": "Id",
+                "value": "",
+                "type": "query",
+                "description": "Artifact identifier to deploy"
+              },
+              {
+                "name": "Version",
+                "value": "",
+                "type": "query",
+                "description": "Artifact version to deploy"
+              }
+            ]
+          },
+          "docs": "Deploy a design-time integration artifact to the runtime. Triggers compilation and deployment of the integration flow."
+        }
+      ]
+    },
+    {
+      "info": {
+        "name": "Runtime Artifacts",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "List Runtime Artifacts",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://{tenant-host}/api/v1/IntegrationRuntimeArtifacts",
+            "params": [
+              {
+                "name": "$filter",
+                "value": "",
+                "type": "query",
+                "description": "OData filter expression"
+              },
+              {
+                "name": "$top",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "$skip",
+                "value": "",
+                "type": "query"
+              }
+            ]
+          },
+          "docs": "Retrieve all currently deployed integration artifacts in the runtime."
+        },
+        {
+          "info": {
+            "name": "Get Runtime Artifact",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://{tenant-host}/api/v1/IntegrationRuntimeArtifacts(':Id')",
+            "params": [
+              {
+                "name": "Id",
+                "value": "",
+                "type": "path",
+                "description": "Runtime artifact identifier"
+              }
+            ]
+          },
+          "docs": "Retrieve a specific deployed runtime artifact and its status."
+        },
+        {
+          "info": {
+            "name": "Undeploy Runtime Artifact",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "https://{tenant-host}/api/v1/IntegrationRuntimeArtifacts(':Id')",
+            "params": [
+              {
+                "name": "Id",
+                "value": "",
+                "type": "path",
+                "description": "Runtime artifact identifier"
+              }
+            ]
+          },
+          "docs": "Remove a deployed integration artifact from the runtime."
+        }
+      ]
+    },
+    {
+      "info": {
+        "name": "Message Processing Logs",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "List Message Processing Logs",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://{tenant-host}/api/v1/MessageProcessingLogs",
+            "params": [
+              {
+                "name": "$filter",
+                "value": "",
+                "type": "query",
+                "description": "OData filter expression (e.g., Status eq 'FAILED')"
+              },
+              {
+                "name": "$top",
+                "value": "",
+                "type": "query",
+                "description": "Maximum number of log entries to return"
+              },
+              {
+                "name": "$skip",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "$orderby",
+                "value": "",
+                "type": "query"
+              }
+            ]
+          },
+          "docs": "Retrieve message processing logs for all integration flows. Supports filtering by time range, status, and integration flow ID."
+        },
+        {
+          "info": {
+            "name": "Get Message Processing Log",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://{tenant-host}/api/v1/MessageProcessingLogs(':MessageGuid')",
+            "params": [
+              {
+                "name": "MessageGuid",
+                "value": "",
+                "type": "path",
+                "description": "Message processing log GUID"
+              }
+            ]
+          },
+          "docs": "Retrieve a specific message processing log entry by its GUID."
+        },
+        {
+          "info": {
+            "name": "Get Message Log Adapter Attributes",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://{tenant-host}/api/v1/MessageProcessingLogs(':MessageGuid')/AdapterAttributes",
+            "params": [
+              {
+                "name": "MessageGuid",
+                "value": "",
+                "type": "path",
+                "description": "Message processing log GUID"
+              }
+            ]
+          },
+          "docs": "Retrieve adapter-specific attributes for a message processing log entry."
+        }
+      ]
+    },
+    {
+      "info": {
+        "name": "Service Endpoints",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "List Service Endpoints",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://{tenant-host}/api/v1/ServiceEndpoints",
+            "params": [
+              {
+                "name": "$top",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "$skip",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "$count",
+                "value": "",
+                "type": "query"
+              }
+            ]
+          },
+          "docs": "Retrieve all service endpoints registered in the Integration Suite tenant. Supports pagination with $top and $skip parameters."
+        }
+      ]
+    },
+    {
+      "info": {
+        "name": "Variables",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "List Variables",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://{tenant-host}/api/v1/Variables",
+            "params": [
+              {
+                "name": "$filter",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "$top",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "$skip",
+                "value": "",
+                "type": "query"
+              }
+            ]
+          },
+          "docs": "Retrieve all integration variables defined in the tenant."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

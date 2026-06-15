@@ -1,0 +1,331 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "SAP API Management API",
+    "version": "1.0.0"
+  },
+  "request": {
+    "auth": {
+      "type": "oauth2",
+      "flow": "client_credentials",
+      "accessTokenUrl": "https://{tenant}.authentication.sap.hana.ondemand.com/oauth/token",
+      "credentials": {
+        "clientId": "{{clientId}}",
+        "clientSecret": "{{clientSecret}}"
+      }
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "API Proxies",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "List API Proxies",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://{api-portal-host}/apiportal/api/1.0/Management/APIProxies",
+            "params": [
+              {
+                "name": "$top",
+                "value": "",
+                "type": "query",
+                "description": "Maximum number of results to return"
+              },
+              {
+                "name": "$skip",
+                "value": "",
+                "type": "query",
+                "description": "Number of results to skip for pagination"
+              },
+              {
+                "name": "$filter",
+                "value": "",
+                "type": "query",
+                "description": "OData filter expression"
+              },
+              {
+                "name": "$orderby",
+                "value": "",
+                "type": "query"
+              }
+            ]
+          },
+          "docs": "Retrieve all API proxies defined in the API Management tenant."
+        },
+        {
+          "info": {
+            "name": "Create API Proxy",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://{api-portal-host}/apiportal/api/1.0/Management/APIProxies",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Create a new API proxy in the API Management tenant."
+        },
+        {
+          "info": {
+            "name": "Get API Proxy",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://{api-portal-host}/apiportal/api/1.0/Management/APIProxies(':name')",
+            "params": [
+              {
+                "name": "name",
+                "value": "",
+                "type": "path",
+                "description": "API proxy name"
+              }
+            ]
+          },
+          "docs": "Retrieve a specific API proxy by name."
+        },
+        {
+          "info": {
+            "name": "Update API Proxy",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "https://{api-portal-host}/apiportal/api/1.0/Management/APIProxies(':name')",
+            "params": [
+              {
+                "name": "name",
+                "value": "",
+                "type": "path",
+                "description": "API proxy name"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Update an existing API proxy."
+        },
+        {
+          "info": {
+            "name": "Delete API Proxy",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "https://{api-portal-host}/apiportal/api/1.0/Management/APIProxies(':name')",
+            "params": [
+              {
+                "name": "name",
+                "value": "",
+                "type": "path",
+                "description": "API proxy name"
+              }
+            ]
+          },
+          "docs": "Delete an existing API proxy from the tenant."
+        }
+      ]
+    },
+    {
+      "info": {
+        "name": "API Products",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "List API Products",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://{api-portal-host}/apiportal/api/1.0/Management/APIProducts",
+            "params": [
+              {
+                "name": "$top",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "$skip",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "$filter",
+                "value": "",
+                "type": "query"
+              }
+            ]
+          },
+          "docs": "Retrieve all API products available in the API Management tenant."
+        },
+        {
+          "info": {
+            "name": "Create API Product",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://{api-portal-host}/apiportal/api/1.0/Management/APIProducts",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Create a new API product bundling one or more API proxies."
+        },
+        {
+          "info": {
+            "name": "Get API Product",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://{api-portal-host}/apiportal/api/1.0/Management/APIProducts(':name')",
+            "params": [
+              {
+                "name": "name",
+                "value": "",
+                "type": "path",
+                "description": "API product name"
+              }
+            ]
+          },
+          "docs": "Retrieve a specific API product by name."
+        }
+      ]
+    },
+    {
+      "info": {
+        "name": "Applications",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "List Applications",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://{api-portal-host}/apiportal/api/1.0/Management/Applications",
+            "params": [
+              {
+                "name": "$top",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "$skip",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "$filter",
+                "value": "",
+                "type": "query"
+              }
+            ]
+          },
+          "docs": "Retrieve all developer applications registered in the API portal."
+        },
+        {
+          "info": {
+            "name": "Get Application",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://{api-portal-host}/apiportal/api/1.0/Management/Applications(':id')",
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "Application identifier"
+              }
+            ]
+          },
+          "docs": "Retrieve a specific developer application by ID."
+        }
+      ]
+    },
+    {
+      "info": {
+        "name": "Developers",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "List Developers",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://{api-portal-host}/apiportal/api/1.0/Management/Developers",
+            "params": [
+              {
+                "name": "$top",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "$skip",
+                "value": "",
+                "type": "query"
+              }
+            ]
+          },
+          "docs": "Retrieve all developers registered in the API portal."
+        }
+      ]
+    },
+    {
+      "info": {
+        "name": "Key Value Maps",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "List Key Value Maps",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://{api-portal-host}/apiportal/api/1.0/KeyValueMaps"
+          },
+          "docs": "Retrieve all key-value maps configured in the API Management tenant."
+        },
+        {
+          "info": {
+            "name": "Create Key Value Map",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://{api-portal-host}/apiportal/api/1.0/KeyValueMaps",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Create a new key-value map for storing configuration data."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}
