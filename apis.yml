@@ -6,7 +6,7 @@ description: >-
   Management, Integration Advisor, Open Connectors, Trading Partner Management, and Event Mesh as part of SAP Business
   Technology Platform (BTP). It enables seamless connectivity between SAP and non-SAP systems.
 type: Index
-image: https://kinlane-productions.s3.amazonaws.com/apis-json/apis-json-logo.jpg
+image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/apis-json-logo.jpg
 tags:
   - API Management
   - Cloud Integration
