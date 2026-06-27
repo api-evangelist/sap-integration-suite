@@ -183,45 +183,42 @@ apis:
 common:
   - type: PostmanWorkspace
     url: https://www.postman.com/kinlaneapi/sap-integration-suite/overview
-  - type: ArazzoWorkflows
-    url: arazzo/
-    workflows:
-      - url: arazzo/sap-integration-suite-catalog-runtime-endpoints-workflow.yml
-        name: SAP Integration Suite Catalog Runtime Endpoints
-        summary: Inventory deployed runtime artifacts, inspect a chosen one, and list its service endpoints.
-      - url: arazzo/sap-integration-suite-deploy-and-verify-flow-workflow.yml
-        name: SAP Integration Suite Deploy And Verify Flow
-        summary: Deploy an integration flow, wait for it to start, then verify recent message processing succeeded.
-      - url: arazzo/sap-integration-suite-deploy-flow-from-package-workflow.yml
-        name: SAP Integration Suite Deploy Flow From Package
-        summary: Discover an integration flow inside a package, deploy it, and poll the runtime until it starts.
-      - url: arazzo/sap-integration-suite-monitor-failed-messages-workflow.yml
-        name: SAP Integration Suite Monitor Failed Messages
-        summary: Find failed message processing logs, read the worst offender in detail, and pull its adapter attributes.
-      - url: arazzo/sap-integration-suite-package-deployment-drift-workflow.yml
-        name: SAP Integration Suite Package Deployment Drift
-        summary: Compare a package's design-time artifacts against what is deployed in the runtime to surface drift.
-      - url: arazzo/sap-integration-suite-provision-key-value-map-workflow.yml
-        name: SAP Integration Suite Provision Key Value Map
-        summary: List existing key-value maps, and create a new one only if it does not already exist.
-      - url: arazzo/sap-integration-suite-publish-api-product-workflow.yml
-        name: SAP Integration Suite Publish API Product
-        summary: Create an API proxy, confirm it, then bundle it into a published API product with a quota.
-      - url: arazzo/sap-integration-suite-retire-api-proxy-workflow.yml
-        name: SAP Integration Suite Retire API Proxy
-        summary: Confirm an API proxy exists, list products to check for dependents, then delete the proxy.
-      - url: arazzo/sap-integration-suite-review-application-access-workflow.yml
-        name: SAP Integration Suite Review Application Access
-        summary: Verify a developer exists, read their application, and confirm the API product it subscribes to.
-      - url: arazzo/sap-integration-suite-trace-message-by-guid-workflow.yml
-        name: SAP Integration Suite Trace Message By GUID
-        summary: Read a single message processing log by GUID, pull its adapter attributes, and find correlated messages.
-      - url: arazzo/sap-integration-suite-undeploy-runtime-artifact-workflow.yml
-        name: SAP Integration Suite Undeploy Runtime Artifact
-        summary: Confirm a runtime artifact is deployed, undeploy it, and verify it is gone.
-      - url: arazzo/sap-integration-suite-upsert-api-proxy-workflow.yml
-        name: SAP Integration Suite Upsert API Proxy
-        summary: Look up an API proxy by name and update it if it exists, otherwise create it.
+  - type: Arazzo
+    url: arazzo/sap-integration-suite-catalog-runtime-endpoints-workflow.yml
+    name: SAP Integration Suite Catalog Runtime Endpoints
+  - type: Arazzo
+    url: arazzo/sap-integration-suite-deploy-and-verify-flow-workflow.yml
+    name: SAP Integration Suite Deploy And Verify Flow
+  - type: Arazzo
+    url: arazzo/sap-integration-suite-deploy-flow-from-package-workflow.yml
+    name: SAP Integration Suite Deploy Flow From Package
+  - type: Arazzo
+    url: arazzo/sap-integration-suite-monitor-failed-messages-workflow.yml
+    name: SAP Integration Suite Monitor Failed Messages
+  - type: Arazzo
+    url: arazzo/sap-integration-suite-package-deployment-drift-workflow.yml
+    name: SAP Integration Suite Package Deployment Drift
+  - type: Arazzo
+    url: arazzo/sap-integration-suite-provision-key-value-map-workflow.yml
+    name: SAP Integration Suite Provision Key Value Map
+  - type: Arazzo
+    url: arazzo/sap-integration-suite-publish-api-product-workflow.yml
+    name: SAP Integration Suite Publish API Product
+  - type: Arazzo
+    url: arazzo/sap-integration-suite-retire-api-proxy-workflow.yml
+    name: SAP Integration Suite Retire API Proxy
+  - type: Arazzo
+    url: arazzo/sap-integration-suite-review-application-access-workflow.yml
+    name: SAP Integration Suite Review Application Access
+  - type: Arazzo
+    url: arazzo/sap-integration-suite-trace-message-by-guid-workflow.yml
+    name: SAP Integration Suite Trace Message By GUID
+  - type: Arazzo
+    url: arazzo/sap-integration-suite-undeploy-runtime-artifact-workflow.yml
+    name: SAP Integration Suite Undeploy Runtime Artifact
+  - type: Arazzo
+    url: arazzo/sap-integration-suite-upsert-api-proxy-workflow.yml
+    name: SAP Integration Suite Upsert API Proxy
   - type: Portal
     url: https://api.sap.com/
   - type: Documentation
