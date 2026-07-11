@@ -1,0 +1,24 @@
+generated: '2026-07-11'
+method: derived
+source: openapi/sap-integration-suite-api-management-openapi.yml, openapi/sap-integration-suite-cloud-integration-openapi.yml
+summary:
+  types:
+  - http
+  - oauth2
+  oauth2_flows:
+  - clientCredentials
+schemes:
+- name: oauth2
+  type: oauth2
+  flows:
+  - flow: clientCredentials
+    tokenUrl: https://{tenant}.authentication.sap.hana.ondemand.com/oauth/token
+    scopes: 0
+  sources:
+  - openapi/sap-integration-suite-api-management-openapi.yml
+  - openapi/sap-integration-suite-cloud-integration-openapi.yml
+- name: basicAuth
+  type: http
+  scheme: basic
+  sources:
+  - openapi/sap-integration-suite-api-management-openapi.yml
