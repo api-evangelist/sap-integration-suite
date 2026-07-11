@@ -1,0 +1,23 @@
+generated: '2026-07-11'
+method: derived
+source: openapi/sap-integration-suite-api-management-openapi.yml, openapi/sap-integration-suite-cloud-integration-openapi.yml
+docs: https://help.sap.com/docs/integration-suite/sap-integration-suite/tasks-and-permissions-556d5575d4b0483e85d4f3251f21d0ec
+note: >-
+  SAP Integration Suite APIs use OAuth 2.0 client credentials with role-based
+  authorization rather than published OAuth scopes; access to each API resource
+  is granted by assigning documented role templates (for example
+  MonitoringDataRead or WorkspacePackagesRead) to the SAP BTP service instance,
+  per
+  https://help.sap.com/docs/integration-suite/sap-integration-suite/tasks-and-permissions-556d5575d4b0483e85d4f3251f21d0ec.
+schemes:
+- name: oauth2
+  source: openapi/sap-integration-suite-api-management-openapi.yml
+  flows:
+  - flow: clientCredentials
+    tokenUrl: https://{tenant}.authentication.sap.hana.ondemand.com/oauth/token
+- name: oauth2
+  source: openapi/sap-integration-suite-cloud-integration-openapi.yml
+  flows:
+  - flow: clientCredentials
+    tokenUrl: https://{tenant}.authentication.sap.hana.ondemand.com/oauth/token
+scopes: []

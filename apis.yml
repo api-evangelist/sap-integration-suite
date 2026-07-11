@@ -181,6 +181,10 @@ apis:
       - type: Authentication
         url: https://help.pubsub.em.services.cloud.sap/Cloud/ght_use_rest_api_services.htm
 common:
+  - type: Authentication
+    url: authentication/sap-integration-suite-authentication.yml
+  - type: OAuthScopes
+    url: scopes/sap-integration-suite-scopes.yml
   - type: PostmanWorkspace
     url: https://www.postman.com/kinlaneapi/sap-integration-suite/overview
   - type: Arazzo
