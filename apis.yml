@@ -181,6 +181,8 @@ apis:
       - type: Authentication
         url: https://help.pubsub.em.services.cloud.sap/Cloud/ght_use_rest_api_services.htm
 common:
+  - type: AgenticAccess
+    url: agentic-access/sap-integration-suite-agentic-access.yml
   - type: VulnerabilityDisclosure
     url: security/sap-integration-suite-vulnerability-disclosure.yml
   - type: DomainSecurity
