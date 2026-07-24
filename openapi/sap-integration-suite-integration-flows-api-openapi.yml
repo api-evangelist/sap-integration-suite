@@ -1,0 +1,174 @@
+openapi: 3.1.0
+info:
+  title: SAP API Management API Products Integration Flows API
+  description: The SAP API Management API enables programmatic management of APIs, products, applications, and developer portals within SAP Integration Suite. It supports creating and publishing API proxies, managing rate plans, configuring policies, administering developer portals, and managing the full API lifecycle within SAP Business Technology Platform.
+  version: 1.0.0
+  contact:
+    name: SAP Support
+    url: https://support.sap.com
+  license:
+    name: SAP Developer License
+    url: https://www.sap.com/about/agreements/product-use-and-support-terms.html
+  x-logo:
+    url: https://www.sap.com/dam/application/shared/logos/sap-logo.svg
+servers:
+- url: https://{api-portal-host}/apiportal/api/1.0
+  description: SAP API Management API Portal
+  variables:
+    api-portal-host:
+      default: my-tenant.apimanagement.sap.hana.ondemand.com
+      description: SAP API Management host
+security:
+- oauth2: []
+- basicAuth: []
+tags:
+- name: Integration Flows
+  description: Deploy and manage integration flow artifacts
+paths:
+  /IntegrationPackages('{Id}')/IntegrationDesigntimeArtifacts:
+    get:
+      operationId: listIntegrationDesigntimeArtifacts
+      summary: List Design-Time Artifacts in Package
+      description: Retrieve all design-time integration artifacts within a package.
+      tags:
+      - Integration Flows
+      parameters:
+      - name: Id
+        in: path
+        required: true
+        description: Integration package identifier
+        schema:
+          type: string
+      responses:
+        '200':
+          description: List of design-time artifacts
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  d:
+                    type: object
+                    properties:
+                      results:
+                        type: array
+                        items:
+                          $ref: '#/components/schemas/IntegrationArtifact'
+        '401':
+          description: Unauthorized
+  /IntegrationDesigntimeArtifacts(Id='{Id}',Version='{Version}'):
+    get:
+      operationId: getIntegrationDesigntimeArtifact
+      summary: Get Design-Time Artifact
+      description: Retrieve a specific design-time integration artifact.
+      tags:
+      - Integration Flows
+      parameters:
+      - name: Id
+        in: path
+        required: true
+        description: Artifact identifier
+        schema:
+          type: string
+      - name: Version
+        in: path
+        required: true
+        description: Artifact version (use 'active' for latest)
+        schema:
+          type: string
+      responses:
+        '200':
+          description: Design-time artifact details
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  d:
+                    $ref: '#/components/schemas/IntegrationArtifact'
+        '401':
+          description: Unauthorized
+        '404':
+          description: Artifact not found
+  /DeployIntegrationDesigntimeArtifact:
+    post:
+      operationId: deployIntegrationDesigntimeArtifact
+      summary: Deploy Integration Flow
+      description: Deploy a design-time integration artifact to the runtime. Triggers compilation and deployment of the integration flow.
+      tags:
+      - Integration Flows
+      parameters:
+      - name: Id
+        in: query
+        required: true
+        description: Artifact identifier to deploy
+        schema:
+          type: string
+      - name: Version
+        in: query
+        required: true
+        description: Artifact version to deploy
+        schema:
+          type: string
+      responses:
+        '202':
+          description: Deployment accepted
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  d:
+                    type: object
+                    properties:
+                      TaskId:
+                        type: string
+        '401':
+          description: Unauthorized
+        '400':
+          description: Bad request
+components:
+  schemas:
+    IntegrationArtifact:
+      type: object
+      properties:
+        Id:
+          type: string
+          description: Artifact identifier
+        Version:
+          type: string
+          description: Artifact version
+        PackageId:
+          type: string
+          description: Parent package identifier
+        Name:
+          type: string
+          description: Artifact display name
+        Description:
+          type: string
+          description: Artifact description
+        Type:
+          type: string
+          description: Artifact type (e.g., IFlow, ValueMapping)
+          enum:
+          - IFlow
+          - ValueMapping
+          - ODataApi
+          - RestApi
+          - SoapApi
+        ModifiedBy:
+          type: string
+          description: User who last modified the artifact
+        ModifiedAt:
+          type: string
+          description: Timestamp of last modification
+  securitySchemes:
+    oauth2:
+      type: oauth2
+      flows:
+        clientCredentials:
+          tokenUrl: https://{tenant}.authentication.sap.hana.ondemand.com/oauth/token
+          scopes: {}
+    basicAuth:
+      type: http
+      scheme: basic

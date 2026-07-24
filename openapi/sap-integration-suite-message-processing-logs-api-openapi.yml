@@ -1,0 +1,182 @@
+openapi: 3.1.0
+info:
+  title: SAP API Management API Products Message Processing Logs API
+  description: The SAP API Management API enables programmatic management of APIs, products, applications, and developer portals within SAP Integration Suite. It supports creating and publishing API proxies, managing rate plans, configuring policies, administering developer portals, and managing the full API lifecycle within SAP Business Technology Platform.
+  version: 1.0.0
+  contact:
+    name: SAP Support
+    url: https://support.sap.com
+  license:
+    name: SAP Developer License
+    url: https://www.sap.com/about/agreements/product-use-and-support-terms.html
+  x-logo:
+    url: https://www.sap.com/dam/application/shared/logos/sap-logo.svg
+servers:
+- url: https://{api-portal-host}/apiportal/api/1.0
+  description: SAP API Management API Portal
+  variables:
+    api-portal-host:
+      default: my-tenant.apimanagement.sap.hana.ondemand.com
+      description: SAP API Management host
+security:
+- oauth2: []
+- basicAuth: []
+tags:
+- name: Message Processing Logs
+  description: Retrieve message processing logs and audit information
+paths:
+  /MessageProcessingLogs:
+    get:
+      operationId: listMessageProcessingLogs
+      summary: List Message Processing Logs
+      description: Retrieve message processing logs for all integration flows. Supports filtering by time range, status, and integration flow ID.
+      tags:
+      - Message Processing Logs
+      parameters:
+      - name: $filter
+        in: query
+        description: OData filter expression (e.g., Status eq 'FAILED')
+        schema:
+          type: string
+      - name: $top
+        in: query
+        schema:
+          type: integer
+        description: Maximum number of log entries to return
+      - name: $skip
+        in: query
+        schema:
+          type: integer
+      - name: $orderby
+        in: query
+        schema:
+          type: string
+      responses:
+        '200':
+          description: List of message processing logs
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  d:
+                    type: object
+                    properties:
+                      results:
+                        type: array
+                        items:
+                          $ref: '#/components/schemas/MessageProcessingLog'
+        '401':
+          description: Unauthorized
+  /MessageProcessingLogs('{MessageGuid}'):
+    get:
+      operationId: getMessageProcessingLog
+      summary: Get Message Processing Log
+      description: Retrieve a specific message processing log entry by its GUID.
+      tags:
+      - Message Processing Logs
+      parameters:
+      - name: MessageGuid
+        in: path
+        required: true
+        description: Message processing log GUID
+        schema:
+          type: string
+      responses:
+        '200':
+          description: Message processing log details
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  d:
+                    $ref: '#/components/schemas/MessageProcessingLog'
+        '401':
+          description: Unauthorized
+        '404':
+          description: Log entry not found
+  /MessageProcessingLogs('{MessageGuid}')/AdapterAttributes:
+    get:
+      operationId: getMessageProcessingLogAdapterAttributes
+      summary: Get Message Log Adapter Attributes
+      description: Retrieve adapter-specific attributes for a message processing log entry.
+      tags:
+      - Message Processing Logs
+      parameters:
+      - name: MessageGuid
+        in: path
+        required: true
+        description: Message processing log GUID
+        schema:
+          type: string
+      responses:
+        '200':
+          description: Adapter attributes for the message log
+          content:
+            application/json:
+              schema:
+                type: object
+        '401':
+          description: Unauthorized
+components:
+  schemas:
+    MessageProcessingLog:
+      type: object
+      properties:
+        MessageGuid:
+          type: string
+          description: Unique identifier for the message
+        CorrelationId:
+          type: string
+          description: Correlation ID linking related messages
+        ApplicationMessageId:
+          type: string
+          description: Application-level message ID
+        ApplicationMessageType:
+          type: string
+          description: Application message type
+        LogStart:
+          type: string
+          description: Message processing start time
+        LogEnd:
+          type: string
+          description: Message processing end time
+        Sender:
+          type: string
+          description: Sending system or adapter
+        Receiver:
+          type: string
+          description: Receiving system or adapter
+        IntegrationFlowName:
+          type: string
+          description: Name of the integration flow that processed the message
+        Status:
+          type: string
+          description: Processing status
+          enum:
+          - COMPLETED
+          - FAILED
+          - PROCESSING
+          - RETRY
+          - ESCALATED
+          - DISCARDED
+          - ABANDONED
+        LogLevel:
+          type: string
+          description: Log verbosity level
+          enum:
+          - INFO
+          - DEBUG
+          - TRACE
+          - ERROR
+  securitySchemes:
+    oauth2:
+      type: oauth2
+      flows:
+        clientCredentials:
+          tokenUrl: https://{tenant}.authentication.sap.hana.ondemand.com/oauth/token
+          scopes: {}
+    basicAuth:
+      type: http
+      scheme: basic

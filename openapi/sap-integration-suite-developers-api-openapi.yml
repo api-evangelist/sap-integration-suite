@@ -1,0 +1,96 @@
+openapi: 3.1.0
+info:
+  title: SAP API Management API Products Developers API
+  description: The SAP API Management API enables programmatic management of APIs, products, applications, and developer portals within SAP Integration Suite. It supports creating and publishing API proxies, managing rate plans, configuring policies, administering developer portals, and managing the full API lifecycle within SAP Business Technology Platform.
+  version: 1.0.0
+  contact:
+    name: SAP Support
+    url: https://support.sap.com
+  license:
+    name: SAP Developer License
+    url: https://www.sap.com/about/agreements/product-use-and-support-terms.html
+  x-logo:
+    url: https://www.sap.com/dam/application/shared/logos/sap-logo.svg
+servers:
+- url: https://{api-portal-host}/apiportal/api/1.0
+  description: SAP API Management API Portal
+  variables:
+    api-portal-host:
+      default: my-tenant.apimanagement.sap.hana.ondemand.com
+      description: SAP API Management host
+security:
+- oauth2: []
+- basicAuth: []
+tags:
+- name: Developers
+  description: Manage developer accounts
+paths:
+  /Management/Developers:
+    get:
+      operationId: listDevelopers
+      summary: List Developers
+      description: Retrieve all developers registered in the API portal.
+      tags:
+      - Developers
+      parameters:
+      - name: $top
+        in: query
+        schema:
+          type: integer
+      - name: $skip
+        in: query
+        schema:
+          type: integer
+      responses:
+        '200':
+          description: List of developers
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  d:
+                    type: object
+                    properties:
+                      results:
+                        type: array
+                        items:
+                          $ref: '#/components/schemas/Developer'
+        '401':
+          description: Unauthorized
+components:
+  schemas:
+    Developer:
+      type: object
+      properties:
+        email:
+          type: string
+          description: Developer email address (unique identifier)
+        firstName:
+          type: string
+          description: First name
+        lastName:
+          type: string
+          description: Last name
+        status:
+          type: string
+          description: Developer status
+          enum:
+          - ACTIVE
+          - INACTIVE
+        createdAt:
+          type: string
+          format: date-time
+        updatedAt:
+          type: string
+          format: date-time
+  securitySchemes:
+    oauth2:
+      type: oauth2
+      flows:
+        clientCredentials:
+          tokenUrl: https://{tenant}.authentication.sap.hana.ondemand.com/oauth/token
+          scopes: {}
+    basicAuth:
+      type: http
+      scheme: basic

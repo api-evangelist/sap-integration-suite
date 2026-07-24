@@ -1,0 +1,156 @@
+openapi: 3.1.0
+info:
+  title: SAP API Management API Products Runtime Artifacts API
+  description: The SAP API Management API enables programmatic management of APIs, products, applications, and developer portals within SAP Integration Suite. It supports creating and publishing API proxies, managing rate plans, configuring policies, administering developer portals, and managing the full API lifecycle within SAP Business Technology Platform.
+  version: 1.0.0
+  contact:
+    name: SAP Support
+    url: https://support.sap.com
+  license:
+    name: SAP Developer License
+    url: https://www.sap.com/about/agreements/product-use-and-support-terms.html
+  x-logo:
+    url: https://www.sap.com/dam/application/shared/logos/sap-logo.svg
+servers:
+- url: https://{api-portal-host}/apiportal/api/1.0
+  description: SAP API Management API Portal
+  variables:
+    api-portal-host:
+      default: my-tenant.apimanagement.sap.hana.ondemand.com
+      description: SAP API Management host
+security:
+- oauth2: []
+- basicAuth: []
+tags:
+- name: Runtime Artifacts
+  description: Manage deployed runtime artifacts
+paths:
+  /IntegrationRuntimeArtifacts:
+    get:
+      operationId: listRuntimeArtifacts
+      summary: List Runtime Artifacts
+      description: Retrieve all currently deployed integration artifacts in the runtime.
+      tags:
+      - Runtime Artifacts
+      parameters:
+      - name: $filter
+        in: query
+        description: OData filter expression
+        schema:
+          type: string
+      - name: $top
+        in: query
+        schema:
+          type: integer
+      - name: $skip
+        in: query
+        schema:
+          type: integer
+      responses:
+        '200':
+          description: List of runtime artifacts
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  d:
+                    type: object
+                    properties:
+                      results:
+                        type: array
+                        items:
+                          $ref: '#/components/schemas/RuntimeArtifact'
+        '401':
+          description: Unauthorized
+  /IntegrationRuntimeArtifacts('{Id}'):
+    get:
+      operationId: getRuntimeArtifact
+      summary: Get Runtime Artifact
+      description: Retrieve a specific deployed runtime artifact and its status.
+      tags:
+      - Runtime Artifacts
+      parameters:
+      - name: Id
+        in: path
+        required: true
+        description: Runtime artifact identifier
+        schema:
+          type: string
+      responses:
+        '200':
+          description: Runtime artifact details
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  d:
+                    $ref: '#/components/schemas/RuntimeArtifact'
+        '404':
+          description: Artifact not found
+    delete:
+      operationId: undeployRuntimeArtifact
+      summary: Undeploy Runtime Artifact
+      description: Remove a deployed integration artifact from the runtime.
+      tags:
+      - Runtime Artifacts
+      parameters:
+      - name: Id
+        in: path
+        required: true
+        description: Runtime artifact identifier
+        schema:
+          type: string
+      responses:
+        '202':
+          description: Undeploy accepted
+        '401':
+          description: Unauthorized
+        '404':
+          description: Artifact not found
+components:
+  schemas:
+    RuntimeArtifact:
+      type: object
+      properties:
+        Id:
+          type: string
+          description: Runtime artifact identifier
+        Version:
+          type: string
+          description: Deployed version
+        Name:
+          type: string
+          description: Artifact name
+        Type:
+          type: string
+          description: Artifact type
+        Status:
+          type: string
+          description: Deployment status
+          enum:
+          - STARTED
+          - STARTING
+          - STOPPING
+          - STOPPED
+          - ERROR
+        DeployedBy:
+          type: string
+          description: User who deployed the artifact
+        DeployedOn:
+          type: string
+          description: Deployment timestamp
+        ErrorInformation:
+          type: string
+          description: Error details if status is ERROR
+  securitySchemes:
+    oauth2:
+      type: oauth2
+      flows:
+        clientCredentials:
+          tokenUrl: https://{tenant}.authentication.sap.hana.ondemand.com/oauth/token
+          scopes: {}
+    basicAuth:
+      type: http
+      scheme: basic

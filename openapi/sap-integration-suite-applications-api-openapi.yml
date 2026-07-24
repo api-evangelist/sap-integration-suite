@@ -1,0 +1,135 @@
+openapi: 3.1.0
+info:
+  title: SAP API Management API Products Applications API
+  description: The SAP API Management API enables programmatic management of APIs, products, applications, and developer portals within SAP Integration Suite. It supports creating and publishing API proxies, managing rate plans, configuring policies, administering developer portals, and managing the full API lifecycle within SAP Business Technology Platform.
+  version: 1.0.0
+  contact:
+    name: SAP Support
+    url: https://support.sap.com
+  license:
+    name: SAP Developer License
+    url: https://www.sap.com/about/agreements/product-use-and-support-terms.html
+  x-logo:
+    url: https://www.sap.com/dam/application/shared/logos/sap-logo.svg
+servers:
+- url: https://{api-portal-host}/apiportal/api/1.0
+  description: SAP API Management API Portal
+  variables:
+    api-portal-host:
+      default: my-tenant.apimanagement.sap.hana.ondemand.com
+      description: SAP API Management host
+security:
+- oauth2: []
+- basicAuth: []
+tags:
+- name: Applications
+  description: Manage developer applications and credentials
+paths:
+  /Management/Applications:
+    get:
+      operationId: listApplications
+      summary: List Applications
+      description: Retrieve all developer applications registered in the API portal.
+      tags:
+      - Applications
+      parameters:
+      - name: $top
+        in: query
+        schema:
+          type: integer
+      - name: $skip
+        in: query
+        schema:
+          type: integer
+      - name: $filter
+        in: query
+        schema:
+          type: string
+      responses:
+        '200':
+          description: List of applications
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  d:
+                    type: object
+                    properties:
+                      results:
+                        type: array
+                        items:
+                          $ref: '#/components/schemas/Application'
+        '401':
+          description: Unauthorized
+  /Management/Applications('{id}'):
+    get:
+      operationId: getApplication
+      summary: Get Application
+      description: Retrieve a specific developer application by ID.
+      tags:
+      - Applications
+      parameters:
+      - name: id
+        in: path
+        required: true
+        description: Application identifier
+        schema:
+          type: string
+      responses:
+        '200':
+          description: Application details
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  d:
+                    $ref: '#/components/schemas/Application'
+        '404':
+          description: Application not found
+components:
+  schemas:
+    Application:
+      type: object
+      properties:
+        id:
+          type: string
+          description: Application identifier
+        name:
+          type: string
+          description: Application name
+        title:
+          type: string
+          description: Display title
+        description:
+          type: string
+          description: Application description
+        status:
+          type: string
+          description: Application status
+          enum:
+          - APPROVED
+          - PENDING
+          - REJECTED
+        developerEmail:
+          type: string
+          description: Developer email associated with the application
+        apiProducts:
+          type: array
+          items:
+            type: string
+          description: API products the application is subscribed to
+        createdAt:
+          type: string
+          format: date-time
+  securitySchemes:
+    oauth2:
+      type: oauth2
+      flows:
+        clientCredentials:
+          tokenUrl: https://{tenant}.authentication.sap.hana.ondemand.com/oauth/token
+          scopes: {}
+    basicAuth:
+      type: http
+      scheme: basic

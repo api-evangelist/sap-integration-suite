@@ -1,0 +1,150 @@
+openapi: 3.1.0
+info:
+  title: SAP API Management API Products Integration Packages API
+  description: The SAP API Management API enables programmatic management of APIs, products, applications, and developer portals within SAP Integration Suite. It supports creating and publishing API proxies, managing rate plans, configuring policies, administering developer portals, and managing the full API lifecycle within SAP Business Technology Platform.
+  version: 1.0.0
+  contact:
+    name: SAP Support
+    url: https://support.sap.com
+  license:
+    name: SAP Developer License
+    url: https://www.sap.com/about/agreements/product-use-and-support-terms.html
+  x-logo:
+    url: https://www.sap.com/dam/application/shared/logos/sap-logo.svg
+servers:
+- url: https://{api-portal-host}/apiportal/api/1.0
+  description: SAP API Management API Portal
+  variables:
+    api-portal-host:
+      default: my-tenant.apimanagement.sap.hana.ondemand.com
+      description: SAP API Management host
+security:
+- oauth2: []
+- basicAuth: []
+tags:
+- name: Integration Packages
+  description: Manage integration packages and their content
+paths:
+  /IntegrationPackages:
+    get:
+      operationId: listIntegrationPackages
+      summary: List Integration Packages
+      description: Retrieve all integration packages available in the tenant.
+      tags:
+      - Integration Packages
+      parameters:
+      - name: $top
+        in: query
+        description: Maximum number of records to return
+        schema:
+          type: integer
+      - name: $skip
+        in: query
+        description: Number of records to skip for pagination
+        schema:
+          type: integer
+      - name: $filter
+        in: query
+        description: OData filter expression
+        schema:
+          type: string
+      - name: $orderby
+        in: query
+        description: OData orderby expression
+        schema:
+          type: string
+      responses:
+        '200':
+          description: List of integration packages
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  d:
+                    type: object
+                    properties:
+                      results:
+                        type: array
+                        items:
+                          $ref: '#/components/schemas/IntegrationPackage'
+        '401':
+          description: Unauthorized
+        '403':
+          description: Forbidden
+  /IntegrationPackages('{Id}'):
+    get:
+      operationId: getIntegrationPackage
+      summary: Get Integration Package
+      description: Retrieve a specific integration package by its ID.
+      tags:
+      - Integration Packages
+      parameters:
+      - name: Id
+        in: path
+        required: true
+        description: Integration package identifier
+        schema:
+          type: string
+      responses:
+        '200':
+          description: Integration package details
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  d:
+                    $ref: '#/components/schemas/IntegrationPackage'
+        '401':
+          description: Unauthorized
+        '404':
+          description: Package not found
+components:
+  schemas:
+    IntegrationPackage:
+      type: object
+      properties:
+        Id:
+          type: string
+          description: Unique identifier of the integration package
+        Name:
+          type: string
+          description: Display name of the package
+        Description:
+          type: string
+          description: Package description
+        ShortText:
+          type: string
+          description: Short description
+        Version:
+          type: string
+          description: Package version
+        Vendor:
+          type: string
+          description: Package vendor
+        Mode:
+          type: string
+          description: Package mode (EDIT_ALLOWED or READONLY)
+          enum:
+          - EDIT_ALLOWED
+          - READONLY
+        SupportedPlatform:
+          type: string
+          description: Supported runtime platform
+        CreationDate:
+          type: string
+          description: Package creation date
+        ModifiedDate:
+          type: string
+          description: Package last modified date
+  securitySchemes:
+    oauth2:
+      type: oauth2
+      flows:
+        clientCredentials:
+          tokenUrl: https://{tenant}.authentication.sap.hana.ondemand.com/oauth/token
+          scopes: {}
+    basicAuth:
+      type: http
+      scheme: basic

@@ -1,0 +1,94 @@
+openapi: 3.1.0
+info:
+  title: SAP API Management API Products Service Endpoints API
+  description: The SAP API Management API enables programmatic management of APIs, products, applications, and developer portals within SAP Integration Suite. It supports creating and publishing API proxies, managing rate plans, configuring policies, administering developer portals, and managing the full API lifecycle within SAP Business Technology Platform.
+  version: 1.0.0
+  contact:
+    name: SAP Support
+    url: https://support.sap.com
+  license:
+    name: SAP Developer License
+    url: https://www.sap.com/about/agreements/product-use-and-support-terms.html
+  x-logo:
+    url: https://www.sap.com/dam/application/shared/logos/sap-logo.svg
+servers:
+- url: https://{api-portal-host}/apiportal/api/1.0
+  description: SAP API Management API Portal
+  variables:
+    api-portal-host:
+      default: my-tenant.apimanagement.sap.hana.ondemand.com
+      description: SAP API Management host
+security:
+- oauth2: []
+- basicAuth: []
+tags:
+- name: Service Endpoints
+  description: Discover and manage service endpoints
+paths:
+  /ServiceEndpoints:
+    get:
+      operationId: listServiceEndpoints
+      summary: List Service Endpoints
+      description: Retrieve all service endpoints registered in the Integration Suite tenant. Supports pagination with $top and $skip parameters.
+      tags:
+      - Service Endpoints
+      parameters:
+      - name: $top
+        in: query
+        schema:
+          type: integer
+      - name: $skip
+        in: query
+        schema:
+          type: integer
+      - name: $count
+        in: query
+        schema:
+          type: boolean
+      responses:
+        '200':
+          description: List of service endpoints
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  d:
+                    type: object
+                    properties:
+                      results:
+                        type: array
+                        items:
+                          $ref: '#/components/schemas/ServiceEndpoint'
+        '401':
+          description: Unauthorized
+components:
+  schemas:
+    ServiceEndpoint:
+      type: object
+      properties:
+        Name:
+          type: string
+          description: Service endpoint name
+        Id:
+          type: string
+          description: Service endpoint identifier
+        Title:
+          type: string
+          description: Endpoint title
+        Protocol:
+          type: string
+          description: Communication protocol (e.g., HTTPS, AS2)
+        Url:
+          type: string
+          description: Endpoint URL
+  securitySchemes:
+    oauth2:
+      type: oauth2
+      flows:
+        clientCredentials:
+          tokenUrl: https://{tenant}.authentication.sap.hana.ondemand.com/oauth/token
+          scopes: {}
+    basicAuth:
+      type: http
+      scheme: basic

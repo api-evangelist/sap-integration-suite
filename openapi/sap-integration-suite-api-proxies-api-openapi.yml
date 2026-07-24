@@ -1,0 +1,238 @@
+openapi: 3.1.0
+info:
+  title: SAP API Management API Products API Proxies API
+  description: The SAP API Management API enables programmatic management of APIs, products, applications, and developer portals within SAP Integration Suite. It supports creating and publishing API proxies, managing rate plans, configuring policies, administering developer portals, and managing the full API lifecycle within SAP Business Technology Platform.
+  version: 1.0.0
+  contact:
+    name: SAP Support
+    url: https://support.sap.com
+  license:
+    name: SAP Developer License
+    url: https://www.sap.com/about/agreements/product-use-and-support-terms.html
+  x-logo:
+    url: https://www.sap.com/dam/application/shared/logos/sap-logo.svg
+servers:
+- url: https://{api-portal-host}/apiportal/api/1.0
+  description: SAP API Management API Portal
+  variables:
+    api-portal-host:
+      default: my-tenant.apimanagement.sap.hana.ondemand.com
+      description: SAP API Management host
+security:
+- oauth2: []
+- basicAuth: []
+tags:
+- name: API Proxies
+  description: Manage API proxy configurations
+paths:
+  /Management/APIProxies:
+    get:
+      operationId: listAPIProxies
+      summary: List API Proxies
+      description: Retrieve all API proxies defined in the API Management tenant.
+      tags:
+      - API Proxies
+      parameters:
+      - name: $top
+        in: query
+        schema:
+          type: integer
+        description: Maximum number of results to return
+      - name: $skip
+        in: query
+        schema:
+          type: integer
+        description: Number of results to skip for pagination
+      - name: $filter
+        in: query
+        schema:
+          type: string
+        description: OData filter expression
+      - name: $orderby
+        in: query
+        schema:
+          type: string
+      responses:
+        '200':
+          description: List of API proxies
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  d:
+                    type: object
+                    properties:
+                      results:
+                        type: array
+                        items:
+                          $ref: '#/components/schemas/APIProxy'
+        '401':
+          description: Unauthorized
+    post:
+      operationId: createAPIProxy
+      summary: Create API Proxy
+      description: Create a new API proxy in the API Management tenant.
+      tags:
+      - API Proxies
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/APIProxyRequest'
+      responses:
+        '201':
+          description: API proxy created
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  d:
+                    $ref: '#/components/schemas/APIProxy'
+        '400':
+          description: Bad request
+        '401':
+          description: Unauthorized
+  /Management/APIProxies('{name}'):
+    get:
+      operationId: getAPIProxy
+      summary: Get API Proxy
+      description: Retrieve a specific API proxy by name.
+      tags:
+      - API Proxies
+      parameters:
+      - name: name
+        in: path
+        required: true
+        description: API proxy name
+        schema:
+          type: string
+      responses:
+        '200':
+          description: API proxy details
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  d:
+                    $ref: '#/components/schemas/APIProxy'
+        '404':
+          description: API proxy not found
+    put:
+      operationId: updateAPIProxy
+      summary: Update API Proxy
+      description: Update an existing API proxy.
+      tags:
+      - API Proxies
+      parameters:
+      - name: name
+        in: path
+        required: true
+        description: API proxy name
+        schema:
+          type: string
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/APIProxyRequest'
+      responses:
+        '200':
+          description: API proxy updated
+        '400':
+          description: Bad request
+        '404':
+          description: Not found
+    delete:
+      operationId: deleteAPIProxy
+      summary: Delete API Proxy
+      description: Delete an existing API proxy from the tenant.
+      tags:
+      - API Proxies
+      parameters:
+      - name: name
+        in: path
+        required: true
+        description: API proxy name
+        schema:
+          type: string
+      responses:
+        '204':
+          description: Deleted successfully
+        '404':
+          description: API proxy not found
+components:
+  schemas:
+    APIProxy:
+      type: object
+      properties:
+        name:
+          type: string
+          description: API proxy name (unique identifier)
+        title:
+          type: string
+          description: Display title
+        description:
+          type: string
+          description: API proxy description
+        version:
+          type: string
+          description: API version
+        basePath:
+          type: string
+          description: Base path for the API proxy
+        virtualHost:
+          type: string
+          description: Virtual host assigned to the proxy
+        targetEndpoint:
+          type: string
+          description: Backend target endpoint URL
+        isDeployed:
+          type: boolean
+          description: Whether the proxy is currently deployed
+        createdAt:
+          type: string
+          format: date-time
+          description: Creation timestamp
+        updatedAt:
+          type: string
+          format: date-time
+          description: Last update timestamp
+    APIProxyRequest:
+      type: object
+      required:
+      - name
+      - targetEndpoint
+      properties:
+        name:
+          type: string
+          description: API proxy name
+        title:
+          type: string
+          description: Display title
+        description:
+          type: string
+          description: Description
+        basePath:
+          type: string
+          description: Base path
+        targetEndpoint:
+          type: string
+          description: Target endpoint URL
+        version:
+          type: string
+          description: API version
+  securitySchemes:
+    oauth2:
+      type: oauth2
+      flows:
+        clientCredentials:
+          tokenUrl: https://{tenant}.authentication.sap.hana.ondemand.com/oauth/token
+          scopes: {}
+    basicAuth:
+      type: http
+      scheme: basic
