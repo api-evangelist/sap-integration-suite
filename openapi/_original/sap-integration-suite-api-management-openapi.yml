@@ -1,0 +1,628 @@
+openapi: 3.1.0
+info:
+  title: SAP API Management API
+  description: >-
+    The SAP API Management API enables programmatic management of APIs,
+    products, applications, and developer portals within SAP Integration Suite.
+    It supports creating and publishing API proxies, managing rate plans,
+    configuring policies, administering developer portals, and managing the full
+    API lifecycle within SAP Business Technology Platform.
+  version: 1.0.0
+  contact:
+    name: SAP Support
+    url: https://support.sap.com
+  license:
+    name: SAP Developer License
+    url: https://www.sap.com/about/agreements/product-use-and-support-terms.html
+  x-logo:
+    url: https://www.sap.com/dam/application/shared/logos/sap-logo.svg
+servers:
+  - url: https://{api-portal-host}/apiportal/api/1.0
+    description: SAP API Management API Portal
+    variables:
+      api-portal-host:
+        default: my-tenant.apimanagement.sap.hana.ondemand.com
+        description: SAP API Management host
+security:
+  - oauth2: []
+  - basicAuth: []
+tags:
+  - name: API Proxies
+    description: Manage API proxy configurations
+  - name: API Products
+    description: Manage API products bundling multiple APIs
+  - name: Applications
+    description: Manage developer applications and credentials
+  - name: Developers
+    description: Manage developer accounts
+  - name: Analytics
+    description: Retrieve API usage analytics
+  - name: Key Value Maps
+    description: Manage key-value map configurations
+
+paths:
+  /Management/APIProxies:
+    get:
+      operationId: listAPIProxies
+      summary: List API Proxies
+      description: Retrieve all API proxies defined in the API Management tenant.
+      tags:
+        - API Proxies
+      parameters:
+        - name: $top
+          in: query
+          schema:
+            type: integer
+          description: Maximum number of results to return
+        - name: $skip
+          in: query
+          schema:
+            type: integer
+          description: Number of results to skip for pagination
+        - name: $filter
+          in: query
+          schema:
+            type: string
+          description: OData filter expression
+        - name: $orderby
+          in: query
+          schema:
+            type: string
+      responses:
+        '200':
+          description: List of API proxies
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  d:
+                    type: object
+                    properties:
+                      results:
+                        type: array
+                        items:
+                          $ref: '#/components/schemas/APIProxy'
+        '401':
+          description: Unauthorized
+    post:
+      operationId: createAPIProxy
+      summary: Create API Proxy
+      description: Create a new API proxy in the API Management tenant.
+      tags:
+        - API Proxies
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/APIProxyRequest'
+      responses:
+        '201':
+          description: API proxy created
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  d:
+                    $ref: '#/components/schemas/APIProxy'
+        '400':
+          description: Bad request
+        '401':
+          description: Unauthorized
+
+  /Management/APIProxies('{name}'):
+    get:
+      operationId: getAPIProxy
+      summary: Get API Proxy
+      description: Retrieve a specific API proxy by name.
+      tags:
+        - API Proxies
+      parameters:
+        - name: name
+          in: path
+          required: true
+          description: API proxy name
+          schema:
+            type: string
+      responses:
+        '200':
+          description: API proxy details
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  d:
+                    $ref: '#/components/schemas/APIProxy'
+        '404':
+          description: API proxy not found
+    put:
+      operationId: updateAPIProxy
+      summary: Update API Proxy
+      description: Update an existing API proxy.
+      tags:
+        - API Proxies
+      parameters:
+        - name: name
+          in: path
+          required: true
+          description: API proxy name
+          schema:
+            type: string
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/APIProxyRequest'
+      responses:
+        '200':
+          description: API proxy updated
+        '400':
+          description: Bad request
+        '404':
+          description: Not found
+    delete:
+      operationId: deleteAPIProxy
+      summary: Delete API Proxy
+      description: Delete an existing API proxy from the tenant.
+      tags:
+        - API Proxies
+      parameters:
+        - name: name
+          in: path
+          required: true
+          description: API proxy name
+          schema:
+            type: string
+      responses:
+        '204':
+          description: Deleted successfully
+        '404':
+          description: API proxy not found
+
+  /Management/APIProducts:
+    get:
+      operationId: listAPIProducts
+      summary: List API Products
+      description: Retrieve all API products available in the API Management tenant.
+      tags:
+        - API Products
+      parameters:
+        - name: $top
+          in: query
+          schema:
+            type: integer
+        - name: $skip
+          in: query
+          schema:
+            type: integer
+        - name: $filter
+          in: query
+          schema:
+            type: string
+      responses:
+        '200':
+          description: List of API products
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  d:
+                    type: object
+                    properties:
+                      results:
+                        type: array
+                        items:
+                          $ref: '#/components/schemas/APIProduct'
+        '401':
+          description: Unauthorized
+    post:
+      operationId: createAPIProduct
+      summary: Create API Product
+      description: Create a new API product bundling one or more API proxies.
+      tags:
+        - API Products
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/APIProductRequest'
+      responses:
+        '201':
+          description: API product created
+        '400':
+          description: Bad request
+        '401':
+          description: Unauthorized
+
+  /Management/APIProducts('{name}'):
+    get:
+      operationId: getAPIProduct
+      summary: Get API Product
+      description: Retrieve a specific API product by name.
+      tags:
+        - API Products
+      parameters:
+        - name: name
+          in: path
+          required: true
+          description: API product name
+          schema:
+            type: string
+      responses:
+        '200':
+          description: API product details
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  d:
+                    $ref: '#/components/schemas/APIProduct'
+        '404':
+          description: API product not found
+
+  /Management/Applications:
+    get:
+      operationId: listApplications
+      summary: List Applications
+      description: Retrieve all developer applications registered in the API portal.
+      tags:
+        - Applications
+      parameters:
+        - name: $top
+          in: query
+          schema:
+            type: integer
+        - name: $skip
+          in: query
+          schema:
+            type: integer
+        - name: $filter
+          in: query
+          schema:
+            type: string
+      responses:
+        '200':
+          description: List of applications
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  d:
+                    type: object
+                    properties:
+                      results:
+                        type: array
+                        items:
+                          $ref: '#/components/schemas/Application'
+        '401':
+          description: Unauthorized
+
+  /Management/Applications('{id}'):
+    get:
+      operationId: getApplication
+      summary: Get Application
+      description: Retrieve a specific developer application by ID.
+      tags:
+        - Applications
+      parameters:
+        - name: id
+          in: path
+          required: true
+          description: Application identifier
+          schema:
+            type: string
+      responses:
+        '200':
+          description: Application details
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  d:
+                    $ref: '#/components/schemas/Application'
+        '404':
+          description: Application not found
+
+  /Management/Developers:
+    get:
+      operationId: listDevelopers
+      summary: List Developers
+      description: Retrieve all developers registered in the API portal.
+      tags:
+        - Developers
+      parameters:
+        - name: $top
+          in: query
+          schema:
+            type: integer
+        - name: $skip
+          in: query
+          schema:
+            type: integer
+      responses:
+        '200':
+          description: List of developers
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  d:
+                    type: object
+                    properties:
+                      results:
+                        type: array
+                        items:
+                          $ref: '#/components/schemas/Developer'
+        '401':
+          description: Unauthorized
+
+  /KeyValueMaps:
+    get:
+      operationId: listKeyValueMaps
+      summary: List Key Value Maps
+      description: Retrieve all key-value maps configured in the API Management tenant.
+      tags:
+        - Key Value Maps
+      responses:
+        '200':
+          description: List of key-value maps
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  d:
+                    type: object
+                    properties:
+                      results:
+                        type: array
+                        items:
+                          $ref: '#/components/schemas/KeyValueMap'
+        '401':
+          description: Unauthorized
+    post:
+      operationId: createKeyValueMap
+      summary: Create Key Value Map
+      description: Create a new key-value map for storing configuration data.
+      tags:
+        - Key Value Maps
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/KeyValueMap'
+      responses:
+        '201':
+          description: Key-value map created
+        '400':
+          description: Bad request
+
+components:
+  securitySchemes:
+    oauth2:
+      type: oauth2
+      flows:
+        clientCredentials:
+          tokenUrl: https://{tenant}.authentication.sap.hana.ondemand.com/oauth/token
+          scopes: {}
+    basicAuth:
+      type: http
+      scheme: basic
+
+  schemas:
+    APIProxy:
+      type: object
+      properties:
+        name:
+          type: string
+          description: API proxy name (unique identifier)
+        title:
+          type: string
+          description: Display title
+        description:
+          type: string
+          description: API proxy description
+        version:
+          type: string
+          description: API version
+        basePath:
+          type: string
+          description: Base path for the API proxy
+        virtualHost:
+          type: string
+          description: Virtual host assigned to the proxy
+        targetEndpoint:
+          type: string
+          description: Backend target endpoint URL
+        isDeployed:
+          type: boolean
+          description: Whether the proxy is currently deployed
+        createdAt:
+          type: string
+          format: date-time
+          description: Creation timestamp
+        updatedAt:
+          type: string
+          format: date-time
+          description: Last update timestamp
+
+    APIProxyRequest:
+      type: object
+      required:
+        - name
+        - targetEndpoint
+      properties:
+        name:
+          type: string
+          description: API proxy name
+        title:
+          type: string
+          description: Display title
+        description:
+          type: string
+          description: Description
+        basePath:
+          type: string
+          description: Base path
+        targetEndpoint:
+          type: string
+          description: Target endpoint URL
+        version:
+          type: string
+          description: API version
+
+    APIProduct:
+      type: object
+      properties:
+        name:
+          type: string
+          description: Product name
+        title:
+          type: string
+          description: Display title
+        description:
+          type: string
+          description: Product description
+        status:
+          type: string
+          description: Product status
+          enum:
+            - PUBLISHED
+            - DEPRECATED
+            - UNPUBLISHED
+        quota:
+          type: integer
+          description: Request quota per interval
+        quotaInterval:
+          type: integer
+          description: Quota interval value
+        quotaTimeUnit:
+          type: string
+          description: Quota time unit
+          enum:
+            - minute
+            - hour
+            - day
+            - month
+        apiProxies:
+          type: array
+          items:
+            type: string
+          description: Names of API proxies included in this product
+
+    APIProductRequest:
+      type: object
+      required:
+        - name
+      properties:
+        name:
+          type: string
+          description: Product name
+        title:
+          type: string
+          description: Display title
+        description:
+          type: string
+          description: Description
+        apiProxies:
+          type: array
+          items:
+            type: string
+
+    Application:
+      type: object
+      properties:
+        id:
+          type: string
+          description: Application identifier
+        name:
+          type: string
+          description: Application name
+        title:
+          type: string
+          description: Display title
+        description:
+          type: string
+          description: Application description
+        status:
+          type: string
+          description: Application status
+          enum:
+            - APPROVED
+            - PENDING
+            - REJECTED
+        developerEmail:
+          type: string
+          description: Developer email associated with the application
+        apiProducts:
+          type: array
+          items:
+            type: string
+          description: API products the application is subscribed to
+        createdAt:
+          type: string
+          format: date-time
+
+    Developer:
+      type: object
+      properties:
+        email:
+          type: string
+          description: Developer email address (unique identifier)
+        firstName:
+          type: string
+          description: First name
+        lastName:
+          type: string
+          description: Last name
+        status:
+          type: string
+          description: Developer status
+          enum:
+            - ACTIVE
+            - INACTIVE
+        createdAt:
+          type: string
+          format: date-time
+        updatedAt:
+          type: string
+          format: date-time
+
+    KeyValueMap:
+      type: object
+      properties:
+        name:
+          type: string
+          description: Key-value map name
+        encrypted:
+          type: boolean
+          description: Whether values are stored encrypted
+        scope:
+          type: string
+          description: Scope of the key-value map
+          enum:
+            - apiproxy
+            - environment
+            - organization
+        keyValuePairs:
+          type: array
+          items:
+            type: object
+            properties:
+              key:
+                type: string
+                description: Key name
+              value:
+                type: string
+                description: Value (masked if encrypted)

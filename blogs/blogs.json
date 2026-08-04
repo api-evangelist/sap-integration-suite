@@ -2,10 +2,6 @@
   "repo": "sap-integration-suite",
   "feeds": [
     {
-      "source": "https://community.sap.com/khhcw49343/rss/Community?interaction.style=forum",
-      "error": "HTTPError"
-    },
-    {
       "source": "https://help.sap.com/docs/integration-suite/sap-integration-suite/setting-up-oauth-inbound-authentication",
       "feed_url": "https://help.sap.com/docs/integration-suite/sap-integration-suite/setting-up-oauth-inbound-authentication",
       "title": "",
@@ -14,5 +10,5 @@
     }
   ],
   "post_count": 102,
-  "fetched": "2026-07-11T11:50:51Z"
+  "fetched": "2026-08-01T15:49:00Z"
 }

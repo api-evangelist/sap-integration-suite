@@ -1,0 +1,34 @@
+{
+  "provider": "sap-integration-suite",
+  "sources": [
+    "sap-integration-suite-api-products-api-openapi.yml",
+    "sap-integration-suite-api-proxies-api-openapi.yml",
+    "sap-integration-suite-applications-api-openapi.yml",
+    "sap-integration-suite-developers-api-openapi.yml",
+    "sap-integration-suite-integration-flows-api-openapi.yml",
+    "sap-integration-suite-integration-packages-api-openapi.yml",
+    "sap-integration-suite-key-value-maps-api-openapi.yml",
+    "sap-integration-suite-message-processing-logs-api-openapi.yml",
+    "sap-integration-suite-runtime-artifacts-api-openapi.yml",
+    "sap-integration-suite-service-endpoints-api-openapi.yml",
+    "sap-integration-suite-variables-api-openapi.yml"
+  ],
+  "outputs": [
+    "sap-integration-suite-api-products-api-openapi.yml",
+    "sap-integration-suite-api-proxies-api-openapi.yml",
+    "sap-integration-suite-applications-api-openapi.yml",
+    "sap-integration-suite-developers-api-openapi.yml",
+    "sap-integration-suite-integration-flows-api-openapi.yml",
+    "sap-integration-suite-integration-packages-api-openapi.yml",
+    "sap-integration-suite-key-value-maps-api-openapi.yml",
+    "sap-integration-suite-message-processing-logs-api-openapi.yml",
+    "sap-integration-suite-runtime-artifacts-api-openapi.yml",
+    "sap-integration-suite-service-endpoints-api-openapi.yml",
+    "sap-integration-suite-variables-api-openapi.yml"
+  ],
+  "archived": [],
+  "errors": [],
+  "warnings": [],
+  "notes": [],
+  "skipped": []
+}
