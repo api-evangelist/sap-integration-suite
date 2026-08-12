@@ -541,8 +541,6 @@ common:
       https://developers.sap.com/tutorial-navigator.html?tag=software-product%3Atechnology-platform%2Fsap-integration-suite
   - type: Vocabulary
     url: vocabulary/sap-integration-suite-vocabulary.yml
-  - type: Capabilities
-    url: capabilities/integration-lifecycle.yaml
   - type: SpectralRules
     url: rules/sap-integration-suite-rules.yml
 maintainers:
