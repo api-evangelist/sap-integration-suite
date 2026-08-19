@@ -1,0 +1,224 @@
+{
+  "item": [
+    {
+      "id": "69447f77-ea84-47e5-b29e-3496c6a223b2",
+      "name": "Developers",
+      "description": {
+        "content": "Manage developer accounts",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "bb6f656e-6586-429d-ae04-f2a40126c448",
+          "name": "List Developers",
+          "request": {
+            "name": "List Developers",
+            "description": {
+              "content": "Retrieve all developers registered in the API portal.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "Management",
+                "Developers"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "$top",
+                  "value": "<integer>"
+                },
+                {
+                  "disabled": false,
+                  "key": "$skip",
+                  "value": "<integer>"
+                }
+              ],
+              "variable": [
+                {
+                  "description": "SAP API Management host",
+                  "type": "any",
+                  "value": "{{api-portal-host}}",
+                  "key": "api-portal-host"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "339007df-5a30-497e-90a1-0a3fc51c7d8b",
+              "name": "List of developers",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "Management",
+                    "Developers"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "$top",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "$skip",
+                      "value": "<integer>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "description": "SAP API Management host",
+                      "type": "any",
+                      "value": "{{api-portal-host}}",
+                      "key": "api-portal-host"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: oauth2",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"d\": {\n    \"results\": [\n      {\n        \"email\": \"string\",\n        \"firstName\": \"string\",\n        \"lastName\": \"string\",\n        \"status\": \"INACTIVE\",\n        \"createdAt\": \"2016-08-11T20:13:18.342Z\",\n        \"updatedAt\": \"1983-11-28T17:07:50.368Z\"\n      },\n      {\n        \"email\": \"string\",\n        \"firstName\": \"string\",\n        \"lastName\": \"string\",\n        \"status\": \"ACTIVE\",\n        \"createdAt\": \"1948-09-12T17:33:56.844Z\",\n        \"updatedAt\": \"1976-11-23T11:21:45.137Z\"\n      }\n    ]\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "d2fc57a7-fb76-43d0-8961-5e910dec970f",
+              "name": "Unauthorized",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "Management",
+                    "Developers"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "$top",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "$skip",
+                      "value": "<integer>"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "description": "SAP API Management host",
+                      "type": "any",
+                      "value": "{{api-portal-host}}",
+                      "key": "api-portal-host"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: oauth2",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "<token>"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "description": {
+        "content": "SAP API Management host",
+        "type": "text/plain"
+      },
+      "type": "any",
+      "value": "my-tenant.apimanagement.sap.hana.ondemand.com",
+      "key": "api-portal-host"
+    },
+    {
+      "type": "string",
+      "value": "https://{{api-portal-host}}/apiportal/api/1.0",
+      "key": "baseUrl"
+    }
+  ],
+  "auth": {
+    "type": "oauth2",
+    "oauth2": [
+      {
+        "key": "accessTokenUrl",
+        "value": "https://{tenant}.authentication.sap.hana.ondemand.com/oauth/token"
+      },
+      {
+        "key": "grant_type",
+        "value": "client_credentials"
+      }
+    ]
+  },
+  "info": {
+    "_postman_id": "ff9196a6-68f8-4b93-a317-3246cdb09b91",
+    "name": "SAP API Management API Products Developers API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "The SAP API Management API enables programmatic management of APIs, products, applications, and developer portals within SAP Integration Suite. It supports creating and publishing API proxies, managing rate plans, configuring policies, administering developer portals, and managing the full API lifecycle within SAP Business Technology Platform.\n\nContact Support:\n Name: SAP Support",
+      "type": "text/plain"
+    }
+  }
+}

@@ -1,0 +1,85 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "SAP API Management API Products Integration Packages API",
+    "version": "1.0.0"
+  },
+  "request": {
+    "auth": {
+      "type": "oauth2",
+      "flow": "client_credentials",
+      "accessTokenUrl": "https://{tenant}.authentication.sap.hana.ondemand.com/oauth/token",
+      "credentials": {
+        "clientId": "{{clientId}}",
+        "clientSecret": "{{clientSecret}}"
+      }
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Integration Packages",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "List Integration Packages",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://{api-portal-host}/apiportal/api/1.0/IntegrationPackages",
+            "params": [
+              {
+                "name": "$top",
+                "value": "",
+                "type": "query",
+                "description": "Maximum number of records to return"
+              },
+              {
+                "name": "$skip",
+                "value": "",
+                "type": "query",
+                "description": "Number of records to skip for pagination"
+              },
+              {
+                "name": "$filter",
+                "value": "",
+                "type": "query",
+                "description": "OData filter expression"
+              },
+              {
+                "name": "$orderby",
+                "value": "",
+                "type": "query",
+                "description": "OData orderby expression"
+              }
+            ]
+          },
+          "docs": "Retrieve all integration packages available in the tenant."
+        },
+        {
+          "info": {
+            "name": "Get Integration Package",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://{api-portal-host}/apiportal/api/1.0/IntegrationPackages(':Id')",
+            "params": [
+              {
+                "name": "Id",
+                "value": "",
+                "type": "path",
+                "description": "Integration package identifier"
+              }
+            ]
+          },
+          "docs": "Retrieve a specific integration package by its ID."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

@@ -1,0 +1,91 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "SAP API Management API Products API",
+    "version": "1.0.0"
+  },
+  "request": {
+    "auth": {
+      "type": "oauth2",
+      "flow": "client_credentials",
+      "accessTokenUrl": "https://{tenant}.authentication.sap.hana.ondemand.com/oauth/token",
+      "credentials": {
+        "clientId": "{{clientId}}",
+        "clientSecret": "{{clientSecret}}"
+      }
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "API Products",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "List API Products",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://{api-portal-host}/apiportal/api/1.0/Management/APIProducts",
+            "params": [
+              {
+                "name": "$top",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "$skip",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "$filter",
+                "value": "",
+                "type": "query"
+              }
+            ]
+          },
+          "docs": "Retrieve all API products available in the API Management tenant."
+        },
+        {
+          "info": {
+            "name": "Create API Product",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://{api-portal-host}/apiportal/api/1.0/Management/APIProducts",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Create a new API product bundling one or more API proxies."
+        },
+        {
+          "info": {
+            "name": "Get API Product",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://{api-portal-host}/apiportal/api/1.0/Management/APIProducts(':name')",
+            "params": [
+              {
+                "name": "name",
+                "value": "",
+                "type": "path",
+                "description": "API product name"
+              }
+            ]
+          },
+          "docs": "Retrieve a specific API product by name."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

@@ -1,0 +1,98 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "SAP API Management API Products Integration Flows API",
+    "version": "1.0.0"
+  },
+  "request": {
+    "auth": {
+      "type": "oauth2",
+      "flow": "client_credentials",
+      "accessTokenUrl": "https://{tenant}.authentication.sap.hana.ondemand.com/oauth/token",
+      "credentials": {
+        "clientId": "{{clientId}}",
+        "clientSecret": "{{clientSecret}}"
+      }
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Integration Flows",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "List Design-Time Artifacts in Package",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://{api-portal-host}/apiportal/api/1.0/IntegrationPackages(':Id')/IntegrationDesigntimeArtifacts",
+            "params": [
+              {
+                "name": "Id",
+                "value": "",
+                "type": "path",
+                "description": "Integration package identifier"
+              }
+            ]
+          },
+          "docs": "Retrieve all design-time integration artifacts within a package."
+        },
+        {
+          "info": {
+            "name": "Get Design-Time Artifact",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://{api-portal-host}/apiportal/api/1.0/IntegrationDesigntimeArtifacts(Id=':Id',Version=':Version')",
+            "params": [
+              {
+                "name": "Id",
+                "value": "",
+                "type": "path",
+                "description": "Artifact identifier"
+              },
+              {
+                "name": "Version",
+                "value": "",
+                "type": "path",
+                "description": "Artifact version (use 'active' for latest)"
+              }
+            ]
+          },
+          "docs": "Retrieve a specific design-time integration artifact."
+        },
+        {
+          "info": {
+            "name": "Deploy Integration Flow",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://{api-portal-host}/apiportal/api/1.0/DeployIntegrationDesigntimeArtifact",
+            "params": [
+              {
+                "name": "Id",
+                "value": "",
+                "type": "query",
+                "description": "Artifact identifier to deploy"
+              },
+              {
+                "name": "Version",
+                "value": "",
+                "type": "query",
+                "description": "Artifact version to deploy"
+              }
+            ]
+          },
+          "docs": "Deploy a design-time integration artifact to the runtime. Triggers compilation and deployment of the integration flow."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

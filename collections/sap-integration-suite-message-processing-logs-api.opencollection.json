@@ -1,0 +1,102 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "SAP API Management API Products Message Processing Logs API",
+    "version": "1.0.0"
+  },
+  "request": {
+    "auth": {
+      "type": "oauth2",
+      "flow": "client_credentials",
+      "accessTokenUrl": "https://{tenant}.authentication.sap.hana.ondemand.com/oauth/token",
+      "credentials": {
+        "clientId": "{{clientId}}",
+        "clientSecret": "{{clientSecret}}"
+      }
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Message Processing Logs",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "List Message Processing Logs",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://{api-portal-host}/apiportal/api/1.0/MessageProcessingLogs",
+            "params": [
+              {
+                "name": "$filter",
+                "value": "",
+                "type": "query",
+                "description": "OData filter expression (e.g., Status eq 'FAILED')"
+              },
+              {
+                "name": "$top",
+                "value": "",
+                "type": "query",
+                "description": "Maximum number of log entries to return"
+              },
+              {
+                "name": "$skip",
+                "value": "",
+                "type": "query"
+              },
+              {
+                "name": "$orderby",
+                "value": "",
+                "type": "query"
+              }
+            ]
+          },
+          "docs": "Retrieve message processing logs for all integration flows. Supports filtering by time range, status, and integration flow ID."
+        },
+        {
+          "info": {
+            "name": "Get Message Processing Log",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://{api-portal-host}/apiportal/api/1.0/MessageProcessingLogs(':MessageGuid')",
+            "params": [
+              {
+                "name": "MessageGuid",
+                "value": "",
+                "type": "path",
+                "description": "Message processing log GUID"
+              }
+            ]
+          },
+          "docs": "Retrieve a specific message processing log entry by its GUID."
+        },
+        {
+          "info": {
+            "name": "Get Message Log Adapter Attributes",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://{api-portal-host}/apiportal/api/1.0/MessageProcessingLogs(':MessageGuid')/AdapterAttributes",
+            "params": [
+              {
+                "name": "MessageGuid",
+                "value": "",
+                "type": "path",
+                "description": "Message processing log GUID"
+              }
+            ]
+          },
+          "docs": "Retrieve adapter-specific attributes for a message processing log entry."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}
