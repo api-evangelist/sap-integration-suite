@@ -73,6 +73,12 @@ apis:
   - Normalization
   - Open Connectors
   - Third-Party Integration
+  - Unified-API
+  tags_raw:
+  - Cloud Connectors
+  - Normalization
+  - Open Connectors
+  - Third-Party Integration
   - Unified API
   properties:
   - type: Documentation
@@ -117,6 +123,12 @@ apis:
   humanURL: https://help.sap.com/docs/event-mesh
   baseURL: https://enterprise-messaging.cfapps.sap.hana.ondemand.com
   tags:
+  - Asynchronous
+  - CloudEvents
+  - Event Mesh
+  - Messaging
+  - Pub-Sub
+  tags_raw:
   - Asynchronous
   - CloudEvents
   - Event Mesh
@@ -213,6 +225,8 @@ apis:
   humanURL: https://help.sap.com/docs/integration-suite/sap-integration-suite/cloud-integration
   baseURL: https://{host}/api/v1
   tags:
+  - Application
+  tags_raw:
   - Applications
   properties:
   - type: OpenAPI
