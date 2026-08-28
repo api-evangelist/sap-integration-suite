@@ -11,8 +11,11 @@ info:
     can be read and executed without opening the underlying OpenAPI description.
   version: 1.0.0
 sourceDescriptions:
-- name: cloudIntegrationApi
-  url: ../openapi/sap-integration-suite-cloud-integration-openapi.yml
+- name: runtimeArtifactsApi
+  url: ../openapi/sap-integration-suite-runtime-artifacts-api-openapi.yml
+  type: openapi
+- name: serviceEndpointsApi
+  url: ../openapi/sap-integration-suite-service-endpoints-api-openapi.yml
   type: openapi
 workflows:
 - workflowId: catalog-runtime-endpoints

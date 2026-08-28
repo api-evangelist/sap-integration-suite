@@ -12,8 +12,14 @@ info:
     description.
   version: 1.0.0
 sourceDescriptions:
-- name: apiManagementApi
-  url: ../openapi/sap-integration-suite-api-management-openapi.yml
+- name: apiProductsApi
+  url: ../openapi/sap-integration-suite-api-products-api-openapi.yml
+  type: openapi
+- name: applicationsApi
+  url: ../openapi/sap-integration-suite-applications-api-openapi.yml
+  type: openapi
+- name: developersApi
+  url: ../openapi/sap-integration-suite-developers-api-openapi.yml
   type: openapi
 workflows:
 - workflowId: review-application-access

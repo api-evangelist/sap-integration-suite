@@ -12,8 +12,8 @@ info:
     OpenAPI description.
   version: 1.0.0
 sourceDescriptions:
-- name: apiManagementApi
-  url: ../openapi/sap-integration-suite-api-management-openapi.yml
+- name: apiProxiesApi
+  url: ../openapi/sap-integration-suite-api-proxies-api-openapi.yml
   type: openapi
 workflows:
 - workflowId: upsert-api-proxy

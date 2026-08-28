@@ -13,8 +13,8 @@ info:
     description.
   version: 1.0.0
 sourceDescriptions:
-- name: cloudIntegrationApi
-  url: ../openapi/sap-integration-suite-cloud-integration-openapi.yml
+- name: messageProcessingLogsApi
+  url: ../openapi/sap-integration-suite-message-processing-logs-api-openapi.yml
   type: openapi
 workflows:
 - workflowId: monitor-failed-messages

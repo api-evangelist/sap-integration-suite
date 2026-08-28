@@ -13,8 +13,14 @@ info:
     executed without opening the underlying OpenAPI description.
   version: 1.0.0
 sourceDescriptions:
-- name: cloudIntegrationApi
-  url: ../openapi/sap-integration-suite-cloud-integration-openapi.yml
+- name: integrationFlowsApi
+  url: ../openapi/sap-integration-suite-integration-flows-api-openapi.yml
+  type: openapi
+- name: messageProcessingLogsApi
+  url: ../openapi/sap-integration-suite-message-processing-logs-api-openapi.yml
+  type: openapi
+- name: runtimeArtifactsApi
+  url: ../openapi/sap-integration-suite-runtime-artifacts-api-openapi.yml
   type: openapi
 workflows:
 - workflowId: deploy-and-verify-flow

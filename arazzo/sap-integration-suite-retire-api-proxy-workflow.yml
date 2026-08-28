@@ -10,8 +10,11 @@ info:
     read and executed without opening the underlying OpenAPI description.
   version: 1.0.0
 sourceDescriptions:
-- name: apiManagementApi
-  url: ../openapi/sap-integration-suite-api-management-openapi.yml
+- name: apiProductsApi
+  url: ../openapi/sap-integration-suite-api-products-api-openapi.yml
+  type: openapi
+- name: apiProxiesApi
+  url: ../openapi/sap-integration-suite-api-proxies-api-openapi.yml
   type: openapi
 workflows:
 - workflowId: retire-api-proxy
