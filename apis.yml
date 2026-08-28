@@ -5,6 +5,18 @@ description: SAP Integration Suite is an enterprise integration platform as a se
   API Management, Integration Advisor, Open Connectors, Trading Partner Management, and Event Mesh as part of SAP
   Business Technology Platform (BTP). It enables seamless connectivity between SAP and non-SAP systems.
 type: Index
+deliveryModel:
+  model: saas
+  open_source: false
+  commercial: true
+  callable_host: false
+  label: Hosted service · you call their endpoint
+  confidence: medium
+  source:
+  - openapi
+  - pricing
+  generated: '2026-08-28'
+  method: derived
 accessModel:
   pricing: enterprise
   onboarding: self-serve
@@ -434,6 +446,9 @@ apis:
   - type: Reference
     url: https://api.sap.com/api/APIMgmt/overview
 common:
+- type: CapabilityMap
+  url: capabilities/sap-integration-suite-capability-edges.yml
+  name: SAP Integration Suite Business Capability Map
 - type: ParentCompany
   url: https://apis.io/providers/sap/
   name: Sap

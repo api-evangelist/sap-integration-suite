@@ -1,0 +1,27 @@
+slug: sap-integration-suite
+provider: SAP Integration Suite
+generated_by: planning/capability-mapping/scripts/classify_capabilities.py
+model: claude-opus-5
+frame:
+- Banking & Capital Markets
+- Software & Technology
+min_confidence: 0.7
+capability_model:
+  source: https://github.com/vincentmakes/turbo-ea-capabilities
+  license: CC-BY-4.0
+  attribution: Turbo EA Capabilities by Vincent Verdet — Turbo EA, https://github.com/vincentmakes/turbo-ea-capabilities,
+    CC BY 4.0
+  notice: NOTICE
+edge_count: 1
+edges:
+- tag: API Products
+  spec_file: sap-integration-suite-api-products-api-openapi.yml
+  capability_id: BC-4270
+  capability_id_l1: BC-4270
+  capability_name: Developer Platform & API Ecosystem Management
+  confidence: 0.7
+  evidence: '"List API Products", "Create API Product"; "programmatic management of APIs, products, applications,
+    and developer portals"'
+  reason: API Products bundle API proxies for external developer consumption with rate plans — squarely
+    developer platform / API ecosystem management. Held at L1 because the surface spans product packaging,
+    publication and consumption tiers.
