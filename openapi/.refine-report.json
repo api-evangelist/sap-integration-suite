@@ -1,26 +1,17 @@
 {
   "provider": "sap-integration-suite",
   "sources": [
-    "sap-integration-suite-api-products-api-openapi.yml",
-    "sap-integration-suite-api-proxies-api-openapi.yml",
-    "sap-integration-suite-applications-api-openapi.yml",
-    "sap-integration-suite-developers-api-openapi.yml",
-    "sap-integration-suite-integration-flows-api-openapi.yml",
-    "sap-integration-suite-integration-packages-api-openapi.yml",
-    "sap-integration-suite-key-value-maps-api-openapi.yml",
-    "sap-integration-suite-message-processing-logs-api-openapi.yml",
-    "sap-integration-suite-runtime-artifacts-api-openapi.yml",
-    "sap-integration-suite-service-endpoints-api-openapi.yml",
-    "sap-integration-suite-variables-api-openapi.yml"
+    "_original/sap-integration-suite-api-management-openapi.yml",
+    "_original/sap-integration-suite-cloud-integration-openapi.yml"
   ],
   "outputs": [
     "sap-integration-suite-api-products-api-openapi.yml",
     "sap-integration-suite-api-proxies-api-openapi.yml",
     "sap-integration-suite-applications-api-openapi.yml",
     "sap-integration-suite-developers-api-openapi.yml",
+    "sap-integration-suite-key-value-maps-api-openapi.yml",
     "sap-integration-suite-integration-flows-api-openapi.yml",
     "sap-integration-suite-integration-packages-api-openapi.yml",
-    "sap-integration-suite-key-value-maps-api-openapi.yml",
     "sap-integration-suite-message-processing-logs-api-openapi.yml",
     "sap-integration-suite-runtime-artifacts-api-openapi.yml",
     "sap-integration-suite-service-endpoints-api-openapi.yml",
@@ -29,6 +20,22 @@
   "archived": [],
   "errors": [],
   "warnings": [],
-  "notes": [],
-  "skipped": []
+  "notes": [
+    "sourced from openapi/_original/ (2 archived document(s)); previously refined output at the top level was skipped rather than re-split",
+    "sap-integration-suite-api-management-openapi.yml: upgraded openapi 3.1.0 -> OpenAPI 3.2.0",
+    "sap-integration-suite-cloud-integration-openapi.yml: upgraded openapi 3.1.0 -> OpenAPI 3.2.0"
+  ],
+  "skipped": [
+    "sap-integration-suite-api-products-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "sap-integration-suite-api-proxies-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "sap-integration-suite-applications-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "sap-integration-suite-developers-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "sap-integration-suite-integration-flows-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "sap-integration-suite-integration-packages-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "sap-integration-suite-key-value-maps-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "sap-integration-suite-message-processing-logs-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "sap-integration-suite-runtime-artifacts-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "sap-integration-suite-service-endpoints-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "sap-integration-suite-variables-api-openapi.yml: previously refined output, superseded by openapi/_original/"
+  ]
 }

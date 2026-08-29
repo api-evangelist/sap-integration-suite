@@ -1,7 +1,7 @@
-openapi: 3.1.0
+openapi: 3.2.0
 info:
-  title: SAP API Management API Products Integration Flows API
-  description: The SAP API Management API enables programmatic management of APIs, products, applications, and developer portals within SAP Integration Suite. It supports creating and publishing API proxies, managing rate plans, configuring policies, administering developer portals, and managing the full API lifecycle within SAP Business Technology Platform.
+  title: SAP Cloud Integration Integration Flows API
+  description: The SAP Cloud Integration API (Process Integration Runtime API) provides OData V2 and REST endpoints for deploying, monitoring, and managing integration flows, artifacts, packages, and runtime operations on SAP Integration Suite hosted on SAP Business Technology Platform. It supports message processing log retrieval, integration package lifecycle management, artifact deployment, and service endpoint discovery.
   version: 1.0.0
   contact:
     name: SAP Support
@@ -12,15 +12,14 @@ info:
   x-logo:
     url: https://www.sap.com/dam/application/shared/logos/sap-logo.svg
 servers:
-- url: https://{api-portal-host}/apiportal/api/1.0
-  description: SAP API Management API Portal
+- url: https://{tenant-host}/api/v1
+  description: SAP Integration Suite Tenant
   variables:
-    api-portal-host:
-      default: my-tenant.apimanagement.sap.hana.ondemand.com
-      description: SAP API Management host
+    tenant-host:
+      default: my-tenant.integrationsuite.cfapps.sap.hana.ondemand.com
+      description: SAP Integration Suite tenant host
 security:
 - oauth2: []
-- basicAuth: []
 tags:
 - name: Integration Flows
   description: Deploy and manage integration flow artifacts
@@ -169,6 +168,3 @@ components:
         clientCredentials:
           tokenUrl: https://{tenant}.authentication.sap.hana.ondemand.com/oauth/token
           scopes: {}
-    basicAuth:
-      type: http
-      scheme: basic
