@@ -23,7 +23,8 @@
   "notes": [
     "sourced from openapi/_original/ (2 archived document(s)); previously refined output at the top level was skipped rather than re-split",
     "sap-integration-suite-api-management-openapi.yml: upgraded openapi 3.1.0 -> OpenAPI 3.2.0",
-    "sap-integration-suite-cloud-integration-openapi.yml: upgraded openapi 3.1.0 -> OpenAPI 3.2.0"
+    "sap-integration-suite-cloud-integration-openapi.yml: upgraded openapi 3.1.0 -> OpenAPI 3.2.0",
+    "apis.yml register: already-registered"
   ],
   "skipped": [
     "sap-integration-suite-api-products-api-openapi.yml: previously refined output, superseded by openapi/_original/",

@@ -1,0 +1,35 @@
+# Front Door AI Index — sap-integration-suite — 2026-09-17
+# AI vocabulary counted on the provider's root page. Generated; do not edit.
+# `score` is null unless ownership is `own` — see front_door_ai.py.
+front_door_ai:
+  slug: sap-integration-suite
+  lexicon_version: '1.0'
+  probed_at: '2026-09-17'
+  host: www.sap.com
+  final_host: www.sap.com
+  ownership: unresolved
+  owner: null
+  shares_host_with:
+  - ariba-guided-buying
+  - sap-america
+  - sap-api-management
+  - sap-bi-tools
+  - sap-brim-billing-and-revenue-innovation-management
+  - sap-btp
+  - sap-business-one
+  - sap-bw
+  - sap-bydesign
+  - sap-commerce
+  - sap-fieldglass
+  - sap-sales-and-distribution-sd
+  - sap-successfactors
+  - sybase
+  inherited_from: null
+  verdict: unmeasured
+  score: null
+  host_score: null
+  density: null
+  words: null
+  tiers: null
+  ambiguous: null
+  top_terms: null
