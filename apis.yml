@@ -78,13 +78,14 @@ apis:
   - Normalization
   - Open Connectors
   - Third-Party Integration
-  - Unified-API
+  - Unified API
   tags_raw:
   - Cloud Connectors
   - Normalization
   - Open Connectors
   - Third-Party Integration
   - Unified API
+  - Unified-API
   properties:
   - type: Documentation
     url: https://help.sap.com/docs/integration-suite/sap-integration-suite/open-connectors-capability
