@@ -109,6 +109,24 @@ paths:
           description: API product not found
 components:
   schemas:
+    APIProductRequest:
+      type: object
+      required:
+      - name
+      properties:
+        name:
+          type: string
+          description: Product name
+        title:
+          type: string
+          description: Display title
+        description:
+          type: string
+          description: Description
+        apiProxies:
+          type: array
+          items:
+            type: string
     APIProduct:
       type: object
       properties:
@@ -147,24 +165,6 @@ components:
           items:
             type: string
           description: Names of API proxies included in this product
-    APIProductRequest:
-      type: object
-      required:
-      - name
-      properties:
-        name:
-          type: string
-          description: Product name
-        title:
-          type: string
-          description: Display title
-        description:
-          type: string
-          description: Description
-        apiProxies:
-          type: array
-          items:
-            type: string
   securitySchemes:
     oauth2:
       type: oauth2
