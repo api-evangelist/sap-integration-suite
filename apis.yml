@@ -447,6 +447,12 @@ apis:
   - type: Reference
     url: https://api.sap.com/api/APIMgmt/overview
 common:
+- type: Plans
+  url: plans/sap-integration-suite-plans-pricing.yml
+- type: RateLimits
+  url: rate-limits/sap-integration-suite-rate-limits.yml
+- type: FinOps
+  url: finops/sap-integration-suite-finops.yml
 - type: CapabilityMap
   url: capabilities/sap-integration-suite-capability-edges.yml
   name: SAP Integration Suite Business Capability Map
