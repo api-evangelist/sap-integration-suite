@@ -167,6 +167,30 @@ paths:
           description: API proxy not found
 components:
   schemas:
+    APIProxyRequest:
+      type: object
+      required:
+      - name
+      - targetEndpoint
+      properties:
+        name:
+          type: string
+          description: API proxy name
+        title:
+          type: string
+          description: Display title
+        description:
+          type: string
+          description: Description
+        basePath:
+          type: string
+          description: Base path
+        targetEndpoint:
+          type: string
+          description: Target endpoint URL
+        version:
+          type: string
+          description: API version
     APIProxy:
       type: object
       properties:
@@ -202,30 +226,6 @@ components:
           type: string
           format: date-time
           description: Last update timestamp
-    APIProxyRequest:
-      type: object
-      required:
-      - name
-      - targetEndpoint
-      properties:
-        name:
-          type: string
-          description: API proxy name
-        title:
-          type: string
-          description: Display title
-        description:
-          type: string
-          description: Description
-        basePath:
-          type: string
-          description: Base path
-        targetEndpoint:
-          type: string
-          description: Target endpoint URL
-        version:
-          type: string
-          description: API version
   securitySchemes:
     oauth2:
       type: oauth2
