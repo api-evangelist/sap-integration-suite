@@ -124,7 +124,7 @@ apis:
   - CloudEvents
   - Event Mesh
   - Messaging
-  - Pub-Sub
+  - Pub/Sub
   tags_raw:
   - Asynchronous
   - CloudEvents
