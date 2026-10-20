@@ -1,0 +1,16 @@
+generated: '2026-10-20'
+method: none
+source:
+- https://zapier.com/apps/sap-integration-suite/integrations
+- https://n8n.io/integrations/sap-integration-suite/
+- https://composio.dev/toolkits/sap-integration-suite
+- https://monid.ai/tools/sap-integration-suite
+checked:
+- https://composio.dev/toolkits/sap-integration-suite
+- https://monid.ai/tools/sap-integration-suite
+- https://n8n.io/integrations/sap-integration-suite/
+- https://zapier.com/apps/sap-integration-suite/integrations
+summary: null
+marketplace_apps: []
+edges: []
+templates: []
